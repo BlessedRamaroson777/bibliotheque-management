@@ -19,4 +19,10 @@ public interface EmpruntRepository extends JpaRepository<Emprunt, Long> {
 
     @Query("SELECT e FROM Emprunt e WHERE e.membre.id = :membreId AND e.surPlace = true")
     List<Emprunt> findLecturesSurPlaceByMembreId(@Param("membreId") Long membreId);
+
+    @Query("SELECT e FROM Emprunt e WHERE e.membre.id = :membreId")
+    List<Emprunt> findByMembreId(@Param("membreId") Long membreId);
+
+    @Query("SELECT e FROM Emprunt e WHERE e.membre.id = :membreId AND (e.surPlace = false OR e.surPlace IS NULL)")
+    List<Emprunt> findPretsByMembreId(@Param("membreId") Long membreId);
 }
