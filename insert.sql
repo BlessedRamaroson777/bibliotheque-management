@@ -13,6 +13,7 @@ INSERT INTO jour_ferie (nom, date_jour) VALUES
 -- Type membre (dejà un existant)
 INSERT INTO type_membre (nom, quota) VALUES 
 ('Etudiant', 3),
+('Adherent', 5),
 ('Professeur', 7);
 
 -- Statut (dejà insere normalement)
@@ -124,11 +125,3 @@ INSERT INTO quotas_reservation_membre (id_membre, quota_reservation, date_quota,
 INSERT INTO quotas_prolongation_membre (id_membre, quota_prolongation, date_quota, id_prolongation) VALUES
 (1, 2, '2025-06-18', 1);
 
-insert into type_membre (nom, quota) values ('Adherent', 5);
-
-INSERT INTO statut (valeur) VALUES
-('inscrit'),
-('actif'),
-('suspendu'),
-('expire'),
-('banni');
