@@ -16,7 +16,6 @@ public class PretService {
     @Autowired private PenaliteRepository penaliteRepository;
     @Autowired private AutorisationRepository autorisationRepository;
     @Autowired private EmpruntRepository empruntRepository;
-    @Autowired private QuotaMembreRepository quotaMembreRepository;
     @Autowired private BibliothecaireRepository bibliothecaireRepository;
 
     public String preterLivre(Long idAdherent, Long idLivre, Long idBibliothecaire) {
