@@ -13,13 +13,13 @@ public class Membre {
     private String email;
 
     @Column(name="nom_utilisateur", nullable = false)
-    private String nomUtilisateur;
+    private String nom_utilisateur;
 
     @Column(name="mot_de_passe", nullable = false)
-    private String motDePasse;
+    private String mot_de_passe;
 
     @Column(name="date_inscription", nullable = false)
-    private LocalDate dateInscription;
+    private LocalDate date_inscription;
 
     @ManyToOne
     @JoinColumn(name="id_type_membre")
@@ -33,12 +33,12 @@ public class Membre {
     public void setId(Long id) { this.id = id; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-    public String getNomUtilisateur() { return nomUtilisateur; }
-    public void setNomUtilisateur(String nomUtilisateur) { this.nomUtilisateur = nomUtilisateur; }
-    public String getMotDePasse() { return motDePasse; }
-    public void setMotDePasse(String motDePasse) { this.motDePasse = motDePasse; }
-    public LocalDate getDateInscription() { return dateInscription; }
-    public void setDateInscription(LocalDate dateInscription) { this.dateInscription = dateInscription; }
+    public String getNomUtilisateur() { return nom_utilisateur; }
+    public void setNomUtilisateur(String nom_utilisateur) { this.nom_utilisateur = nom_utilisateur; }
+    public String getMotDePasse() { return mot_de_passe; }
+    public void setMotDePasse(String mot_de_passe) { this.mot_de_passe = mot_de_passe; }
+    public LocalDate getDateInscription() { return date_inscription; }
+    public void setDateInscription(LocalDate date_inscription) { this.date_inscription = date_inscription; }
     public TypeMembre getTypeMembre() { return typeMembre; }
     public void setTypeMembre(TypeMembre typeMembre) { this.typeMembre = typeMembre; }
     public LocalDate getNaissance() { return naissance; }

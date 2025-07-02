@@ -18,7 +18,7 @@ public class StatutMembre {
     private Statut statut;
 
     @Column(name="date_statut")
-    private LocalDate dateStatut;
+    private LocalDate date_statut;
 
     // ...getters/setters...
     public Long getId() { return id; }
@@ -27,6 +27,6 @@ public class StatutMembre {
     public void setMembre(Membre membre) { this.membre = membre; }
     public Statut getStatut() { return statut; }
     public void setStatut(Statut statut) { this.statut = statut; }
-    public LocalDate getDateStatut() { return dateStatut; }
-    public void setDateStatut(LocalDate dateStatut) { this.dateStatut = dateStatut; }
+    public LocalDate getDateStatut() { return date_statut; }
+    public void setDateStatut(LocalDate date_statut) { this.date_statut = date_statut; }
 }
