@@ -41,4 +41,11 @@ public class ProlongationService {
         // Ici, tu pourrais notifier le bibliothécaire (mail, notification, etc.)
         return "Demande de prolongation envoyée au bibliothécaire.";
     }
+
+    public java.util.List<Prolongation> getProlongationsEnCours() {
+        // Accordée == null → en attente de validation
+        return prolongationRepository.findAll().stream()
+            .filter(p -> p.getAccordee() == null)
+            .toList();
+    }
 }

@@ -41,5 +41,31 @@
         <br/>
         <input type="submit" value="Demander la prolongation"/>
     </form>
+    <h3>Prolongations en cours</h3>
+    <table border="1">
+        <tr>
+            <th>Adhérent</th>
+            <th>Livre</th>
+            <th>Date demande</th>
+            <th>Ancienne échéance</th>
+            <th>Nouvelle échéance demandée</th>
+        </tr>
+        <%
+            java.util.List<com.bibliotheque.model.Prolongation> prolongations = (java.util.List<com.bibliotheque.model.Prolongation>) request.getAttribute("prolongations");
+            if (prolongations != null) {
+                for (com.bibliotheque.model.Prolongation p : prolongations) {
+        %>
+        <tr>
+            <td><%= p.getEmprunt().getMembre().getNomUtilisateur() %></td>
+            <td><%= p.getEmprunt().getExemplaire().getLivre().getTitre() %></td>
+            <td><%= p.getDateProlongation() %></td>
+            <td><%= p.getAncienneEcheance() %></td>
+            <td><%= p.getNouvelleEcheance() %></td>
+        </tr>
+        <%
+                }
+            }
+        %>
+    </table>
 </body>
 </html>

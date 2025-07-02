@@ -18,6 +18,7 @@ public class ProlongationController {
     public String formProlongerLivre(Model model) {
         model.addAttribute("livres", livreRepository.findAll());
         model.addAttribute("adherents", membreRepository.findAll());
+        model.addAttribute("prolongations", prolongationService.getProlongationsEnCours());
         return "form_prolonger_livre";
     }
 
