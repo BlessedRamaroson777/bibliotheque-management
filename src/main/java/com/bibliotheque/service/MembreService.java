@@ -44,11 +44,11 @@ public class MembreService {
         }
 
         if (membreRepository.findByEmail(email).isPresent()) {
-            throw new RuntimeException("Email déjà utilisé.");
+            throw new RuntimeException("Email dejà utilise.");
         }
 
         TypeMembre typeMembre = typeMembreRepository.findById((long)idTypeMembre)
-            .orElseThrow(() -> new RuntimeException("Type membre non trouvé"));
+            .orElseThrow(() -> new RuntimeException("Type membre non trouve"));
 
         Membre membre = new Membre();
         membre.setNomUtilisateur(nomUtilisateur);

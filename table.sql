@@ -49,7 +49,7 @@ CREATE TABLE membre (
     naissance DATE NOT NULL,
     FOREIGN KEY (id_type_membre) REFERENCES type_membre(id)
 );
-
+ALTER TABLE membre ADD CONSTRAINT unique_email UNIQUE(email);
 -- Statut membre
 CREATE TABLE statut_membre (
     id SERIAL PRIMARY KEY,
