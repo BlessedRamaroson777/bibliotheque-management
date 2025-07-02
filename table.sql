@@ -1,3 +1,4 @@
+-- DROP DATABASE IF EXISTS "BibliothequeNaina";
 CREATE DATABASE "BibliothequeNaina";
 \c "BibliothequeNaina";
 

@@ -1,10 +1,12 @@
 com\bibliotheque\controller\LivreController.class
+com\bibliotheque\repository\AuteurRepository.class
 com\bibliotheque\model\QuotaMembre.class
 com\bibliotheque\model\StatutMembre.class
 com\bibliotheque\repository\StatutMembreRepository.class
 com\bibliotheque\model\GenreLivre.class
 com\bibliotheque\model\Livre.class
 com\bibliotheque\model\Statut.class
+com\bibliotheque\repository\GenreLivreRepository.class
 com\bibliotheque\controller\MembreController.class
 com\bibliotheque\repository\MembreRepository.class
 com\bibliotheque\repository\QuotaMembreRepository.class

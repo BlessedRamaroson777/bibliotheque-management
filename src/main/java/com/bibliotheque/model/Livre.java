@@ -13,7 +13,7 @@ public class Livre {
     private String titre;
     @Column(name = "date_edition")
     private LocalDate dateEdition;
-    private Integer ageMinimum;
+    private Integer age_Minimum;
 
     @ManyToOne
     @JoinColumn(name = "id_auteur")
@@ -30,8 +30,8 @@ public class Livre {
     public void setTitre(String titre) { this.titre = titre; }
     public LocalDate getDateEdition() { return dateEdition; }
     public void setDateEdition(LocalDate dateEdition) { this.dateEdition = dateEdition; }
-    public Integer getAgeMinimum() { return ageMinimum; }
-    public void setAgeMinimum(Integer ageMinimum) { this.ageMinimum = ageMinimum; }
+    public Integer getAgeMinimum() { return age_Minimum; }
+    public void setAgeMinimum(Integer ageMinimum) { this.age_Minimum = ageMinimum; }
     public Auteur getAuteur() { return auteur; }
     public void setAuteur(Auteur auteur) { this.auteur = auteur; }
     public GenreLivre getGenreLivre() { return genreLivre; }
