@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Disponibilité du livre</title>
+    <title>Disponibilite du livre</title>
 </head>
 <body>
-    <h2>Disponibilité</h2>
+    <h2>Disponibilite</h2>
     <%
         com.bibliotheque.service.DisponibiliteResult result = (com.bibliotheque.service.DisponibiliteResult) request.getAttribute("result");
         if (result != null) {
@@ -21,7 +21,7 @@
             }
         } else {
     %>
-            <p>Erreur : Aucune donnée de disponibilité trouvée.</p>
+            <p>Erreur : Aucune donnee de disponibilite trouvee.</p>
     <%
         }
     %>

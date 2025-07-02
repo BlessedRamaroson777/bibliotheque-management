@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Résultat lecture sur place</title>
+    <title>Resultat lecture sur place</title>
 </head>
 <body>
-    <h2>Résultat</h2>
+    <h2>Resultat</h2>
     <p>${resultat}</p>
     <a href="form-lecture-sur-place">Nouvelle lecture sur place</a>
 </body>

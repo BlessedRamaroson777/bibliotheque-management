@@ -12,7 +12,7 @@
     <h2>Recherche de livres</h2>
     <form action="rechercher-livres" method="get">
         Titre: <input type="text" name="titre"/><br/>
-        Date édition: <input type="date" name="dateEdition"/><br/>
+        Date edition: <input type="date" name="dateEdition"/><br/>
         Nom auteur:
         <select name="nomAuteur">
             <option value="">-- Tous --</option>

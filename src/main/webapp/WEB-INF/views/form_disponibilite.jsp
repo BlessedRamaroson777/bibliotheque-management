@@ -5,10 +5,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Vérifier disponibilité d'un livre</title>
+    <title>Verifier disponibilite d'un livre</title>
 </head>
 <body>
-    <h2>Vérifier disponibilité d'un exemplaire</h2>
+    <h2>Verifier disponibilite d'un exemplaire</h2>
     <form action="verifier-disponibilite" method="get">
         Livre :
         <select name="livreId" required>
@@ -23,10 +23,10 @@
             %>
         </select>
         <br/>
-        Date de disponibilité :
+        Date de disponibilite :
         <input type="date" name="dateDispo" required />
         <br/>
-        <input type="submit" value="Vérifier"/>
+        <input type="submit" value="Verifier"/>
     </form>
 </body>
 </html>

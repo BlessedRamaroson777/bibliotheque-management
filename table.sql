@@ -155,7 +155,7 @@ CREATE TABLE emprunt (
     FOREIGN KEY (id_biblio_emprunt) REFERENCES bibliothecaire(id),
     FOREIGN KEY (id_biblio_retour) REFERENCES bibliothecaire(id)
 );
-
+ALTER TABLE emprunt ADD COLUMN sur_place BOOLEAN DEFAULT FALSE;
 -- Reservation
 CREATE TABLE reservation (
     id SERIAL PRIMARY KEY,

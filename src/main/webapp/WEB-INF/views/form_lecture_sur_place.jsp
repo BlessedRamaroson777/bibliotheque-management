@@ -2,6 +2,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.bibliotheque.model.Livre" %>
 <%@ page import="com.bibliotheque.model.Membre" %>
+<%@ page import="com.bibliotheque.model.Bibliothecaire" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +11,9 @@
 <body>
     <h2>Lecture sur place</h2>
     <form action="lire-sur-place" method="post">
-        Adhérent :
+        Adherent :
         <select name="idAdherent" required>
-            <option value="">-- Choisir un adhérent --</option>
+            <option value="">-- Choisir un adherent --</option>
             <%
                 List<Membre> adherents = (List<Membre>) request.getAttribute("adherents");
                 for (Membre m : adherents) {
@@ -36,6 +37,19 @@
             %>
         </select>
         <br/>
+        Bibliothécaire :
+        <select name="idBibliothecaire" required>
+            <option value="">-- Choisir --</option>
+            <%
+                List<Bibliothecaire> biblios = (List<Bibliothecaire>) request.getAttribute("bibliothecaires");
+                for (Bibliothecaire b : biblios) {
+            %>
+
+                <option value="<%= b.getId() %>"><%= b.getNomUtilisateur() %></option>
+            <%
+                }
+            %>
+        </select>
         <input type="submit" value="Lire sur place"/>
     </form>
 </body>

@@ -10,6 +10,9 @@ public class Emprunt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "sur_place")
+    private Boolean surPlace = false;
+
     @ManyToOne
     @JoinColumn(name = "id_membre")
     private Membre membre;
@@ -41,6 +44,8 @@ public class Emprunt {
     // Getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+    public Boolean getSurPlace() { return surPlace; }
+    public void setSurPlace(Boolean surPlace) { this.surPlace = surPlace; }
     public Membre getMembre() { return membre; }
     public void setMembre(Membre membre) { this.membre = membre; }
     public Exemplaire getExemplaire() { return exemplaire; }

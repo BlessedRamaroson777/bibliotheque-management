@@ -11,5 +11,6 @@
     <a href="form-disponibilite">verifier disponibilite</a>
     <a href="form-historique-pret">Voir l historique des prets</a>
     <a href="form-lecture-sur-place">Lire un livre sur place</a>
+    <a href="lectures-sur-place">Liste des lectures sur place</a>
 </body>
 </html>
