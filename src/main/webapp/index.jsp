@@ -10,5 +10,6 @@
     <a href="form-recherche-livre">rechercher</a>
     <a href="form-disponibilite">verifier disponibilite</a>
     <a href="form-historique-pret">Voir l historique des prets</a>
+    <a href="form-lecture-sur-place">Lire un livre sur place</a>
 </body>
 </html>
