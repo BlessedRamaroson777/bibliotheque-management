@@ -18,8 +18,8 @@
         Email: <input type="email" name="email"/><br/>
         Mot de passe: <input type="password" name="motDePasse"/><br/>
         Confirmer: <input type="password" name="confirmationMotDePasse"/><br/>
-        Date inscription: <input type="date" name="dateInscription"/><br/>
-        Date de naissance: <input type="date" name="dateNaissance"/><br/>
+        Date inscription: <input type="datetime-local" name="dateInscription"/><br/>
+        Date de naissance: <input type="datetime-local" name="dateNaissance"/><br/>
         Type membre:
         <select name="idTypeMembre" required>
             <%

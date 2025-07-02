@@ -1,7 +1,7 @@
 package com.bibliotheque.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "reservation")
@@ -19,17 +19,17 @@ public class Reservation {
     private Livre livre;
 
     @Column(name = "date_reservation")
-    private LocalDate dateReservation;
+    private LocalDateTime dateReservation;
 
     @Column(name = "date_debut")
-    private LocalDate dateDebut;
+    private LocalDateTime dateDebut;
 
     @ManyToOne
     @JoinColumn(name = "id_bibliothecaire")
     private Bibliothecaire bibliothecaire;
 
     @Column(name = "date_traitement")
-    private LocalDate dateTraitement;
+    private LocalDateTime dateTraitement;
 
     @ManyToOne
     @JoinColumn(name = "id_emprunt")
@@ -45,17 +45,17 @@ public class Reservation {
     public Livre getLivre() { return livre; }
     public void setLivre(Livre livre) { this.livre = livre; }
 
-    public LocalDate getDateReservation() { return dateReservation; }
-    public void setDateReservation(LocalDate dateReservation) { this.dateReservation = dateReservation; }
+    public LocalDateTime getDateReservation() { return dateReservation; }
+    public void setDateReservation(LocalDateTime dateReservation) { this.dateReservation = dateReservation; }
 
-    public LocalDate getDateDebut() { return dateDebut; }
-    public void setDateDebut(LocalDate dateDebut) { this.dateDebut = dateDebut; }
+    public LocalDateTime getDateDebut() { return dateDebut; }
+    public void setDateDebut(LocalDateTime dateDebut) { this.dateDebut = dateDebut; }
 
     public Bibliothecaire getBibliothecaire() { return bibliothecaire; }
     public void setBibliothecaire(Bibliothecaire bibliothecaire) { this.bibliothecaire = bibliothecaire; }
 
-    public LocalDate getDateTraitement() { return dateTraitement; }
-    public void setDateTraitement(LocalDate dateTraitement) { this.dateTraitement = dateTraitement; }
+    public LocalDateTime getDateTraitement() { return dateTraitement; }
+    public void setDateTraitement(LocalDateTime dateTraitement) { this.dateTraitement = dateTraitement; }
 
     public Emprunt getEmprunt() { return emprunt; }
     public void setEmprunt(Emprunt emprunt) { this.emprunt = emprunt; }

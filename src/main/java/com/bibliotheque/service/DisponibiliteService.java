@@ -5,7 +5,7 @@ import com.bibliotheque.repository.ExemplaireRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,10 +14,10 @@ public class DisponibiliteService {
     @Autowired
     private ExemplaireRepository exemplaireRepository;
 
-    public DisponibiliteResult verifierDisponibilite(Long livreId, LocalDate dateDispo) {
+    public DisponibiliteResult verifierDisponibilite(Long livreId, LocalDateTime dateDispo) {
         List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(livreId, dateDispo);
         int nbDispo = exemplaires.size();
-        LocalDate prochaineDate = exemplaireRepository.findProchaineDateDisponible(livreId, dateDispo);
+        LocalDateTime prochaineDate = exemplaireRepository.findProchaineDateDisponible(livreId, dateDispo);
 
         DisponibiliteResult result = new DisponibiliteResult();
         result.setDisponible(nbDispo > 0);

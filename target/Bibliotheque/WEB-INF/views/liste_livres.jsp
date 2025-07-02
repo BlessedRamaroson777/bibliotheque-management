@@ -3,14 +3,14 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Résultats recherche livres</title>
+    <title>Resultats recherche livres</title>
 </head>
 <body>
-    <h2>Résultats de la recherche</h2>
+    <h2>Resultats de la recherche</h2>
     <table border="1">
         <tr>
             <th>Titre</th>
-            <th>Date édition</th>
+            <th>Date edition</th>
             <th>Auteur</th>
             <th>Nom artiste</th>
             <th>Genre</th>

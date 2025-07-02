@@ -1,7 +1,7 @@
 package com.bibliotheque.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "membre")
@@ -19,14 +19,14 @@ public class Membre {
     private String mot_de_passe;
 
     @Column(name="date_inscription", nullable = false)
-    private LocalDate date_inscription;
+    private LocalDateTime date_inscription;
 
     @ManyToOne
     @JoinColumn(name="id_type_membre")
     private TypeMembre typeMembre;
 
     @Column(name="naissance", nullable = false)
-    private LocalDate naissance;
+    private LocalDateTime naissance;
 
     // ...getters/setters...
     public Long getId() { return id; }
@@ -37,10 +37,10 @@ public class Membre {
     public void setNomUtilisateur(String nom_utilisateur) { this.nom_utilisateur = nom_utilisateur; }
     public String getMotDePasse() { return mot_de_passe; }
     public void setMotDePasse(String mot_de_passe) { this.mot_de_passe = mot_de_passe; }
-    public LocalDate getDateInscription() { return date_inscription; }
-    public void setDateInscription(LocalDate date_inscription) { this.date_inscription = date_inscription; }
+    public LocalDateTime getDateInscription() { return date_inscription; }
+    public void setDateInscription(LocalDateTime date_inscription) { this.date_inscription = date_inscription; }
     public TypeMembre getTypeMembre() { return typeMembre; }
     public void setTypeMembre(TypeMembre typeMembre) { this.typeMembre = typeMembre; }
-    public LocalDate getNaissance() { return naissance; }
-    public void setNaissance(LocalDate naissance) { this.naissance = naissance; }
+    public LocalDateTime getNaissance() { return naissance; }
+    public void setNaissance(LocalDateTime naissance) { this.naissance = naissance; }
 }

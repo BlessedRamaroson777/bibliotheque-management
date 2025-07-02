@@ -155,7 +155,7 @@ CREATE TABLE emprunt (
     FOREIGN KEY (id_biblio_emprunt) REFERENCES bibliothecaire(id),
     FOREIGN KEY (id_biblio_retour) REFERENCES bibliothecaire(id)
 );
-
+ALTER TABLE emprunt ADD COLUMN sur_place BOOLEAN DEFAULT FALSE;
 -- Reservation
 CREATE TABLE reservation (
     id SERIAL PRIMARY KEY,
@@ -229,3 +229,47 @@ CREATE TABLE quotas_prolongation_membre (
     FOREIGN KEY (id_prolongation) REFERENCES prolongation(id),
     FOREIGN KEY (id_membre) REFERENCES membre(id)
 );
+
+-- Emprunt
+ALTER TABLE emprunt ALTER COLUMN date_emprunt TYPE TIMESTAMP;
+ALTER TABLE emprunt ALTER COLUMN date_debut TYPE TIMESTAMP;
+ALTER TABLE emprunt ALTER COLUMN date_echeance TYPE TIMESTAMP;
+ALTER TABLE emprunt ALTER COLUMN date_retour TYPE TIMESTAMP;
+
+-- Reservation
+ALTER TABLE reservation ALTER COLUMN date_reservation TYPE TIMESTAMP;
+ALTER TABLE reservation ALTER COLUMN date_debut TYPE TIMESTAMP;
+ALTER TABLE reservation ALTER COLUMN date_traitement TYPE TIMESTAMP;
+
+-- Prolongation
+ALTER TABLE prolongation ALTER COLUMN date_prolongation TYPE TIMESTAMP;
+ALTER TABLE prolongation ALTER COLUMN ancienne_echeance TYPE TIMESTAMP;
+ALTER TABLE prolongation ALTER COLUMN nouvelle_echeance TYPE TIMESTAMP;
+ALTER TABLE prolongation ALTER COLUMN date_traitement TYPE TIMESTAMP;
+
+-- Penalite
+ALTER TABLE penalite ALTER COLUMN date_echeance TYPE TIMESTAMP;
+ALTER TABLE penalite ALTER COLUMN date_retour TYPE TIMESTAMP;
+
+-- Quotas
+ALTER TABLE quotas_emprunt_membre ALTER COLUMN date_quota TYPE TIMESTAMP;
+ALTER TABLE quotas_reservation_membre ALTER COLUMN date_quota TYPE TIMESTAMP;
+ALTER TABLE quotas_prolongation_membre ALTER COLUMN date_quota TYPE TIMESTAMP;
+
+-- Membre
+ALTER TABLE membre ALTER COLUMN date_inscription TYPE TIMESTAMP;
+ALTER TABLE membre ALTER COLUMN naissance TYPE TIMESTAMP;
+
+-- Statut membre
+ALTER TABLE statut_membre ALTER COLUMN date_statut TYPE TIMESTAMP;
+
+-- Abonnement
+ALTER TABLE abonnement ALTER COLUMN date_abonnement TYPE TIMESTAMP;
+ALTER TABLE abonnement ALTER COLUMN debut_abonnement TYPE TIMESTAMP;
+ALTER TABLE abonnement ALTER COLUMN fin_abonnement TYPE TIMESTAMP;
+
+-- Livre
+ALTER TABLE livre ALTER COLUMN date_edition TYPE TIMESTAMP;
+
+-- Jour ferie
+ALTER TABLE jour_ferie ALTER COLUMN date_jour TYPE TIMESTAMP;
