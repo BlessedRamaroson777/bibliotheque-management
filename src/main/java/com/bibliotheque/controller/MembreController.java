@@ -48,7 +48,7 @@ public class MembreController {
             return "form_inscription";
         } catch (Exception e) {
             model.addAttribute("typesMembres", typeMembreRepository.findAll());
-            model.addAttribute("error", e.getMessage());
+            model.addAttribute("error", e.getMessage() + " - " + (e.getCause() != null ? e.getCause().getMessage() : ""));
             return "form_inscription";
         }
     }
