@@ -16,7 +16,7 @@
     <%
             } else {
     %>
-                <p>Indisponible. Prochaine date disponible : <%= result.getProchaineDateDisponible() %></p>
+                <p>Indisponible. Prochaine date disponible supposee : <%= result.getProchaineDateDisponible() %></p>
     <%
             }
         } else {
