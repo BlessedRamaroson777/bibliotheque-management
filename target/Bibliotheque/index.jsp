@@ -13,5 +13,6 @@
     <a href="form-lecture-sur-place">Lire un livre sur place</a>
     <a href="lectures-sur-place">Liste des lectures sur place</a>
     <a href="form-preter-livre">Preter un livre</a>
+    <a href="form-prolonger-livre">Prolonger un livre</a>
 </body>
 </html>

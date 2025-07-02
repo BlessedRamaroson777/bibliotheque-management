@@ -27,13 +27,17 @@ F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Statut.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\LectureSurPlaceController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\AutorisationRepository.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\ProlongationRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\LivreRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\HistoriquePretController.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\ProlongationService.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\StatutRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Reservation.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\ExemplaireRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Membre.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\MembreController.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\ProlongationController.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Prolongation.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\TypeMembre.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Emprunt.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Bibliothecaire.java

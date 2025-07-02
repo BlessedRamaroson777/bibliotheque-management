@@ -6,6 +6,7 @@ com\bibliotheque\service\PretService.class
 com\bibliotheque\model\StatutMembre.class
 com\bibliotheque\service\LectureSurPlaceService.class
 com\bibliotheque\model\GenreLivre.class
+com\bibliotheque\repository\ProlongationRepository.class
 com\bibliotheque\repository\ReservationRepository.class
 com\bibliotheque\model\Reservation.class
 com\bibliotheque\model\Statut.class
@@ -15,9 +16,11 @@ com\bibliotheque\repository\EmpruntRepository.class
 com\bibliotheque\repository\TypeMembreRepository.class
 com\bibliotheque\controller\PretController.class
 com\bibliotheque\model\TypeMembre.class
+com\bibliotheque\model\Prolongation.class
 com\bibliotheque\service\HistoriquePretService.class
 com\bibliotheque\repository\AutorisationRepository.class
 com\bibliotheque\controller\LectureSurPlaceController.class
+com\bibliotheque\service\ProlongationService.class
 com\bibliotheque\repository\AuteurRepository.class
 com\bibliotheque\model\Exemplaire.class
 com\bibliotheque\controller\HistoriquePretController.class
@@ -33,6 +36,7 @@ com\bibliotheque\repository\GenreLivreRepository.class
 com\bibliotheque\controller\MembreController.class
 com\bibliotheque\repository\MembreRepository.class
 com\bibliotheque\repository\QuotaMembreRepository.class
+com\bibliotheque\controller\ProlongationController.class
 com\bibliotheque\service\MembreService.class
 com\bibliotheque\repository\StatutRepository.class
 com\bibliotheque\model\Membre.class
