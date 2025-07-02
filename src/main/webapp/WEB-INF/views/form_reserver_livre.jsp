@@ -41,5 +41,27 @@
         <br/>
         <input type="submit" value="Reserver"/>
     </form>
+    <h3>Reservations non recuperees</h3>
+    <table border="1">
+        <tr>
+            <th>Adherent</th>
+            <th>Livre</th>
+            <th>Date reservation</th>
+        </tr>
+        <%
+            List<com.bibliotheque.model.Reservation> reservations = (List<com.bibliotheque.model.Reservation>) request.getAttribute("reservations");
+            if (reservations != null) {
+                for (com.bibliotheque.model.Reservation r : reservations) {
+        %>
+        <tr>
+            <td><%= r.getMembre().getNomUtilisateur() %></td>
+            <td><%= r.getLivre().getTitre() %></td>
+            <td><%= r.getDateReservation() %></td>
+        </tr>
+        <%
+                }
+            }
+        %>
+    </table>
 </body>
 </html>

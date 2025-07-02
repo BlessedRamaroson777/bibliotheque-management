@@ -3,6 +3,8 @@ package com.bibliotheque.controller;
 import com.bibliotheque.service.ReservationService;
 import com.bibliotheque.repository.LivreRepository;
 import com.bibliotheque.repository.MembreRepository;
+import com.bibliotheque.repository.ReservationRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,11 +15,13 @@ public class ReservationController {
     @Autowired private ReservationService reservationService;
     @Autowired private LivreRepository livreRepository;
     @Autowired private MembreRepository membreRepository;
+    @Autowired private ReservationRepository reservationRepository;
 
     @GetMapping("/form-reserver-livre")
     public String formReserverLivre(Model model) {
         model.addAttribute("livres", livreRepository.findAll());
         model.addAttribute("adherents", membreRepository.findAll());
+        model.addAttribute("reservations", reservationRepository.findNonReclamees());
         return "form_reserver_livre";
     }
 

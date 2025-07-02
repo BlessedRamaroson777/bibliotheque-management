@@ -11,10 +11,12 @@ F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\contr
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\EmpruntRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\DisponibiliteController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\GenreLivreRepository.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\ReservationService.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Auteur.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\AuteurRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\DisponibiliteService.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Livre.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\ReservationController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\TypeMembreRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\PenaliteRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\HistoriquePretService.java
