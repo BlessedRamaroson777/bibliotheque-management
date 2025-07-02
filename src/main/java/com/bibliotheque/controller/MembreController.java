@@ -44,7 +44,7 @@ public class MembreController {
                     LocalDate.parse(dateNaissance),
                     idTypeMembre
             );
-            model.addAttribute("message", "Membre inscrit avec succès. ID : " + membre.getId());
+            model.addAttribute("message", "Membre inscrit avec succes. ID : " + membre.getId());
             return "form_inscription";
         } catch (Exception e) {
             model.addAttribute("typesMembres", typeMembreRepository.findAll());

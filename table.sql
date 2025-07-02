@@ -208,6 +208,7 @@ CREATE TABLE quotas_emprunt_membre (
     FOREIGN KEY (id_emprunt) REFERENCES emprunt(id),
     FOREIGN KEY (id_membre) REFERENCES membre(id)
 );
+ALTER TABLE quotas_emprunt_membre ALTER COLUMN id_emprunt DROP NOT NULL;
 
 CREATE TABLE quotas_reservation_membre (
     id SERIAL PRIMARY KEY,
