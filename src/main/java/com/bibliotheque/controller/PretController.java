@@ -28,6 +28,9 @@ public class PretController {
     public String preterLivre(@RequestParam Long idAdherent, @RequestParam Long idLivre, @RequestParam Long idBibliothecaire, Model model) {
         String resultat = pretService.preterLivre(idAdherent, idLivre, idBibliothecaire);
         model.addAttribute("resultat", resultat);
+
+        // Ajoute la liste des prêts en cours (hors sur place)
+        model.addAttribute("prets", pretService.getPretsEnCours());
         return "resultat_preter_livre";
     }
 }

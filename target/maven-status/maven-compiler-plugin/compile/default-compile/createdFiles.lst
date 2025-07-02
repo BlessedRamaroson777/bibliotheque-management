@@ -2,6 +2,7 @@ com\bibliotheque\controller\LivreController.class
 com\bibliotheque\model\Autorisation.class
 com\bibliotheque\model\QuotaMembre.class
 com\bibliotheque\model\Emprunt.class
+com\bibliotheque\service\PretService.class
 com\bibliotheque\model\StatutMembre.class
 com\bibliotheque\service\LectureSurPlaceService.class
 com\bibliotheque\model\GenreLivre.class
@@ -12,6 +13,7 @@ com\bibliotheque\model\Bibliothecaire.class
 com\bibliotheque\repository\ExemplaireRepository.class
 com\bibliotheque\repository\EmpruntRepository.class
 com\bibliotheque\repository\TypeMembreRepository.class
+com\bibliotheque\controller\PretController.class
 com\bibliotheque\model\TypeMembre.class
 com\bibliotheque\service\HistoriquePretService.class
 com\bibliotheque\repository\AutorisationRepository.class
