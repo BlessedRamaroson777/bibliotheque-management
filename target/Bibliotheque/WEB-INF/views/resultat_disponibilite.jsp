@@ -7,7 +7,7 @@
 <body>
     <h2>Disponibilité</h2>
     <%
-        com.bibliotheque.model.Disponibilite result = (com.bibliotheque.model.Disponibilite) request.getAttribute("result");
+        com.bibliotheque.service.DisponibiliteResult result = (com.bibliotheque.service.DisponibiliteResult) request.getAttribute("result");
         if (result != null) {
             if (result.isDisponible()) {
     %>

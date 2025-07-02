@@ -8,6 +8,6 @@
     <a href="membre/inscrire">Inscription</a>
     <a href="rechercher-livres">liste_livre</a>
     <a href="form-recherche-livre">rechercher</a>
-    <a href="verifier-disponibilite">vérifier disponibilité</a>
+    <a href="form-disponibilite">verifier disponibilite</a>
 </body>
 </html>
