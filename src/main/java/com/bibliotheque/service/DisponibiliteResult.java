@@ -1,13 +1,13 @@
 package com.bibliotheque.service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class DisponibiliteResult {
     private boolean disponible;
     private int nbExemplaires;
     private List<Long> idExemplaires;
-    private LocalDate prochaineDateDisponible;
+    private LocalDateTime prochaineDateDisponible;
 
     public boolean isDisponible() { return disponible; }
     public void setDisponible(boolean disponible) { this.disponible = disponible; }
@@ -15,6 +15,6 @@ public class DisponibiliteResult {
     public void setNbExemplaires(int nbExemplaires) { this.nbExemplaires = nbExemplaires; }
     public List<Long> getIdExemplaires() { return idExemplaires; }
     public void setIdExemplaires(List<Long> idExemplaires) { this.idExemplaires = idExemplaires; }
-    public LocalDate getProchaineDateDisponible() { return prochaineDateDisponible; }
-    public void setProchaineDateDisponible(LocalDate prochaineDateDisponible) { this.prochaineDateDisponible = prochaineDateDisponible; }
+    public LocalDateTime getProchaineDateDisponible() { return prochaineDateDisponible; }
+    public void setProchaineDateDisponible(LocalDateTime prochaineDateDisponible) { this.prochaineDateDisponible = prochaineDateDisponible; }
 }

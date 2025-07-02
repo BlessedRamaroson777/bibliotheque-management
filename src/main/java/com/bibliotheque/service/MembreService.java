@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.bibliotheque.model.Membre;
 import com.bibliotheque.model.TypeMembre;
@@ -36,8 +36,8 @@ public class MembreService {
 
     @Transactional
     public Membre inscrireMembre(String nomUtilisateur, String email, String motDePasse,
-                                 String confirmationMotDePasse, LocalDate dateInscription,
-                                 LocalDate naissance, int idTypeMembre) {
+                                 String confirmationMotDePasse, LocalDateTime dateInscription,
+                                 LocalDateTime naissance, int idTypeMembre) {
 
         if (!motDePasse.equals(confirmationMotDePasse)) {
             throw new RuntimeException("Les mots de passe ne correspondent pas.");
@@ -66,14 +66,14 @@ public class MembreService {
         StatutMembre statutMembre = new StatutMembre();
         statutMembre.setMembre(savedMembre);
         statutMembre.setStatut(statutInscrit);
-        statutMembre.setDateStatut(LocalDate.now());
+        statutMembre.setDateStatut(LocalDateTime.now());
         statutMembreRepository.save(statutMembre);
 
         // Quota maximal
         QuotaMembre quota = new QuotaMembre();
         quota.setMembre(savedMembre);
         quota.setQuotaEmprunt(typeMembre.getQuota());
-        quota.setDateQuota(LocalDate.now());
+        quota.setDateQuota(LocalDateTime.now());
         quotaMembreRepository.save(quota);
 
         return savedMembre;

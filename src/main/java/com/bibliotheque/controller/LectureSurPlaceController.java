@@ -42,7 +42,7 @@ public class LectureSurPlaceController {
     public String finirLectureSurPlace(@RequestParam Long empruntId) {
         Emprunt emprunt = empruntRepository.findById(empruntId).orElse(null);
         if (emprunt != null && emprunt.getSurPlace() && emprunt.getDateRetour() == null) {
-            emprunt.setDateRetour(java.time.LocalDate.now());
+            emprunt.setDateRetour(java.time.LocalDateTime.now());
             empruntRepository.save(emprunt);
         }
         return "redirect:/lectures-sur-place";

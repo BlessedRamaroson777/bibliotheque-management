@@ -24,7 +24,7 @@
         </select>
         <br/>
         Date de disponibilite :
-        <input type="date" name="dateDispo" required />
+        <input type="datetime-local" name="dateDispo" required />
         <br/>
         <input type="submit" value="Verifier"/>
     </form>

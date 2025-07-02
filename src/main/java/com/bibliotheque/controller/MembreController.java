@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import com.bibliotheque.model.Membre;
 import com.bibliotheque.repository.TypeMembreRepository;
@@ -40,8 +40,8 @@ public class MembreController {
                     email,
                     motDePasse,
                     confirmationMotDePasse,
-                    LocalDate.parse(dateInscription),
-                    LocalDate.parse(dateNaissance),
+                    LocalDateTime.parse(dateInscription),
+                    LocalDateTime.parse(dateNaissance),
                     idTypeMembre
             );
             model.addAttribute("message", "Membre inscrit avec succes. ID : " + membre.getId());

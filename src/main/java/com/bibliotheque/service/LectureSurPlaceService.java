@@ -5,7 +5,7 @@ import com.bibliotheque.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -39,7 +39,7 @@ public class LectureSurPlaceService {
         if (livre == null) return "Livre inexistant.";
 
         // 5. Verifier qu'il y a un exemplaire disponible
-        List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, LocalDate.now());
+        List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, LocalDateTime.now());
         if (exemplaires.isEmpty()) return "Aucun exemplaire disponible pour ce livre.";
 
         // 6. Verifier que le livre est compatible avec l'adherent (autorisation)
@@ -50,18 +50,18 @@ public class LectureSurPlaceService {
         // 7. Retourner l'exemplaire disponible (le premier)
         Exemplaire exemplaire = exemplaires.get(0);
         Bibliothecaire biblio = bibliothecaireRepository.findById(idBibliothecaire).orElse(null);
-        if (biblio == null) return "Bibliothécaire inexistant.";
+        if (biblio == null) return "Bibliothecaire inexistant.";
 
         Emprunt emprunt = new Emprunt();
         emprunt.setMembre(membre);
         emprunt.setExemplaire(exemplaire);
-        emprunt.setDateEmprunt(LocalDate.now());
-        emprunt.setDateDebut(LocalDate.now());
-        emprunt.setDateEcheance(LocalDate.now());
+        emprunt.setDateEmprunt(LocalDateTime.now());
+        emprunt.setDateDebut(LocalDateTime.now());
+        emprunt.setDateEcheance(LocalDateTime.now());
         emprunt.setSurPlace(true);
         emprunt.setBiblioEmprunt(biblio); // <-- obligatoire !
         empruntRepository.save(emprunt);
 
-        return "Exemplaire n°" + exemplaire.getNumeroExemplaire() + " enregistré pour lecture sur place.";
+        return "Exemplaire n " + exemplaire.getNumeroExemplaire() + " enregistre pour lecture sur place.";
     }
 }

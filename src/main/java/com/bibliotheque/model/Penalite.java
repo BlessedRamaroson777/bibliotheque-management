@@ -2,7 +2,7 @@ package com.bibliotheque.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "penalite")
@@ -20,10 +20,10 @@ public class Penalite {
     private Membre membre;
 
     @Column(name = "date_echeance")
-    private LocalDate dateEcheance;
+    private LocalDateTime dateEcheance;
 
     @Column(name = "date_retour")
-    private LocalDate dateRetour;
+    private LocalDateTime dateRetour;
 
     @Column(name = "cout")
     private BigDecimal cout;
@@ -38,11 +38,11 @@ public class Penalite {
     public Membre getMembre() { return membre; }
     public void setMembre(Membre membre) { this.membre = membre; }
 
-    public LocalDate getDateEcheance() { return dateEcheance; }
-    public void setDateEcheance(LocalDate dateEcheance) { this.dateEcheance = dateEcheance; }
+    public LocalDateTime getDateEcheance() { return dateEcheance; }
+    public void setDateEcheance(LocalDateTime dateEcheance) { this.dateEcheance = dateEcheance; }
 
-    public LocalDate getDateRetour() { return dateRetour; }
-    public void setDateRetour(LocalDate dateRetour) { this.dateRetour = dateRetour; }
+    public LocalDateTime getDateRetour() { return dateRetour; }
+    public void setDateRetour(LocalDateTime dateRetour) { this.dateRetour = dateRetour; }
 
     public BigDecimal getCout() { return cout; }
     public void setCout(BigDecimal cout) { this.cout = cout; }
