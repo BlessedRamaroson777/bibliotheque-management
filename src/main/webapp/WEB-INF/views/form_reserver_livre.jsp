@@ -65,7 +65,7 @@
                 </form>
                 <form action="recuperer-reservation" method="post" style="display:inline;">
                     <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
-                    <input type="hidden" name="idBibliothecaire" value="..."/> <%-- à remplacer par l'id du bibliothécaire connecté --%>
+                    <input type="hidden" name="idBibliothecaire" value="1"/> <!-- Remplace 1 par l'id réel du bibliothécaire -->
                     <input type="submit" value="Recuperer"/>
                 </form>
             </td>

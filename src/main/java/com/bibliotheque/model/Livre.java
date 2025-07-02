@@ -23,7 +23,7 @@ public class Livre {
     @JoinColumn(name = "id_genre_livre")
     private GenreLivre genreLivre;
 
-    @OneToMany(mappedBy = "livre")
+    @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER)
     private java.util.List<Exemplaire> exemplaires;
 
     // Getters/setters

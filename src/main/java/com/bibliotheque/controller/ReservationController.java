@@ -37,6 +37,8 @@ public class ReservationController {
         String resultat = reservationService.annulerReservation(idReservation);
         model.addAttribute("resultat", resultat);
         // recharge la liste
+        model.addAttribute("livres", livreRepository.findAll());
+        model.addAttribute("adherents", membreRepository.findAll());
         model.addAttribute("reservations", reservationRepository.findNonReclamees());
         return "form_reserver_livre";
     }
@@ -46,6 +48,8 @@ public class ReservationController {
         String resultat = reservationService.recupererReservation(idReservation, idBibliothecaire);
         model.addAttribute("resultat", resultat);
         // recharge la liste
+        model.addAttribute("livres", livreRepository.findAll());
+        model.addAttribute("adherents", membreRepository.findAll());
         model.addAttribute("reservations", reservationRepository.findNonReclamees());
         return "form_reserver_livre";
     }

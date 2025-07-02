@@ -14,4 +14,8 @@ public interface LivreRepository extends JpaRepository<Livre, Long> {
                                  @Param("nomAuteur") String nomAuteur,
                                  @Param("typeAuteur") String typeAuteur,
                                  @Param("typeLivre") String typeLivre);
-}
+
+    @Query("SELECT l FROM Livre l LEFT JOIN FETCH l.exemplaires WHERE l.id = :id")
+    Livre findByIdWithExemplaires(@Param("id") Long id);
+    
+}    

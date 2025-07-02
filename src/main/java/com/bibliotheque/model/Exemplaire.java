@@ -15,8 +15,8 @@ public class Exemplaire {
 
     @Column(name = "numero_exemplaire")
     private Integer numeroExemplaire;
-
-    @OneToMany(mappedBy = "exemplaire")
+    
+    @OneToMany(mappedBy = "exemplaire", fetch = FetchType.EAGER)
     private java.util.List<Emprunt> emprunts;
 
     // getters/setters

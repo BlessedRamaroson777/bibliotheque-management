@@ -16,7 +16,7 @@ public class ReservationService {
     public String reserverLivre(Long idAdherent, Long idLivre, LocalDateTime dateReservation) {
         Membre membre = membreRepository.findById(idAdherent).orElse(null);
         if (membre == null) return "adherent inexistant";
-        Livre livre = livreRepository.findById(idLivre).orElse(null);
+        Livre livre = livreRepository.findByIdWithExemplaires(idLivre);
         if (livre == null) return "livre inexistant";
 
         Reservation reservation = new Reservation();
@@ -44,7 +44,7 @@ public class ReservationService {
         if (reservation.getEmprunt() != null) return "reservation deja transformee en emprunt";
 
         // Chercher un exemplaire disponible du livre
-        Livre livre = reservation.getLivre();
+        Livre livre = livreRepository.findByIdWithExemplaires(reservation.getLivre().getId());
         Membre membre = reservation.getMembre();
         Exemplaire exemplaire = livre.getExemplaires().stream()
             .filter(e -> e.getEmprunts().stream().noneMatch(em -> em.getDateRetour() == null))
