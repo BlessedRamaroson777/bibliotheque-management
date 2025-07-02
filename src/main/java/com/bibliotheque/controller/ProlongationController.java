@@ -22,7 +22,7 @@ public class ProlongationController {
     public String formProlongerLivre(@RequestParam(required = false) Long idAdherent, Model model) {
         model.addAttribute("adherents", membreRepository.findAll());
         if (idAdherent != null) {
-            // Liste des emprunts en cours pour cet adhérent
+            // Liste des emprunts en cours pour cet adherent
             List<Emprunt> emprunts = empruntRepository.findByMembreId(idAdherent).stream()
                 .filter(e -> e.getDateRetour() == null && !Boolean.TRUE.equals(e.getSurPlace()))
                 .toList();
