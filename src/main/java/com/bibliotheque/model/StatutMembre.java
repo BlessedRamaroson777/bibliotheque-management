@@ -1,7 +1,7 @@
 package com.bibliotheque.model;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "statut_membre")
@@ -18,7 +18,7 @@ public class StatutMembre {
     private Statut statut;
 
     @Column(name="date_statut")
-    private LocalDate date_statut;
+    private LocalDateTime date_statut;
 
     // ...getters/setters...
     public Long getId() { return id; }
@@ -27,6 +27,6 @@ public class StatutMembre {
     public void setMembre(Membre membre) { this.membre = membre; }
     public Statut getStatut() { return statut; }
     public void setStatut(Statut statut) { this.statut = statut; }
-    public LocalDate getDateStatut() { return date_statut; }
-    public void setDateStatut(LocalDate date_statut) { this.date_statut = date_statut; }
+    public LocalDateTime getDateStatut() { return date_statut; }
+    public void setDateStatut(LocalDateTime date_statut) { this.date_statut = date_statut; }
 }

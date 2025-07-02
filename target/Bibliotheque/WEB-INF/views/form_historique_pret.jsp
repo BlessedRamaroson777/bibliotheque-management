@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Historique des prêts - Sélection du livre</title>
+    <title>Historique des prêts - Selection du livre</title>
 </head>
 <body>
     <h2>Voir l'historique des prêts d'un livre</h2>

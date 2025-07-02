@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Controller
 public class DisponibiliteController {
@@ -27,7 +27,7 @@ public class DisponibiliteController {
     public String verifierDisponibilite(@RequestParam Long livreId,
                                         @RequestParam String dateDispo,
                                         Model model) {
-        LocalDate date = LocalDate.parse(dateDispo);
+        LocalDateTime date = LocalDateTime.parse(dateDispo);
         DisponibiliteResult result = disponibiliteService.verifierDisponibilite(livreId, date);
         model.addAttribute("result", result);
         return "resultat_disponibilite";

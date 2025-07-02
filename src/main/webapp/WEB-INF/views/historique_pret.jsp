@@ -6,13 +6,13 @@
 </head>
 <body>
     <h2>Historique des prêts</h2>
-    <h3>Prêts (avant, en cours, prolongés)</h3>
+    <h3>Prêts (avant, en cours, prolonges)</h3>
     <table border="1">
         <tr>
             <th>Membre</th>
             <th>Date emprunt</th>
-            <th>Date début</th>
-            <th>Date échéance</th>
+            <th>Date debut</th>
+            <th>Date echeance</th>
             <th>Date retour</th>
         </tr>
         <%
@@ -28,12 +28,12 @@
         </tr>
         <% } %>
     </table>
-    <h3>Réservations</h3>
+    <h3>Reservations</h3>
     <table border="1">
         <tr>
             <th>Membre</th>
-            <th>Date réservation</th>
-            <th>Date début</th>
+            <th>Date reservation</th>
+            <th>Date debut</th>
         </tr>
         <%
             java.util.List<com.bibliotheque.model.Reservation> reservations = (java.util.List<com.bibliotheque.model.Reservation>) request.getAttribute("reservations");
