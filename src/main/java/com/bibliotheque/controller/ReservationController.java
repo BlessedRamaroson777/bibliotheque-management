@@ -31,4 +31,22 @@ public class ReservationController {
         model.addAttribute("resultat", resultat);
         return "resultat_reserver_livre";
     }
+
+    @PostMapping("/annuler-reservation")
+    public String annulerReservation(@RequestParam Long idReservation, Model model) {
+        String resultat = reservationService.annulerReservation(idReservation);
+        model.addAttribute("resultat", resultat);
+        // recharge la liste
+        model.addAttribute("reservations", reservationRepository.findNonReclamees());
+        return "form_reserver_livre";
+    }
+
+    @PostMapping("/recuperer-reservation")
+    public String recupererReservation(@RequestParam Long idReservation, @RequestParam Long idBibliothecaire, Model model) {
+        String resultat = reservationService.recupererReservation(idReservation, idBibliothecaire);
+        model.addAttribute("resultat", resultat);
+        // recharge la liste
+        model.addAttribute("reservations", reservationRepository.findNonReclamees());
+        return "form_reserver_livre";
+    }
 }

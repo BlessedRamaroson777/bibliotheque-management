@@ -47,6 +47,7 @@
             <th>Adherent</th>
             <th>Livre</th>
             <th>Date reservation</th>
+            <th>Actions</th>
         </tr>
         <%
             List<com.bibliotheque.model.Reservation> reservations = (List<com.bibliotheque.model.Reservation>) request.getAttribute("reservations");
@@ -57,6 +58,17 @@
             <td><%= r.getMembre().getNomUtilisateur() %></td>
             <td><%= r.getLivre().getTitre() %></td>
             <td><%= r.getDateReservation() %></td>
+            <td>
+                <form action="annuler-reservation" method="post" style="display:inline;">
+                    <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
+                    <input type="submit" value="Annuler"/>
+                </form>
+                <form action="recuperer-reservation" method="post" style="display:inline;">
+                    <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
+                    <input type="hidden" name="idBibliothecaire" value="..."/> <%-- à remplacer par l'id du bibliothécaire connecté --%>
+                    <input type="submit" value="Recuperer"/>
+                </form>
+            </td>
         </tr>
         <%
                 }

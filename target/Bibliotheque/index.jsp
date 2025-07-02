@@ -6,13 +6,24 @@
 </head>
 <body>
     <a href="membre/inscrire">Inscription</a>
+    <br>
     <a href="rechercher-livres">liste_livre</a>
+    <br>
     <a href="form-recherche-livre">rechercher</a>
+    <br>
     <a href="form-disponibilite">verifier disponibilite</a>
+    <br>
     <a href="form-historique-pret">Voir l historique des prets</a>
+    <br>
     <a href="form-lecture-sur-place">Lire un livre sur place</a>
+    <br>
     <a href="lectures-sur-place">Liste des lectures sur place</a>
+    <br>
     <a href="form-preter-livre">Preter un livre</a>
+    <br>
     <a href="form-prolonger-livre">Prolonger un livre</a>
+    <br>
+    <a href="form-reserver-livre">Reserver un livre</a>
+    <br>
 </body>
 </html>

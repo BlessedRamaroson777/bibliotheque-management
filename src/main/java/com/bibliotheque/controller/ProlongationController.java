@@ -2,7 +2,6 @@ package com.bibliotheque.controller;
 
 import com.bibliotheque.service.ProlongationService;
 import com.bibliotheque.model.Emprunt;
-import com.bibliotheque.repository.LivreRepository;
 import com.bibliotheque.repository.MembreRepository;
 
 import java.util.List;
