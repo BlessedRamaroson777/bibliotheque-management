@@ -23,6 +23,9 @@ public class Livre {
     @JoinColumn(name = "id_genre_livre")
     private GenreLivre genreLivre;
 
+    @OneToMany(mappedBy = "livre", fetch = FetchType.EAGER)
+    private java.util.List<Exemplaire> exemplaires;
+
     // Getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -36,4 +39,6 @@ public class Livre {
     public void setAuteur(Auteur auteur) { this.auteur = auteur; }
     public GenreLivre getGenreLivre() { return genreLivre; }
     public void setGenreLivre(GenreLivre genreLivre) { this.genreLivre = genreLivre; }
+    public java.util.List<Exemplaire> getExemplaires() { return exemplaires; }
+    public void setExemplaires(java.util.List<Exemplaire> exemplaires) { this.exemplaires = exemplaires; }
 }
