@@ -36,4 +36,11 @@ public class ProlongationController {
         model.addAttribute("resultat", resultat);
         return "resultat_prolonger_livre";
     }
+    @PostMapping("/examiner-prolongation")
+    public String examinerProlongation(@RequestParam Long idProlongation, @RequestParam boolean accorder, Model model) {
+        String resultat = prolongationService.examinerProlongation(idProlongation, accorder);
+        model.addAttribute("resultat", resultat);
+        model.addAttribute("prolongations", prolongationService.getProlongationsEnCours());
+        return "resultat_prolonger_livre";
+    }
 }

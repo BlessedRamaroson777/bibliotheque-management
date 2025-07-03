@@ -21,7 +21,7 @@
     <br>
     <a href="form-preter-livre">Preter un livre</a>
     <br>
-    <a href="form-prolonger-livre">Prolonger un livre</a>
+    <a href="form-prolonger-livre">Gestion prolongation</a>
     <br>
     <a href="form-reserver-livre">Reserver un livre</a>
     <br>

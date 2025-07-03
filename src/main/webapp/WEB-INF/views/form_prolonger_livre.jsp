@@ -74,6 +74,7 @@
             <th>Date demande</th>
             <th>Ancienne échéance</th>
             <th>Nouvelle échéance demandée</th>
+            <th>Action</th>
         </tr>
         <%
             java.util.List<com.bibliotheque.model.Prolongation> prolongations = (java.util.List<com.bibliotheque.model.Prolongation>) request.getAttribute("prolongations");
@@ -86,6 +87,13 @@
             <td><%= p.getDateProlongation() %></td>
             <td><%= p.getAncienneEcheance() %></td>
             <td><%= p.getNouvelleEcheance() %></td>
+            <td>
+                <form action="examiner-prolongation" method="post" style="display:inline;">
+                    <input type="hidden" name="idProlongation" value="<%= p.getId() %>"/>
+                    <button type="submit" name="accorder" value="true">Accorder</button>
+                    <button type="submit" name="accorder" value="false">Refuser</button>
+                </form>
+            </td>
         </tr>
         <%
                 }
