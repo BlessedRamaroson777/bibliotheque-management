@@ -24,6 +24,7 @@ F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Emprunt.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\ReservationAnnulee.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Bibliothecaire.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\QuotaEmpruntMembre.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\DisponibiliteResult.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\LivreController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\MembreService.java
@@ -32,6 +33,7 @@ F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repos
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\PretController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\EmpruntRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\NotificationController.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\QuotaEmpruntMembreRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\DisponibiliteService.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\ReservationController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\ReservationAnnuleeRepository.java
@@ -43,8 +45,10 @@ F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repos
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\LivreRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\ProlongationService.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\StatutRepository.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\EmpruntController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Reservation.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Membre.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\MembreController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\ProlongationController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\TypeMembre.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\EmpruntService.java
