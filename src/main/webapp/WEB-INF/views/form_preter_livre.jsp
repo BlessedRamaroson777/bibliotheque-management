@@ -7,6 +7,7 @@
 <html>
 <head>
     <title>Prêter un livre</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Prêter un livre</h2>

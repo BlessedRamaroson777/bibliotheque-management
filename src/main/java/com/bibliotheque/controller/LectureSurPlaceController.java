@@ -25,8 +25,14 @@ public class LectureSurPlaceController {
     }
 
     @PostMapping("/lire-sur-place")
-    public String lireSurPlace(@RequestParam Long idAdherent, @RequestParam Long idLivre, @RequestParam Long idBibliothecaire, Model model) {
-        String resultat = lectureSurPlaceService.lireSurPlace(idAdherent, idLivre, idBibliothecaire);
+    public String lireSurPlace(
+        @RequestParam Long idAdherent,
+        @RequestParam Long idLivre,
+        @RequestParam Long idBibliothecaire,
+        @RequestParam String dateLecture,
+        Model model
+    ) {
+        String resultat = lectureSurPlaceService.lireSurPlace(idAdherent, idLivre, idBibliothecaire, java.time.LocalDateTime.parse(dateLecture));
         model.addAttribute("resultat", resultat);
         return "resultat_lecture_sur_place";
     }

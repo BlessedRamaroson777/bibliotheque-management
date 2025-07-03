@@ -18,11 +18,8 @@ INSERT INTO type_membre (nom, quota) VALUES
 
 -- Statut (dejà insere normalement)
 INSERT INTO statut (valeur) VALUES
-('inscrit'),
 ('actif'),
-('suspendu'),
-('expire'),
-('banni');
+('inactif');
 
 -- Bibliothecaire
 INSERT INTO bibliothecaire (nom_utilisateur, mot_de_passe) VALUES
@@ -200,7 +197,7 @@ WITH m3 AS (
   RETURNING id
 )
 INSERT INTO statut_membre (id_membre, id_statut, date_statut)
-SELECT id, 3, '2025-06-18' FROM m3; -- suspendu
+SELECT id, 2, '2025-06-18' FROM m3; -- suspendu
 INSERT INTO reservation (id_membre, id_livre, date_reservation, date_debut, id_bibliothecaire, date_traitement, id_emprunt)
 VALUES (
   (SELECT id FROM membre WHERE email='inactif@mail.com'),

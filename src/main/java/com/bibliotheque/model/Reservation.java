@@ -35,6 +35,9 @@ public class Reservation {
     @JoinColumn(name = "id_emprunt")
     private Emprunt emprunt;
 
+    @Column(name = "etat")
+    private String etat = "en_cours";
+
     // Getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -59,4 +62,7 @@ public class Reservation {
 
     public Emprunt getEmprunt() { return emprunt; }
     public void setEmprunt(Emprunt emprunt) { this.emprunt = emprunt; }
+
+    public String getEtat() { return etat; }
+    public void setEtat(String etat) { this.etat = etat; }
 }

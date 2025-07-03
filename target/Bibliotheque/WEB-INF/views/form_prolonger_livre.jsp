@@ -7,28 +7,18 @@
 <html>
 <head>
     <title>Prolonger un livre</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Demander une prolongation</h2>
-    <%-- Sélection de l'adhérent --%>
-    <form method="get" action="form-prolonger-livre">
-        Adhérent :
-        <select name="idAdherent" required onchange="this.form.submit()">
-            <option value="">-- Choisir un adhérent --</option>
-            <%
-                List<Membre> adherents = (List<Membre>) request.getAttribute("adherents");
-                Long selectedId = request.getParameter("idAdherent") != null ? Long.parseLong(request.getParameter("idAdherent")) : null;
-                for (Membre m : adherents) {
-            %>
-                <option value="<%= m.getId() %>" <%= (selectedId != null && m.getId().equals(selectedId)) ? "selected" : "" %>><%= m.getNomUtilisateur() %> (<%= m.getEmail() %>)</option>
-            <%
-                }
-            %>
-        </select>
-    </form>
-
-    <%-- Liste des emprunts en cours --%>
     <%
+        Long idAdherent = (Long) session.getAttribute("idMembre");
+    %>
+    <form method="get" action="form-prolonger-livre">
+        <input type="hidden" name="idAdherent" value="<%= idAdherent %>"/>
+        <input type="submit" value="Afficher mes emprunts"/>
+    </form>
+    <% 
         List<Emprunt> emprunts = (List<Emprunt>) request.getAttribute("emprunts");
         if (emprunts != null && !emprunts.isEmpty()) {
     %>

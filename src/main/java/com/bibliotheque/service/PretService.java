@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
+import com.bibliotheque.repository.JourFerieRepository;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class PretService {
@@ -17,6 +20,7 @@ public class PretService {
     @Autowired private AutorisationRepository autorisationRepository;
     @Autowired private EmpruntRepository empruntRepository;
     @Autowired private BibliothecaireRepository bibliothecaireRepository;
+    @Autowired private JourFerieRepository jourFerieRepository;
 
     public String preterLivre(Long idAdherent, Long idLivre, Long idBibliothecaire) {
         // 1. Verifier que l'adherent existe
@@ -44,6 +48,14 @@ public class PretService {
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Livre inexistant.";
 
+        // Vérifier l'âge minimum requis
+        if (livre.getAgeMinimum() != null && membre.getNaissance() != null) {
+            int age = java.time.Period.between(membre.getNaissance().toLocalDate(), java.time.LocalDate.now()).getYears();
+            if (age < livre.getAgeMinimum()) {
+                return "Vous n'avez pas l'age minimum requis (" + livre.getAgeMinimum() + " ans) pour emprunter ce livre.";
+            }
+        }
+
         // 6. Verifier qu'il y a un exemplaire disponible
         List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, LocalDateTime.now());
         if (exemplaires.isEmpty()) return "Aucun exemplaire disponible pour ce livre.";
@@ -63,13 +75,29 @@ public class PretService {
         emprunt.setExemplaire(exemplaire);
         emprunt.setDateEmprunt(LocalDateTime.now());
         emprunt.setDateDebut(LocalDateTime.now());
-        // Calcul de la date d'echeance (exemple : +15 jours)
-        emprunt.setDateEcheance(LocalDateTime.now().plusDays(15));
+        // Calcul de la date d'echeance (exemple : +15 jours ouvrés hors jours fériés)
+        emprunt.setDateEcheance(calculerDateEcheanceSansJoursFeries(LocalDateTime.now(), 15));
         emprunt.setSurPlace(false);
         emprunt.setBiblioEmprunt(biblio);
         empruntRepository.save(emprunt);
 
         return "Exemplaire n " + exemplaire.getNumeroExemplaire() + " prete. Date de rendu prevue : " + emprunt.getDateEcheance();
+    }
+
+    // Ajoute cette méthode utilitaire
+    private LocalDateTime calculerDateEcheanceSansJoursFeries(LocalDateTime dateDebut, int nbJours) {
+        Set<java.time.LocalDate> joursFeries = jourFerieRepository.findAll().stream()
+            .map(jf -> jf.getDateJour().toLocalDate())
+            .collect(Collectors.toSet());
+        LocalDateTime date = dateDebut;
+        int joursAjoutes = 0;
+        while (joursAjoutes < nbJours) {
+            date = date.plusDays(1);
+            if (!joursFeries.contains(date.toLocalDate())) {
+                joursAjoutes++;
+            }
+        }
+        return date;
     }
 
     public List<Emprunt> getPretsEnCours() {

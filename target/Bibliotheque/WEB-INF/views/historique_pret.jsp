@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Historique des prêts</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Historique des prêts</h2>

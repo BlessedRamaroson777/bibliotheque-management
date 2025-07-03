@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Resultats recherche livres</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Resultats de la recherche</h2>

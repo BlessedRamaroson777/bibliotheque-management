@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Disponibilite du livre</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Disponibilite</h2>

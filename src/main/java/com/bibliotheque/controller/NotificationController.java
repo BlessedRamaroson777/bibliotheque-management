@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class NotificationController {
     @Autowired private NotificationService notificationService;
+    @Autowired private com.bibliotheque.repository.MembreRepository membreRepository;
 
     @GetMapping("/notifier-retour-livre")
-    public String notifierRetourLivre(@RequestParam Long idAdherent, Model model) {
-        model.addAttribute("emprunts", notificationService.getEmpruntsARendreDans2Jours(idAdherent));
+    public String notifierRetourLivre(@RequestParam(required = false) Long idAdherent, Model model) {
+        model.addAttribute("adherents", membreRepository.findAll());
+        if (idAdherent != null) {
+            model.addAttribute("emprunts", notificationService.getEmpruntsARendreDans2Jours(idAdherent));
+        }
         return "notifier_retour_livre";
     }
 
