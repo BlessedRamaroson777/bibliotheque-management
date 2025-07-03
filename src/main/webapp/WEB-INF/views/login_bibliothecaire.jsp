@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Connexion Bibliothécaire</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Connexion Bibliothécaire</h2>

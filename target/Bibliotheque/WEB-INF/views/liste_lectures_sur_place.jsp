@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Lectures sur place</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Lectures sur place en cours</h2>

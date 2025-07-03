@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Resultat lecture sur place</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Resultat</h2>

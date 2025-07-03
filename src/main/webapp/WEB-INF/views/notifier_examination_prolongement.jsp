@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Notification examen prolongement</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Resultat examen prolongement</h2>

@@ -3,10 +3,11 @@
 <html>
 <head>
     <title>Accueil Bibliothécaire</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Bienvenue, ${bibliothecaire.nomUtilisateur} !</h2>
     <p>Vous êtes connecté en tant que bibliothécaire.</p>
-    <a href="index.jsp">Retour à l'accueil</a>
+    <a href="index.jsp">Retour a l'accueil</a>
 </body>
 </html>

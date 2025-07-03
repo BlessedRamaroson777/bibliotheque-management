@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bibliotheque</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <c:if test="${not empty error}">

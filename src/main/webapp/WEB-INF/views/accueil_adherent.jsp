@@ -2,11 +2,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Accueil Adhérent</title>
+    <title>Accueil Adherent</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Bienvenue, ${adherent.nomUtilisateur} !</h2>
-    <p>Vous êtes connecté en tant qu'adhérent.</p>
-    <a href="index.jsp">Retour à l'accueil</a>
+    <p>Vous etes connecte en tant qu'adherent.</p>
+    <a href="index.jsp">Retour a l'accueil</a>
 </body>
 </html>

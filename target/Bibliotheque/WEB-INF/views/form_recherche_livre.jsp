@@ -7,6 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Recherche de livres</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Recherche de livres</h2>

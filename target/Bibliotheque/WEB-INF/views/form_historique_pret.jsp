@@ -5,6 +5,7 @@
 <html>
 <head>
     <title>Historique des prêts - Selection du livre</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Voir l'historique des prêts d'un livre</h2>

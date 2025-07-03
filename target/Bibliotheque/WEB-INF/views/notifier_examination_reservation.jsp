@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Notification examen reservation</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Resultat examen reservation</h2>

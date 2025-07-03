@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Connexion Adhérent</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Connexion Adhérent</h2>

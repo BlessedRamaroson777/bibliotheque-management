@@ -6,6 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Verifier disponibilite d'un livre</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
     <h2>Verifier disponibilite d'un exemplaire</h2>
