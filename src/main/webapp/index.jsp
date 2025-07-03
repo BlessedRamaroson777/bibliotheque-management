@@ -23,7 +23,7 @@
     <br>
     <a href="form-prolonger-livre">Gestion prolongation</a>
     <br>
-    <a href="form-reserver-livre">Reserver un livre</a>
+    <a href="form-reserver-livre">Gestion reservation</a>
     <br>
 </body>
 </html>
