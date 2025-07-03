@@ -8,8 +8,8 @@
 <body>
     <h2>Connexion Adhérent</h2>
     <form action="login-adherent" method="post">
-        Email : <input type="email" name="email" required /><br/>
-        Mot de passe : <input type="password" name="motDePasse" required /><br/>
+        Email : <input type="email" name="email" value="hahah@gmail.com" required /><br/>
+        Mot de passe : <input type="password" name="motDePasse" value="kely" required /><br/>
         <input type="submit" value="Se connecter"/>
     </form>
     <div style="color:red">${error}</div>

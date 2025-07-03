@@ -34,6 +34,7 @@ public class AuthController {
         if (membre != null && membre.getMotDePasse().equals(motDePasse)) {
             session.setAttribute("adherent", membre);
             session.setAttribute("role", "adherent");
+            session.setAttribute("idMembre", membre.getId()); // <-- Ajout ici
             model.addAttribute("adherent", membre);
             return "accueil_adherent";
         } else {
@@ -61,6 +62,7 @@ public class AuthController {
         if (biblio != null) {
             session.setAttribute("bibliothecaire", biblio);
             session.setAttribute("role", "bibliothecaire");
+            session.setAttribute("idBibliothecaire", biblio.getId()); // <-- Ajout ici
             model.addAttribute("bibliothecaire", biblio);
             return "accueil_bibliothecaire";
         } else {

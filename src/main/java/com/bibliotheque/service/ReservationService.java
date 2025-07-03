@@ -27,6 +27,14 @@ public class ReservationService {
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Erreur : livre inexistant.";
 
+        // Vérifier l'âge minimum requis
+        if (livre.getAgeMinimum() != null && membre.getNaissance() != null) {
+            int age = java.time.Period.between(membre.getNaissance().toLocalDate(), java.time.LocalDate.now()).getYears();
+            if (age < livre.getAgeMinimum()) {
+                return "Vous n'avez pas l'âge minimum requis (" + livre.getAgeMinimum() + " ans) pour réserver ce livre.";
+            }
+        }
+
         // Verifier que dateDebut >= dateReservation
         if (dateDebut.isBefore(dateReservation)) {
             return "Erreur : la date de debut doit être posterieure ou egale à la date de reservation.";
@@ -154,54 +162,14 @@ public class ReservationService {
     public String examinerReservation(Long idReservation, boolean accorder) {
         Reservation reservation = reservationRepository.findById(idReservation).orElse(null);
         if (reservation == null) return "Erreur : reservation inexistante.";
-        Membre membre = reservation.getMembre();
-        if (membre == null) return "Erreur : adherent inexistant.";
-        Livre livre = reservation.getLivre();
-        if (livre == null) return "Erreur : livre inexistant.";
-
-        // Verifier que l'adherent est actif (avant et après)
-        boolean actif = statutMembreRepository.findAll().stream()
-            .anyMatch(s -> s.getMembre().getId().equals(membre.getId()) && s.getStatut().getValeur().equalsIgnoreCase("actif"));
-        if (!actif) {
-            return "Erreur : adherent inactif. Reservation refusee.";
-        }
-
-        // Verifier que l'adherent n'est pas penalise
-        boolean penalise = penaliteRepository.findAll().stream()
-            .anyMatch(p -> p.getMembre().getId().equals(membre.getId()) && p.getDateRetour() == null);
-        if (penalise) {
-            return "Erreur : adherent penalise. Reservation refusee.";
-        }
-
-        // Verifier le quota à la date de reservation
-        int quota = membre.getTypeMembre().getQuota();
-        long empruntsEnCours = empruntRepository.findByMembreId(membre.getId()).stream()
-            .filter(e -> e.getDateRetour() == null && !Boolean.TRUE.equals(e.getSurPlace()))
-            .count();
-        if (empruntsEnCours >= quota) {
-            return "Erreur : quota depasse a la date de reservation. Reservation refusee.";
-        }
-
-        // Verifier qu'un exemplaire est disponible à la date de reservation
-        java.util.List<Exemplaire> exemplairesDispo = exemplaireRepository.findDisponibles(livre.getId(), reservation.getDateDebut());
-        if (exemplairesDispo.isEmpty()) {
-            // Quota -1 (à implementer selon ta logique de quota)
-            // Message vers adherent
-            return "Aucun exemplaire disponible a la date demandee. Reservation refusee et quota decremente.";
-        }
-
-        // Verifier que le livre est compatible avec l'adherent (autorisation)
-        boolean autorise = autorisationRepository.findAll().stream()
-            .anyMatch(a -> a.getTypeMembre().getId().equals(membre.getTypeMembre().getId()) && a.getLivre().getId().equals(livre.getId()));
-        if (!autorise) {
-            return "Ce livre n'est pas autorise pour ce type d'adherent. Reservation refusee.";
-        }
 
         if (accorder) {
-            // Ici, tu pourrais marquer la reservation comme "validee" (par exemple, set un champ ou notifier l'adherent)
-            return "Reservation accordee. Exemplaire disponible a la date demandee.";
+            reservation.setEtat("validee");
         } else {
-            return "Reservation refusee par le bibliothecaire.";
+            reservation.setEtat("refusee");
         }
+        reservation.setDateTraitement(java.time.LocalDateTime.now());
+        reservationRepository.save(reservation);
+        return accorder ? "Reservation accordee." : "Reservation refusee.";
     }
 }

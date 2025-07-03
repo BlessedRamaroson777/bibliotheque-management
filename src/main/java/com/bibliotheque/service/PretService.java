@@ -48,6 +48,14 @@ public class PretService {
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Livre inexistant.";
 
+        // Vérifier l'âge minimum requis
+        if (livre.getAgeMinimum() != null && membre.getNaissance() != null) {
+            int age = java.time.Period.between(membre.getNaissance().toLocalDate(), java.time.LocalDate.now()).getYears();
+            if (age < livre.getAgeMinimum()) {
+                return "Vous n'avez pas l'age minimum requis (" + livre.getAgeMinimum() + " ans) pour emprunter ce livre.";
+            }
+        }
+
         // 6. Verifier qu'il y a un exemplaire disponible
         List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, LocalDateTime.now());
         if (exemplaires.isEmpty()) return "Aucun exemplaire disponible pour ce livre.";

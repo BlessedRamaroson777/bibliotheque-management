@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>Accueil Adherent</title>
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
 </head>
 <body>
     <h2>Bienvenue, ${adherent.nomUtilisateur} !</h2>

@@ -19,8 +19,8 @@ public class LectureSurPlaceService {
     @Autowired private EmpruntRepository empruntRepository;
     @Autowired private BibliothecaireRepository bibliothecaireRepository;
 
-    public String lireSurPlace(Long idAdherent, Long idLivre, Long idBibliothecaire) {
-     // 1. Verifier que l'adherent existe
+    public String lireSurPlace(Long idAdherent, Long idLivre, Long idBibliothecaire, LocalDateTime dateLecture) {
+        // 1. Verifier que l'adherent existe
         Membre membre = membreRepository.findById(idAdherent).orElse(null);
         if (membre == null) return "Adherent inexistant.";
 
@@ -38,8 +38,8 @@ public class LectureSurPlaceService {
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Livre inexistant.";
 
-        // 5. Verifier qu'il y a un exemplaire disponible
-        List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, LocalDateTime.now());
+        // 5. Verifier qu'il y a un exemplaire disponible à la date demandée
+        List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, dateLecture);
         if (exemplaires.isEmpty()) return "Aucun exemplaire disponible pour ce livre.";
 
         // 6. Verifier que le livre est compatible avec l'adherent (autorisation)
@@ -55,13 +55,16 @@ public class LectureSurPlaceService {
         Emprunt emprunt = new Emprunt();
         emprunt.setMembre(membre);
         emprunt.setExemplaire(exemplaire);
-        emprunt.setDateEmprunt(LocalDateTime.now());
-        emprunt.setDateDebut(LocalDateTime.now());
-        emprunt.setDateEcheance(LocalDateTime.now());
+        emprunt.setDateEmprunt(dateLecture);
+        emprunt.setDateDebut(dateLecture);
+        emprunt.setDateEcheance(dateLecture);
         emprunt.setSurPlace(true);
         emprunt.setBiblioEmprunt(biblio); // <-- obligatoire !
         empruntRepository.save(emprunt);
 
         return "Exemplaire n " + exemplaire.getNumeroExemplaire() + " enregistre pour lecture sur place.";
     }
+
+    // Utilise la même méthode de calcul si besoin pour la date d'échéance
+    // private LocalDateTime calculerDateEcheanceSansWeekends(...) { ... } (voir EmpruntService)
 }

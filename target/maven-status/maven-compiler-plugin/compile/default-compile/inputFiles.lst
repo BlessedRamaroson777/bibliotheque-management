@@ -2,6 +2,9 @@ F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\servi
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Penalite.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\AuthController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\GenreLivre.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\DureePenalite.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Cotisation.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\CotisationService.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\config\RoleInterceptor.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\StatutMembre.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\JourFerieRepository.java
@@ -16,6 +19,7 @@ F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\contr
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\TypeMembreRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\NotificationService.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\PretService.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\CotisationRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\BibliothecaireRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\MembreRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\QuotaMembre.java
@@ -45,8 +49,10 @@ F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\contr
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\ReservationAnnuleeRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\PenaliteRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\HistoriquePretService.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\controller\CotisationController.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Exemplaire.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\model\Autorisation.java
+F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\DureePenaliteRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\ProlongationRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\repository\LivreRepository.java
 F:\Studies\S4\WebDynNaina\bibliothequeWbDyn\src\main\java\com\bibliotheque\service\ProlongationService.java

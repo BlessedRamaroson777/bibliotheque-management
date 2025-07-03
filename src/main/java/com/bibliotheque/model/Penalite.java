@@ -28,6 +28,9 @@ public class Penalite {
     @Column(name = "cout")
     private BigDecimal cout;
 
+    @Column(name = "duree")
+    private Integer duree;
+
     // Getters/setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -46,4 +49,7 @@ public class Penalite {
 
     public BigDecimal getCout() { return cout; }
     public void setCout(BigDecimal cout) { this.cout = cout; }
+
+    public Integer getDuree() { return duree; }
+    public void setDuree(Integer duree) { this.duree = duree; }
 }

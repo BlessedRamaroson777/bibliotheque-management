@@ -37,71 +37,12 @@ public class ReservationController {
         return "resultat_reserver_livre";
     }
 
-    @PostMapping("/annuler-reservation")
-    public String annulerReservation(@RequestParam Long idReservation, Model model) {
-        String resultat = reservationService.annulerReservation(idReservation);
-        model.addAttribute("resultat", resultat);
-        // recharge la liste
-        model.addAttribute("livres", livreRepository.findAll());
-        model.addAttribute("adherents", membreRepository.findAll());
-        model.addAttribute("reservations", reservationRepository.findNonReclamees());
-        model.addAttribute("bibliothecaires", bibliothecaireRepository.findAll());
-        return "form_reserver_livre";
-    }
-
-    @PostMapping("/recuperer-reservation")
-    public String recupererReservation(@RequestParam Long idReservation, @RequestParam Long idBibliothecaire, Model model) {
-        String resultat = reservationService.recupererReservation(idReservation, idBibliothecaire);
-        model.addAttribute("resultat", resultat);
-        model.addAttribute("livres", livreRepository.findAll());
-        model.addAttribute("adherents", membreRepository.findAll());
-        model.addAttribute("reservations", reservationRepository.findNonReclamees());
-        model.addAttribute("bibliothecaires", bibliothecaireRepository.findAll());
-        return "form_reserver_livre";
-    }
-
-    @PostMapping("/assigner-bibliothecaire-reservation")
-    public String assignerBibliothecaireReservation(@RequestParam Long idReservation, @RequestParam Long idBibliothecaire, Model model) {
-        String resultat = reservationService.assignerBibliothecaire(idReservation, idBibliothecaire);
-        model.addAttribute("resultat", resultat);
-        model.addAttribute("livres", livreRepository.findAll());
-        model.addAttribute("adherents", membreRepository.findAll());
-        model.addAttribute("reservations", reservationRepository.findNonReclamees());
-        model.addAttribute("bibliothecaires", bibliothecaireRepository.findAll());
-        return "form_reserver_livre";
-    }
-
-    @PostMapping("/annuler-reservation-biblio")
-    public String annulerReservationBiblio(@RequestParam Long idReservation, @RequestParam Long idBibliothecaire, Model model) {
-        String resultat = reservationService.annulerReservationParBibliothecaire(idReservation, idBibliothecaire);
-        model.addAttribute("resultat", resultat);
-        model.addAttribute("livres", livreRepository.findAll());
-        model.addAttribute("adherents", membreRepository.findAll());
-        model.addAttribute("reservations", reservationService.getReservationsNonAnnulees());
-        model.addAttribute("bibliothecaires", bibliothecaireRepository.findAll());
-        return "form_reserver_livre";
-    }
-
-    @PostMapping("/annuler-reservation-membre")
-    public String annulerReservationMembre(@RequestParam Long idReservation, @RequestParam Long idMembre, Model model) {
-        String resultat = reservationService.annulerReservationParMembre(idReservation, idMembre);
-        model.addAttribute("resultat", resultat);
-        model.addAttribute("livres", livreRepository.findAll());
-        model.addAttribute("adherents", membreRepository.findAll());
-        model.addAttribute("reservations", reservationService.getReservationsNonAnnulees());
-        model.addAttribute("bibliothecaires", bibliothecaireRepository.findAll());
-        return "form_reserver_livre";
-    }
-
     @PostMapping("/examiner-reservation")
     public String examinerReservation(@RequestParam Long idReservation, @RequestParam boolean accorder, Model model) {
         String resultat = reservationService.examinerReservation(idReservation, accorder);
         model.addAttribute("resultat", resultat);
-        model.addAttribute("livres", livreRepository.findAll());
-        model.addAttribute("adherents", membreRepository.findAll());
-        model.addAttribute("reservations", reservationService.getReservationsNonAnnulees());
-        model.addAttribute("bibliothecaires", bibliothecaireRepository.findAll());
-        return "form_reserver_livre";
+        // Redirection vers la même page (notification examen reservation)
+        return "redirect:/notifier-examination-reservation";
     }
 
     @GetMapping("/form-reserver-livre")

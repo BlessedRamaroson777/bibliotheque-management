@@ -8,8 +8,8 @@
 <body>
     <h2>Connexion Bibliothécaire</h2>
     <form action="login-bibliothecaire" method="post">
-        Nom utilisateur : <input type="text" name="nomUtilisateur" required /><br/>
-        Mot de passe : <input type="password" name="motDePasse" required /><br/>
+        Nom utilisateur : <input type="text" name="nomUtilisateur" value="admin1" required /><br/>
+        Mot de passe : <input type="password" name="motDePasse" value="admin123" required /><br/>
         <input type="submit" value="Se connecter"/>
     </form>
     <div style="color:red">${error}</div>

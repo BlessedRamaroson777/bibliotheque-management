@@ -7,22 +7,12 @@
 </head>
 <body>
     <h2>Livres a rendre dans 2 jours</h2>
+    <%
+        Long idAdherent = (Long) session.getAttribute("idMembre");
+    %>
     <form method="get" action="notifier-retour-livre">
-        Adhérent :
-        <select name="idAdherent" required>
-            <option value="">-- Choisir un adhérent --</option>
-            <%
-                java.util.List<com.bibliotheque.model.Membre> adherents = (java.util.List<com.bibliotheque.model.Membre>) request.getAttribute("adherents");
-                if (adherents != null) {
-                    for (com.bibliotheque.model.Membre m : adherents) {
-            %>
-                <option value="<%= m.getId() %>"><%= m.getNomUtilisateur() %></option>
-            <%
-                    }
-                }
-            %>
-        </select>
-        <input type="submit" value="Voir"/>
+        <input type="hidden" name="idAdherent" value="<%= idAdherent %>"/>
+        <input type="submit" value="Voir mes livres à rendre"/>
     </form>
     <br/>
     <table border="1">

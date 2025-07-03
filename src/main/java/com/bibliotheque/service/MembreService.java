@@ -61,8 +61,8 @@ public class MembreService {
         Membre savedMembre = membreRepository.save(membre);
 
         // Statut "inscrit"
-        Statut statutInscrit = statutRepository.findByValeur("inscrit")
-            .orElseThrow(() -> new RuntimeException("Statut 'inscrit' introuvable"));
+        Statut statutInscrit = statutRepository.findByValeur("actif")
+            .orElseThrow(() -> new RuntimeException("Statut 'actif' introuvable"));
         StatutMembre statutMembre = new StatutMembre();
         statutMembre.setMembre(savedMembre);
         statutMembre.setStatut(statutInscrit);
