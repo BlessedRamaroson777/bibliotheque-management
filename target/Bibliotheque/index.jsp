@@ -29,5 +29,7 @@
     <br>
     <a href="notifier-examination-prolongement?idAdherent=1">Notification examen prolongement</a>
     <br>
+    <a href="notifier-examination-reservation?idAdherent=1">Notification examen reservation</a>
+    <br>
 </body>
 </html>

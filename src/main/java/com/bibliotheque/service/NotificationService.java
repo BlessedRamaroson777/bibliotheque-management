@@ -2,8 +2,10 @@ package com.bibliotheque.service;
 
 import com.bibliotheque.model.Emprunt;
 import com.bibliotheque.model.Prolongation;
+import com.bibliotheque.model.Reservation;
 import com.bibliotheque.repository.EmpruntRepository;
 import com.bibliotheque.repository.ProlongationRepository;
+import com.bibliotheque.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,8 @@ public class NotificationService {
     private EmpruntRepository empruntRepository;
     @Autowired
     private ProlongationRepository prolongationRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     // Pour l'adhérent : ses emprunts à rendre dans 2 jours
     public List<Emprunt> getEmpruntsARendreDans2Jours(Long idAdherent) {
@@ -43,6 +47,14 @@ public class NotificationService {
         return prolongationRepository.findAll().stream()
             .filter(p -> p.getEmprunt().getMembre().getId().equals(idAdherent))
             .filter(p -> p.getAccordee() != null) // seulement celles déjà examinées
+            .toList();
+    }
+
+    // Reservations examinées pour un adhérent (celles qui ont été transformées en emprunt ou refusées)
+    public java.util.List<Reservation> getReservationsExaminees(Long idAdherent) {
+        return reservationRepository.findAll().stream()
+            .filter(r -> r.getMembre().getId().equals(idAdherent))
+            .filter(r -> r.getEmprunt() != null || r.getBibliothecaire() != null) // examinées
             .toList();
     }
 }
