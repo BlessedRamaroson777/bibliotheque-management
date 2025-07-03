@@ -20,6 +20,7 @@ com\bibliotheque\model\ReservationAnnulee.class
 com\bibliotheque\controller\MembreController.class
 com\bibliotheque\model\QuotaEmpruntMembre.class
 com\bibliotheque\service\MembreService.class
+com\bibliotheque\controller\AuthController.class
 com\bibliotheque\controller\LivreController.class
 com\bibliotheque\service\PretService.class
 com\bibliotheque\repository\ProlongationRepository.class

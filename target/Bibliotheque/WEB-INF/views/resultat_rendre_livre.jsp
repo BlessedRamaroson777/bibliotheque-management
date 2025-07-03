@@ -7,6 +7,6 @@
 <body>
     <h2>Resultat</h2>
     <p>${resultat}</p>
-    <a href="form_rendre_livre">Rendre un autre livre</a>
+    <a href="form-rendre-livre">Rendre un autre livre</a>
 </body>
 </html>

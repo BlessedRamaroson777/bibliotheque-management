@@ -5,6 +5,10 @@
     <title>title</title>
 </head>
 <body>
+    <a href="login-adherent">Connexion Adherent</a>
+    <br>
+    <a href="login-bibliothecaire">Connexion Bibliothecaire</a>
+    <br>
     <a href="membre/inscrire">Inscription</a>
     <br>
     <a href="rechercher-livres">liste_livre</a>
