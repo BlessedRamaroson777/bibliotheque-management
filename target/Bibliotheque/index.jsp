@@ -25,5 +25,9 @@
     <br>
     <a href="form-reserver-livre">Gestion reservation</a>
     <br>
+    <a href="notifier-retour-livre-biblio">Notification retour livre (biblio)</a>
+    <br>
+    <a href="formulaire-bibliothecaire">Formulaire Bibliothecaire</a>
+    <br>
 </body>
 </html>
