@@ -15,6 +15,9 @@ public class ReservationService {
     @Autowired private EmpruntRepository empruntRepository;
     @Autowired private ExemplaireRepository exemplaireRepository;
     @Autowired private ReservationAnnuleeRepository reservationAnnuleeRepository;
+    @Autowired private StatutMembreRepository statutMembreRepository;
+    @Autowired private PenaliteRepository penaliteRepository;
+    @Autowired private AutorisationRepository autorisationRepository;
 
     public String reserverLivre(Long idAdherent, Long idLivre, LocalDateTime dateReservation, LocalDateTime dateDebut) {
         // Verification existence adherent
@@ -146,5 +149,59 @@ public class ReservationService {
         return toutes.stream()
             .filter(r -> !idsAnnulees.contains(r.getId()))
             .toList();
+    }
+
+    public String examinerReservation(Long idReservation, boolean accorder) {
+        Reservation reservation = reservationRepository.findById(idReservation).orElse(null);
+        if (reservation == null) return "Erreur : reservation inexistante.";
+        Membre membre = reservation.getMembre();
+        if (membre == null) return "Erreur : adherent inexistant.";
+        Livre livre = reservation.getLivre();
+        if (livre == null) return "Erreur : livre inexistant.";
+
+        // Vérifier que l'adhérent est actif (avant et après)
+        boolean actif = statutMembreRepository.findAll().stream()
+            .anyMatch(s -> s.getMembre().getId().equals(membre.getId()) && s.getStatut().getValeur().equalsIgnoreCase("actif"));
+        if (!actif) {
+            return "Erreur : adherent inactif. Reservation refusee.";
+        }
+
+        // Vérifier que l'adhérent n'est pas pénalisé
+        boolean penalise = penaliteRepository.findAll().stream()
+            .anyMatch(p -> p.getMembre().getId().equals(membre.getId()) && p.getDateRetour() == null);
+        if (penalise) {
+            return "Erreur : adherent penalise. Reservation refusee.";
+        }
+
+        // Vérifier le quota à la date de reservation
+        int quota = membre.getTypeMembre().getQuota();
+        long empruntsEnCours = empruntRepository.findByMembreId(membre.getId()).stream()
+            .filter(e -> e.getDateRetour() == null && !Boolean.TRUE.equals(e.getSurPlace()))
+            .count();
+        if (empruntsEnCours >= quota) {
+            return "Erreur : quota depasse a la date de reservation. Reservation refusee.";
+        }
+
+        // Vérifier qu'un exemplaire est disponible à la date de reservation
+        java.util.List<Exemplaire> exemplairesDispo = exemplaireRepository.findDisponibles(livre.getId(), reservation.getDateDebut());
+        if (exemplairesDispo.isEmpty()) {
+            // Quota -1 (à implémenter selon ta logique de quota)
+            // Message vers adherent
+            return "Aucun exemplaire disponible a la date demandee. Reservation refusee et quota decrementé.";
+        }
+
+        // Vérifier que le livre est compatible avec l'adhérent (autorisation)
+        boolean autorise = autorisationRepository.findAll().stream()
+            .anyMatch(a -> a.getTypeMembre().getId().equals(membre.getTypeMembre().getId()) && a.getLivre().getId().equals(livre.getId()));
+        if (!autorise) {
+            return "Ce livre n'est pas autorise pour ce type d'adherent. Reservation refusee.";
+        }
+
+        if (accorder) {
+            // Ici, tu pourrais marquer la reservation comme "validée" (par exemple, set un champ ou notifier l'adhérent)
+            return "Reservation accordee. Exemplaire disponible a la date demandee.";
+        } else {
+            return "Reservation refusee par le bibliothecaire.";
+        }
     }
 }

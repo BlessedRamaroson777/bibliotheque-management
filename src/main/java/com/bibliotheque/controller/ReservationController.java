@@ -93,6 +93,17 @@ public class ReservationController {
         return "form_reserver_livre";
     }
 
+    @PostMapping("/examiner-reservation")
+    public String examinerReservation(@RequestParam Long idReservation, @RequestParam boolean accorder, Model model) {
+        String resultat = reservationService.examinerReservation(idReservation, accorder);
+        model.addAttribute("resultat", resultat);
+        model.addAttribute("livres", livreRepository.findAll());
+        model.addAttribute("adherents", membreRepository.findAll());
+        model.addAttribute("reservations", reservationService.getReservationsNonAnnulees());
+        model.addAttribute("bibliothecaires", bibliothecaireRepository.findAll());
+        return "form_reserver_livre";
+    }
+
     @GetMapping("/form-reserver-livre")
     public String formReserverLivre(Model model) {
         model.addAttribute("livres", livreRepository.findAll());
