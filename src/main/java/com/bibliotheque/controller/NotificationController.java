@@ -28,4 +28,10 @@ public class NotificationController {
         model.addAttribute("prolongations", notificationService.getProlongationsExaminees(idAdherent));
         return "notifier_examination_prolongement";
     }
+
+    @GetMapping("/notifier-examination-reservation")
+    public String notifierExaminationReservation(@RequestParam Long idAdherent, Model model) {
+        model.addAttribute("reservations", notificationService.getReservationsExaminees(idAdherent));
+        return "notifier_examination_reservation";
+    }
 }
