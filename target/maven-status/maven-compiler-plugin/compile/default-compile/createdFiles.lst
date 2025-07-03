@@ -21,6 +21,7 @@ com\bibliotheque\model\Prolongation.class
 com\bibliotheque\service\HistoriquePretService.class
 com\bibliotheque\repository\AutorisationRepository.class
 com\bibliotheque\controller\LectureSurPlaceController.class
+com\bibliotheque\repository\ReservationAnnuleeRepository.class
 com\bibliotheque\service\ProlongationService.class
 com\bibliotheque\repository\AuteurRepository.class
 com\bibliotheque\model\Exemplaire.class
@@ -33,6 +34,7 @@ com\bibliotheque\service\DisponibiliteResult.class
 com\bibliotheque\service\DisponibiliteService.class
 com\bibliotheque\model\Livre.class
 com\bibliotheque\repository\BibliothecaireRepository.class
+com\bibliotheque\model\ReservationAnnulee.class
 com\bibliotheque\controller\DisponibiliteController.class
 com\bibliotheque\repository\GenreLivreRepository.class
 com\bibliotheque\controller\MembreController.class

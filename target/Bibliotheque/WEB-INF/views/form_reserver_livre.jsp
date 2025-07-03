@@ -8,6 +8,12 @@
     <title>Reserver un livre</title>
 </head>
 <body>
+    <% 
+        String resultat = (String) request.getAttribute("resultat");
+        if (resultat != null && !resultat.isEmpty()) {
+    %>
+        <div style="color:blue"><%= resultat %></div>
+    <% } %>
     <h2>Reserver un livre</h2>
     <form action="reserver-livre" method="post">
         Adherent :
@@ -37,7 +43,10 @@
         </select>
         <br/>
         Date reservation :
-        <input type="datetime-local" name="dateReservation" required/>
+        <input type="datetime-local" name="dateReservation" value="<%= java.time.LocalDateTime.now().toString().substring(0,16) %>"/>
+        <br/>
+        Date début (retrait prévu) :
+        <input type="datetime-local" name="dateDebut" required/>
         <br/>
         <input type="submit" value="Reserver"/>
     </form>
@@ -51,6 +60,7 @@
         </tr>
         <%
             List<com.bibliotheque.model.Reservation> reservations = (List<com.bibliotheque.model.Reservation>) request.getAttribute("reservations");
+            List<com.bibliotheque.model.Bibliothecaire> bibliothecaires = (List<com.bibliotheque.model.Bibliothecaire>) request.getAttribute("bibliothecaires");
             if (reservations != null) {
                 for (com.bibliotheque.model.Reservation r : reservations) {
         %>
@@ -59,15 +69,50 @@
             <td><%= r.getLivre().getTitre() %></td>
             <td><%= r.getDateReservation() %></td>
             <td>
-                <form action="annuler-reservation" method="post" style="display:inline;">
+                <% 
+                    java.time.LocalDate today = java.time.LocalDate.now();
+                    java.time.LocalDate dateDebut = r.getDateDebut().toLocalDate();
+                    if (dateDebut.isBefore(today)) { 
+                %>
+                <form action="annuler-reservation-biblio" method="post" style="display:inline;">
                     <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
+                    <select name="idBibliothecaire" required>
+                        <option value="">-- Bibliothecaire --</option>
+                        <% if (bibliothecaires != null) {
+                            for (com.bibliotheque.model.Bibliothecaire b : bibliothecaires) { %>
+                                <option value="<%= b.getId() %>"><%= b.getNomUtilisateur() %></option>
+                        <%  }
+                        } %>
+                    </select>
+                    <input type="submit" value="Annuler (biblio)"/>
+                </form>
+                <% } %>
+                <% if (r.getBibliothecaire() != null) { %>
+                <form action="annuler-reservation-membre" method="post" style="display:inline;">
+                    <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
+                    <input type="hidden" name="idMembre" value="<%= r.getMembre().getId() %>"/>
                     <input type="submit" value="Annuler"/>
                 </form>
                 <form action="recuperer-reservation" method="post" style="display:inline;">
                     <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
-                    <input type="hidden" name="idBibliothecaire" value="1"/> <!-- Remplace 1 par l'id réel du bibliothécaire -->
+                    <input type="hidden" name="idBibliothecaire" value="<%= r.getBibliothecaire().getId() %>"/>
                     <input type="submit" value="Recuperer"/>
                 </form>
+                <% } %>
+                <% if (r.getBibliothecaire() == null) { %>
+                <form action="assigner-bibliothecaire-reservation" method="post" style="display:inline;">
+                    <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
+                    <select name="idBibliothecaire" required>
+                        <option value="">-- Assigner bibliothécaire --</option>
+                        <% if (bibliothecaires != null) {
+                            for (com.bibliotheque.model.Bibliothecaire b : bibliothecaires) { %>
+                                <option value="<%= b.getId() %>"><%= b.getNomUtilisateur() %></option>
+                        <%  }
+                        } %>
+                    </select>
+                    <input type="submit" value="Assigner"/>
+                </form>
+                <% } %>
             </td>
         </tr>
         <%

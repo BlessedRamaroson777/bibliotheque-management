@@ -172,6 +172,17 @@ CREATE TABLE reservation (
     FOREIGN KEY (id_emprunt) REFERENCES emprunt(id)
 );
 
+CREATE TABLE reservation_annulee (
+    id SERIAL PRIMARY KEY,
+    id_reservation INTEGER NOT NULL,
+    id_bibliothecaire INTEGER,
+    id_membre INTEGER,
+    date_annulation TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_reservation) REFERENCES reservation(id),
+    FOREIGN KEY (id_bibliothecaire) REFERENCES bibliothecaire(id),
+    FOREIGN KEY (id_membre) REFERENCES membre(id)
+);
+
 -- Prolongation
 CREATE TABLE prolongation (
     id SERIAL PRIMARY KEY,
