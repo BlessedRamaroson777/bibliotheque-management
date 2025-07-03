@@ -164,14 +164,6 @@ Scenario alternatif :
     - penaliser id_adherent
 Sortie : quota +1, examplaire disponible
 
-## Titre : payer penalisation id_adherent
-Utilisateur : bibliothecaire
-Entree : id_adherent
-Regles de gestion : 
-    - payer une penalisation 
-Scenario nominal : 
-    - adherent penaliser
-Sortie : statut actif/inscrit ou 
 
 
 - Type livre

@@ -5,18 +5,18 @@
     <title>Notification retour livre</title>
 </head>
 <body>
-    <h2>Livres à rendre dans 2 jours</h2>
+    <h2>Livres a rendre dans 2 jours</h2>
     <table border="1">
         <tr>
             <th>Id exemplaire</th>
             <th>Date rendu</th>
-            <th>Durée restante (jours)</th>
+            <th>Duree restante (jours)</th>
         </tr>
         <%
             java.util.List<com.bibliotheque.model.Emprunt> emprunts = (java.util.List<com.bibliotheque.model.Emprunt>) request.getAttribute("emprunts");
             java.time.LocalDateTime now = java.time.LocalDateTime.now();
             for (com.bibliotheque.model.Emprunt e : emprunts) {
-                long joursRestant = java.time.Duration.between(now, e.getDateEcheance()).toDays();
+                long joursRestant = java.time.temporal.ChronoUnit.DAYS.between(now.toLocalDate(), e.getDateEcheance().toLocalDate());
         %>
         <tr>
             <td><%= e.getExemplaire().getId() %></td>
