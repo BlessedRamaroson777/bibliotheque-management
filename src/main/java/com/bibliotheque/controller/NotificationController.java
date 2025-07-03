@@ -22,4 +22,10 @@ public class NotificationController {
         model.addAttribute("emprunts", notificationService.getEmpruntsTousAdherentsARendreDans2Jours());
         return "notifier_retour_livre_biblio";
     }
+
+    @GetMapping("/notifier-examination-prolongement")
+    public String notifierExaminationProlongement(@RequestParam Long idAdherent, Model model) {
+        model.addAttribute("prolongations", notificationService.getProlongationsExaminees(idAdherent));
+        return "notifier_examination_prolongement";
+    }
 }
