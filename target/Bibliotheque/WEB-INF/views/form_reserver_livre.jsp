@@ -98,6 +98,11 @@
                     <input type="hidden" name="idBibliothecaire" value="<%= r.getBibliothecaire().getId() %>"/>
                     <input type="submit" value="Recuperer"/>
                 </form>
+                <form action="examiner-reservation" method="post" style="display:inline;">
+                    <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
+                    <button type="submit" name="accorder" value="true">Accorder</button>
+                    <button type="submit" name="accorder" value="false">Refuser</button>
+                </form>
                 <% } %>
                 <% if (r.getBibliothecaire() == null) { %>
                 <form action="assigner-bibliothecaire-reservation" method="post" style="display:inline;">

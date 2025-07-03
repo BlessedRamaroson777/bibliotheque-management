@@ -125,3 +125,102 @@ INSERT INTO quotas_reservation_membre (id_membre, quota_reservation, date_quota,
 INSERT INTO quotas_prolongation_membre (id_membre, quota_prolongation, date_quota, id_prolongation) VALUES
 (1, 2, '2025-06-18', 1);
 
+-- Ajoute un membre actif sans penalite, quota non atteint
+WITH m1 AS (
+  INSERT INTO membre (email, id_type_membre, nom_utilisateur, mot_de_passe, date_inscription, naissance)
+  VALUES ('testuser@mail.com', 1, 'TestUser', 'passtest', '2025-06-15', '2002-01-01')
+  RETURNING id
+)
+INSERT INTO statut_membre (id_membre, id_statut, date_statut)
+SELECT id, 2, '2025-06-15' FROM m1; -- actif
+
+-- Ajoute un livre et un exemplaire disponible
+WITH l1 AS (
+  INSERT INTO livre (titre, id_auteur, id_genre_livre, date_edition, age_minimum)
+  VALUES ('Test Livre', 1, 1, '2025-01-01', 10)
+  RETURNING id
+)
+INSERT INTO exemplaire (id_livre, numero_exemplaire)
+SELECT id, 1 FROM l1;
+
+-- Autorisation pour ce membre/livre
+INSERT INTO autorisation (id_type_membre, id_livre)
+VALUES (1, (SELECT id FROM livre WHERE titre='Test Livre'));
+
+-- Reservation à examiner (date_debut à venir, exemplaire dispo)
+INSERT INTO reservation (id_membre, id_livre, date_reservation, date_debut, id_bibliothecaire, date_traitement, id_emprunt)
+VALUES (
+  (SELECT id FROM membre WHERE email='testuser@mail.com'),
+  (SELECT id FROM livre WHERE titre='Test Livre'),
+  '2025-06-16 10:00:00', '2025-06-20 10:00:00', 1, NULL, NULL
+);
+
+-- Reservation à examiner (date_debut à venir, exemplaire NON dispo)
+-- On emprunte l'exemplaire à la même date pour bloquer la dispo
+INSERT INTO emprunt (id_membre, id_exemplaire, id_biblio_emprunt, date_emprunt, date_debut, date_echeance, id_biblio_retour, date_retour, sur_place)
+VALUES (
+  (SELECT id FROM membre WHERE email='testuser@mail.com'),
+  (SELECT id FROM exemplaire WHERE id_livre=(SELECT id FROM livre WHERE titre='Test Livre')),
+  1, '2025-06-19 09:00:00', '2025-06-19 09:00:00', '2025-06-25 09:00:00', NULL, NULL, FALSE
+);
+INSERT INTO reservation (id_membre, id_livre, date_reservation, date_debut, id_bibliothecaire, date_traitement, id_emprunt)
+VALUES (
+  (SELECT id FROM membre WHERE email='testuser@mail.com'),
+  (SELECT id FROM livre WHERE titre='Test Livre'),
+  '2025-06-18 10:00:00', '2025-06-22 10:00:00', 1, NULL, NULL
+);
+
+-- Reservation pour un membre penalise
+WITH m2 AS (
+  INSERT INTO membre (email, id_type_membre, nom_utilisateur, mot_de_passe, date_inscription, naissance)
+  VALUES ('penalise@mail.com', 1, 'Penalise', 'passpen', '2025-06-17', '2001-02-02')
+  RETURNING id
+)
+INSERT INTO statut_membre (id_membre, id_statut, date_statut)
+SELECT id, 2, '2025-06-17' FROM m2; -- actif
+
+-- Ajoute une penalite pour ce membre
+INSERT INTO penalite (id_emprunt, id_membre, date_echeance, date_retour, cout)
+VALUES (
+  1, -- adapte l'id_emprunt selon ce qui existe
+  (SELECT id FROM membre WHERE email='penalise@mail.com'),
+  '2025-06-25', NULL, 1000
+);
+INSERT INTO reservation (id_membre, id_livre, date_reservation, date_debut, id_bibliothecaire, date_traitement, id_emprunt)
+VALUES (
+  (SELECT id FROM membre WHERE email='penalise@mail.com'),
+  (SELECT id FROM livre WHERE titre='Test Livre'),
+  '2025-06-19 10:00:00', '2025-06-23 10:00:00', 1, NULL, NULL
+);
+
+-- Reservation pour un membre inactif
+WITH m3 AS (
+  INSERT INTO membre (email, id_type_membre, nom_utilisateur, mot_de_passe, date_inscription, naissance)
+  VALUES ('inactif@mail.com', 1, 'Inactif', 'passinactif', '2025-06-18', '2000-03-03')
+  RETURNING id
+)
+INSERT INTO statut_membre (id_membre, id_statut, date_statut)
+SELECT id, 3, '2025-06-18' FROM m3; -- suspendu
+INSERT INTO reservation (id_membre, id_livre, date_reservation, date_debut, id_bibliothecaire, date_traitement, id_emprunt)
+VALUES (
+  (SELECT id FROM membre WHERE email='inactif@mail.com'),
+  (SELECT id FROM livre WHERE titre='Test Livre'),
+  '2025-06-20 10:00:00', '2025-06-24 10:00:00', 1, NULL, NULL
+);
+
+-- Reservation pour un membre sans autorisation sur le livre
+WITH m4 AS (
+  INSERT INTO membre (email, id_type_membre, nom_utilisateur, mot_de_passe, date_inscription, naissance)
+  VALUES ('noauth@mail.com', 2, 'NoAuth', 'passnoauth', '2025-06-19', '1999-04-04')
+  RETURNING id
+)
+INSERT INTO statut_membre (id_membre, id_statut, date_statut)
+SELECT id, 2, '2025-06-19' FROM m4; -- actif
+-- PAS d'autorisation pour type_membre 2 sur livre 4
+INSERT INTO reservation (id_membre, id_livre, date_reservation, date_debut, id_bibliothecaire, date_traitement, id_emprunt)
+VALUES (
+  (SELECT id FROM membre WHERE email='noauth@mail.com'),
+  (SELECT id FROM livre WHERE titre='Test Livre'),
+  '2025-06-21 10:00:00', '2025-06-25 10:00:00', 1, NULL, NULL
+);
+
