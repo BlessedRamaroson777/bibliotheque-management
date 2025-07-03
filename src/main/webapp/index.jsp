@@ -31,7 +31,7 @@
     <br>
     <a href="notifier-examination-reservation?idAdherent=1">Notification examen reservation</a>
     <br>
-    <a href="form_rendre_livre">Rendre un livre</a>
+    <a href="form-rendre-livre">Rendre un livre</a>
     <br>
 </body>
 </html>
