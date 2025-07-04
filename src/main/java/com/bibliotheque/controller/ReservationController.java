@@ -42,7 +42,7 @@ public class ReservationController {
         String resultat = reservationService.examinerReservation(idReservation, accorder);
         model.addAttribute("resultat", resultat);
         // Redirection vers la même page (notification examen reservation)
-        return "redirect:/notifier-examination-reservation";
+        return "redirect:/notifier-examination-reservation-biblio";
     }
 
     @GetMapping("/form-reserver-livre")

@@ -38,4 +38,18 @@ public class NotificationController {
         model.addAttribute("reservations", notificationService.getReservationsExaminees(idAdherent));
         return "notifier_examination_reservation";
     }
+
+    @GetMapping("/notifier-examination-prolongement-biblio")
+    public String notifierExaminationProlongementBiblio(Model model) {
+        // model.addAttribute("prolongations", notificationService.getProlongationsExamineesBiblio());
+        model.addAttribute("prolongations", notificationService.getToutesLesProlongations());
+        return "notifier_examination_prolongement_biblio";
+    }
+
+    @GetMapping("/notifier-examination-reservation-biblio")
+    public String notifierExaminationReservationBiblio(Model model) {
+        model.addAttribute("reservations", notificationService.getToutesLesReservations());
+        // model.addAttribute("reservations", notificationService.getReservationsExamineesBiblio());
+        return "notifier_examination_reservation_biblio";
+    }
 }
