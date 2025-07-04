@@ -106,8 +106,8 @@ INSERT INTO prolongation (id_emprunt, date_prolongation, ancienne_echeance, nouv
 (1, '2025-06-18', '2025-06-20', '2025-06-27', 1, '2025-06-18', TRUE);
 
 -- Penalite
-INSERT INTO penalite (id_emprunt, id_membre, date_echeance, date_retour, cout) VALUES
-(2, 2, '2025-06-25', '2025-06-28', 5000);
+INSERT INTO penalite (id_emprunt, id_membre, date_echeance, date_retour) VALUES
+(2, 2, '2025-06-25', '2025-06-28');
 
 -- Quotas emprunt
 INSERT INTO quotas_emprunt_membre (id_membre, quota_emprunt, date_quota, id_emprunt) VALUES
@@ -177,11 +177,11 @@ INSERT INTO statut_membre (id_membre, id_statut, date_statut)
 SELECT id, 2, '2025-06-17' FROM m2; -- actif
 
 -- Ajoute une penalite pour ce membre
-INSERT INTO penalite (id_emprunt, id_membre, date_echeance, date_retour, cout)
+INSERT INTO penalite (id_emprunt, id_membre, date_echeance, date_retour)
 VALUES (
   1, -- adapte l'id_emprunt selon ce qui existe
   (SELECT id FROM membre WHERE email='penalise@mail.com'),
-  '2025-06-25', NULL, 1000
+  '2025-06-25', NULL
 );
 INSERT INTO reservation (id_membre, id_livre, date_reservation, date_debut, id_bibliothecaire, date_traitement, id_emprunt)
 VALUES (

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>Accueil - Bibliothèque</title>
+    <title>Accueil - Bibliotheque</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
     <style>
         body {
@@ -116,8 +116,8 @@
                     <a href="membre/inscrire">Inscrire une personne</a>
                     <a href="form-lecture-sur-place">Lire un livre sur place</a>
                     <a href="lectures-sur-place">Lectures sur place en cours</a>
-                    <a href="form-preter-livre">Prêter un livre</a>
-                    <a href="form-historique-pret">Voir l'historique des prêts</a>
+                    <a href="form-preter-livre">Preter un livre</a>
+                    <a href="form-historique-pret">Voir l'historique des prets</a>
                     <a href="notifier-retour-livre-biblio">Notification retour livre (biblio)</a>
                     <a href="form-rendre-livre">Rendre un livre</a>
                     <a href="notifier-examination-prolongement-biblio">Examiner prolongement</a>

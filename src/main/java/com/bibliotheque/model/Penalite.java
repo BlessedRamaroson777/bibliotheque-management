@@ -25,9 +25,6 @@ public class Penalite {
     @Column(name = "date_retour")
     private LocalDateTime dateRetour;
 
-    @Column(name = "cout")
-    private BigDecimal cout;
-
     @Column(name = "duree")
     private Integer duree;
 
@@ -46,9 +43,6 @@ public class Penalite {
 
     public LocalDateTime getDateRetour() { return dateRetour; }
     public void setDateRetour(LocalDateTime dateRetour) { this.dateRetour = dateRetour; }
-
-    public BigDecimal getCout() { return cout; }
-    public void setCout(BigDecimal cout) { this.cout = cout; }
 
     public Integer getDuree() { return duree; }
     public void setDuree(Integer duree) { this.duree = duree; }
