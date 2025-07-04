@@ -31,6 +31,15 @@ public class NotificationService {
             .filter(e -> e.getDateEcheance().truncatedTo(ChronoUnit.DAYS).equals(dans2Jours))
             .toList();
     }
+    
+    public List<Emprunt> getEmpruntsARendreDansTelJours(Long idAdherent, int jours) {
+        LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS);
+        LocalDateTime dansXJours = now.plusDays(jours);
+        return empruntRepository.findByMembreId(idAdherent).stream()
+            .filter(e -> e.getDateRetour() == null && e.getDateEcheance() != null)
+            .filter(e -> e.getDateEcheance().truncatedTo(ChronoUnit.DAYS).equals(dansXJours))
+            .toList();
+    }
 
     // Pour le bibliothécaire : tous les emprunts à rendre dans 2 jours
     public List<Emprunt> getEmpruntsTousAdherentsARendreDans2Jours() {
@@ -57,4 +66,27 @@ public class NotificationService {
             .filter(r -> r.getEmprunt() != null || r.getBibliothecaire() != null) // examinées
             .toList();
     }
+
+    // Prolongations examinées (toutes, sans filtrer par adhérent)
+    public List<Prolongation> getProlongationsExamineesBiblio() {
+        return prolongationRepository.findAll().stream()
+            .filter(p -> p.getAccordee() != null) // seulement celles déjà examinées
+            .toList();
+    }
+
+    // Réservations examinées (toutes, sans filtrer par adhérent)
+    public List<Reservation> getReservationsExamineesBiblio() {
+        return reservationRepository.findAll().stream()
+            .filter(r -> r.getEmprunt() != null || r.getBibliothecaire() != null) // examinées
+            .toList();
+    }
+
+    public List<Prolongation> getToutesLesProlongations() {
+        return prolongationRepository.findAll();
+    }
+
+    public List<Reservation> getToutesLesReservations() {
+        return reservationRepository.findAll();
+    }
+
 }
