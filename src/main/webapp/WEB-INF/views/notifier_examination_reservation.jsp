@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"/>
 </head>
 <body>
-    <h2>Réservations en attente</h2>
+    <h2>Mes Réservations</h2>
     <table border="1">
         <tr>
             <th>Adherent</th>
@@ -27,6 +27,7 @@
                 <% if ("en_cours".equals(r.getEtat())) { %>
                 <form action="examiner-reservation" method="post" style="display:inline;">
                     <input type="hidden" name="idReservation" value="<%= r.getId() %>"/>
+                    <input type="hidden" name="idAdherent" value="<%= r.getMembre().getId() %>"/>
                     <button type="submit" name="accorder" value="true">Valider</button>
                     <button type="submit" name="accorder" value="false">Refuser</button>
                 </form>

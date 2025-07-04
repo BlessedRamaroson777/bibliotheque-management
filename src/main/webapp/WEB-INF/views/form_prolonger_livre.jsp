@@ -56,7 +56,7 @@
     <%
         }
     %>
-    <h3>Prolongations en cours</h3>
+    <h3>Mes Prolongations</h3>
     <table border="1">
         <tr>
             <th>Adhérent</th>
@@ -78,11 +78,13 @@
             <td><%= p.getAncienneEcheance() %></td>
             <td><%= p.getNouvelleEcheance() %></td>
             <td>
-                <form action="examiner-prolongation" method="post" style="display:inline;">
-                    <input type="hidden" name="idProlongation" value="<%= p.getId() %>"/>
-                    <button type="submit" name="accorder" value="true">Accorder</button>
-                    <button type="submit" name="accorder" value="false">Refuser</button>
-                </form>
+                <% if (p.getAccordee() == null) { %>
+                    En attente
+                <% } else if (p.getAccordee()) { %>
+                    Accordée
+                <% } else { %>
+                    Refusée
+                <% } %>
             </td>
         </tr>
         <%

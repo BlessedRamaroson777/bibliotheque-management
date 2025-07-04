@@ -8,6 +8,6 @@
 <body>
     <h2>Résultat</h2>
     <p>${resultat}</p>
-    <a href="form-prolonger-livre">Nouvelle demande</a>
+    <a href="notifier-examination-prolongement-biblio">Nouvelle demande</a>
 </body>
 </html>

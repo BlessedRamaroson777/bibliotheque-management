@@ -13,7 +13,7 @@ INSERT INTO jour_ferie (nom, date_jour) VALUES
 -- Type membre (dejà un existant)
 INSERT INTO type_membre (nom, quota) VALUES 
 ('Etudiant', 3),
-('Adherent', 5),
+('Employe', 5),
 ('Professeur', 7);
 
 -- Statut (dejà insere normalement)

@@ -57,4 +57,27 @@ public class NotificationService {
             .filter(r -> r.getEmprunt() != null || r.getBibliothecaire() != null) // examinées
             .toList();
     }
+
+    // Prolongations examinées (toutes, sans filtrer par adhérent)
+    public List<Prolongation> getProlongationsExamineesBiblio() {
+        return prolongationRepository.findAll().stream()
+            .filter(p -> p.getAccordee() != null) // seulement celles déjà examinées
+            .toList();
+    }
+
+    // Réservations examinées (toutes, sans filtrer par adhérent)
+    public List<Reservation> getReservationsExamineesBiblio() {
+        return reservationRepository.findAll().stream()
+            .filter(r -> r.getEmprunt() != null || r.getBibliothecaire() != null) // examinées
+            .toList();
+    }
+
+    public List<Prolongation> getToutesLesProlongations() {
+        return prolongationRepository.findAll();
+    }
+
+    public List<Reservation> getToutesLesReservations() {
+        return reservationRepository.findAll();
+    }
+
 }

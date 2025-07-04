@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css"/>
 </head>
 <body>
+    <h2>Inscription d'un nouveau membre</h2>
     <c:if test="${not empty error}">
         <div style="color:red">${error}</div>
     </c:if>
