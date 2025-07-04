@@ -13,6 +13,8 @@ com\bibliotheque\repository\CotisationRepository.class
 com\bibliotheque\controller\PretController.class
 com\bibliotheque\service\CotisationService.class
 com\bibliotheque\config\WebConfig.class
+com\bibliotheque\service\DemandeEmpruntService.class
+com\bibliotheque\repository\DemandeEmpruntRepository.class
 com\bibliotheque\repository\QuotaEmpruntMembreRepository.class
 com\bibliotheque\repository\AutorisationRepository.class
 com\bibliotheque\controller\LectureSurPlaceController.class
@@ -27,6 +29,7 @@ com\bibliotheque\model\QuotaEmpruntMembre.class
 com\bibliotheque\model\Cotisation.class
 com\bibliotheque\service\MembreService.class
 com\bibliotheque\controller\AuthController.class
+com\bibliotheque\model\DemandeEmprunt.class
 com\bibliotheque\repository\JourFerieRepository.class
 com\bibliotheque\controller\LivreController.class
 com\bibliotheque\service\PretService.class
@@ -38,6 +41,7 @@ com\bibliotheque\repository\ExemplaireRepository.class
 com\bibliotheque\repository\EmpruntRepository.class
 com\bibliotheque\repository\TypeMembreRepository.class
 com\bibliotheque\controller\ReservationController.class
+com\bibliotheque\controller\DemandeEmpruntController.class
 com\bibliotheque\model\TypeMembre.class
 com\bibliotheque\controller\CotisationController.class
 com\bibliotheque\model\Prolongation.class

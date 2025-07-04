@@ -15,7 +15,7 @@ public class EmpruntService {
     @Autowired private EmpruntRepository empruntRepository;
     @Autowired private PenaliteRepository penaliteRepository;
     @Autowired private QuotaEmpruntMembreRepository quotaEmpruntMembreRepository;
-    @Autowired private DureePenaliteRepository dureePenaliteRepository; // AJOUTe
+    @Autowired private DureePenaliteRepository dureePenaliteRepository; 
 
     public String rendreLivre(Long idAdherent, Long idExemplaire, LocalDateTime dateRendu) {
         Membre membre = membreRepository.findById(idAdherent).orElse(null);

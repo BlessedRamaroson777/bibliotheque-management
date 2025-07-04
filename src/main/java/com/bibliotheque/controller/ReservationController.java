@@ -16,7 +16,6 @@ public class ReservationController {
     @Autowired private ReservationService reservationService;
     @Autowired private LivreRepository livreRepository;
     @Autowired private MembreRepository membreRepository;
-    @Autowired private ReservationRepository reservationRepository;
     @Autowired private BibliothecaireRepository bibliothecaireRepository;
 
     @PostMapping("/reserver-livre")

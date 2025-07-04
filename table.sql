@@ -306,3 +306,19 @@ ALTER TABLE jour_ferie ALTER COLUMN date_jour TYPE TIMESTAMP;
 UPDATE reservation SET etat = 'en_cours' WHERE etat IS NULL;
 ALTER TABLE reservation ADD COLUMN IF NOT EXISTS etat TEXT DEFAULT 'en_cours';
 ALTER TABLE reservation ADD COLUMN etat TEXT DEFAULT 'en_cours';
+
+CREATE TABLE demande_emprunt (
+    id SERIAL PRIMARY KEY,
+    id_membre INTEGER NOT NULL,
+    id_livre INTEGER NOT NULL,
+    date_demande TIMESTAMP NOT NULL,
+    date_prevu TIMESTAMP NOT NULL,
+    statut TEXT NOT NULL DEFAULT 'en_attente', -- 'en_attente', 'validee', 'refusee'
+    date_traitement TIMESTAMP,
+    id_bibliothecaire INTEGER,
+    id_exemplaire INTEGER, -- renseigné si demande validée
+    FOREIGN KEY (id_membre) REFERENCES membre(id),
+    FOREIGN KEY (id_livre) REFERENCES livre(id),
+    FOREIGN KEY (id_bibliothecaire) REFERENCES bibliothecaire(id),
+    FOREIGN KEY (id_exemplaire) REFERENCES exemplaire(id)
+);

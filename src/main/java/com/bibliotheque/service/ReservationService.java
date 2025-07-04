@@ -15,10 +15,6 @@ public class ReservationService {
     @Autowired private EmpruntRepository empruntRepository;
     @Autowired private ExemplaireRepository exemplaireRepository;
     @Autowired private ReservationAnnuleeRepository reservationAnnuleeRepository;
-    @Autowired private StatutMembreRepository statutMembreRepository;
-    @Autowired private PenaliteRepository penaliteRepository;
-    @Autowired private AutorisationRepository autorisationRepository;
-
     public String reserverLivre(Long idAdherent, Long idLivre, LocalDateTime dateReservation, LocalDateTime dateDebut) {
         // Verification existence adherent
         Membre membre = membreRepository.findById(idAdherent).orElse(null);
