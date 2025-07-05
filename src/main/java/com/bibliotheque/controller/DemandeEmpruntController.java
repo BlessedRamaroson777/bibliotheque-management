@@ -51,13 +51,16 @@ public class DemandeEmpruntController {
             model.addAttribute("demandesNonEnAttente", demandesNonEnAttente);
             return "liste_demandes_en_attente";
         }
-
-
+    
     // Valider une demande (admin)
     @PostMapping("/{id}/valider")
     public String validerDemande(@PathVariable Long id, @RequestParam Long idBibliothecaire, Model model) {
-        String resultat = demandeEmpruntService.validerDemande(id, idBibliothecaire);
-        model.addAttribute("resultat", resultat);
+        String resultatValidation = demandeEmpruntService.validerDemande(id, idBibliothecaire);
+
+        // Créer automatiquement l'emprunt à partir de la demande validée
+        String resultatEmprunt = demandeEmpruntService.creerEmpruntDepuisDemande(id); // null pour idAdherent, car déjà connu via Demande
+
+        model.addAttribute("resultat", resultatValidation + " / " + resultatEmprunt);
         return "redirect:/demandes/en-attente";
     }
 
@@ -77,5 +80,7 @@ public class DemandeEmpruntController {
         model.addAttribute("idAdherent", idAdherent);
         return "liste_demandes_validees";
     }
+
+
 
 }

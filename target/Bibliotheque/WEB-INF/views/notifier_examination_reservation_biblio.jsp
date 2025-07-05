@@ -21,8 +21,8 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            color: #1a252f; /* bleu nuit */
+            border-bottom: 2px solid #7ec8e3; /* bleu ciel doux */
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
@@ -37,8 +37,8 @@
             text-align: left;
         }
         th {
-            background-color: #3498db;
-            color: white;
+            background-color: #7ec8e3; /* bleu ciel doux */
+            color: #1a252f;
         }
         tr:nth-child(even) {
             background-color: #f9f9f9;
@@ -50,12 +50,14 @@
             border-radius: 4px;
             cursor: pointer;
             color: white;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
         }
         button[name="accorder"][value="true"] {
-            background-color: #2ecc71;
+            background-color: #27ae60; /* vert agréable */
         }
         button[name="accorder"][value="false"] {
-            background-color: #e74c3c;
+            background-color: #c0392b; /* rouge foncé */
         }
         button:hover {
             opacity: 0.9;

@@ -1,10 +1,103 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
     <title>Accueil - Bibliotheque</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+
+    <% 
+       String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : ""; 
+    %>
+
     <style>
+    <% if ("bibliothecaire".equals(role)) { %>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5; /* même fond clair que les autres */
+            margin: 0;
+            padding: 2rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #1d3557; /* bleu marine */
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #1d3557;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title {
+            color: #1d3557;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        a {
+            display: block;
+            padding: 0.8rem 1rem;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #1d3557;
+        }
+
+        a:hover {
+            background-color: #1d3557;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .auth-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .auth-links a {
+            background-color: #2c3e50;
+            color: white;
+            border-left: 4px solid #1d3557;
+        }
+
+        .auth-links a:hover {
+            background-color: #1d3557;
+        }
+
+        @media (max-width: 768px) {
+            .menu-links {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    <% } else { %>
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f5f5;
@@ -93,13 +186,14 @@
                 gap: 0.5rem;
             }
         }
+    <% } %>
     </style>
+
 </head>
 <body>
     <div class="container">
         <h1>Bibliotheque - Accueil</h1>
         
-        <% String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : ""; %>
         <div class="auth-links">
             <% if (!role.isEmpty()) { %>
                 <a href="logout">Deconnexion</a>
@@ -118,12 +212,12 @@
                     <a href="lectures-sur-place">Lectures sur place en cours</a>
                     <a href="form-preter-livre">Preter un livre</a>
                     <a href="form-historique-pret">Voir l'historique des prets</a>
-                    <a href="notifier-retour-livre-biblio">Notification retour livre</a>
+                    <a href="notifier-retour-livre-biblio">Livre a rendre</a>
                     <a href="form-rendre-livre">Rendre un livre</a>
-                    <a href="notifier-examination-prolongement-biblio">Examiner prolongement</a>
-                    <a href="notifier-examination-reservation-biblio">Examiner reservation</a>
+                    <a href="notifier-examination-prolongement-biblio">Traitement prolongement</a>
+                    <a href="notifier-examination-reservation-biblio">Traitement reservation</a>
                     <a href="cotisations">Historique des cotisations</a>
-                    <a href="demandes/en-attente">Voir la liste des demandes en attente (admin)</a>
+                    <a href="demandes/en-attente">Liste demandes d'emprunt en attente</a>
                 </div>
             </div>
         <% } %>
@@ -136,14 +230,14 @@
                 <div class="menu-links">
                     <a href="form-prolonger-livre">Prolonger un livre</a>
                     <a href="form-reserver-livre">Reserver un livre</a>
-                    <a href="notifier-retour-livre">Notifier retour livre</a>
-                    <a href="notifier-examination-prolongement?idAdherent=<%= idAdherent %>">Notification examen prolongement</a>
-                    <a href="notifier-examination-reservation?idAdherent=<%= idAdherent %>">Notification examen reservation</a>
+                    <a href="notifier-retour-livre?idAdherent=<%= idAdherent %>">Livre a rendre</a>
+                    <a href="notifier-examination-prolongement?idAdherent=<%= idAdherent %>">Prolongements traitees</a>
+                    <a href="notifier-examination-reservation?idAdherent=<%= idAdherent %>">Reservations traitees</a>
                     <a href="cotiser">Cotiser</a>
                     <a href="cotisations">Mes cotisations</a>
-                    <a href="demandes/nouvelle">Faire une nouvelle demande d'emprunt</a>
-                    <a href="demandes/validees?idAdherent=<%= idAdherent %>">Demande d'emprunt validees</a>
-                    
+                    <a href="demandes/nouvelle">Demander un emprunt</a>
+                    <a href="demandes/validees?idAdherent=<%= idAdherent %>">Demandes d'emprunt validees</a>
+
                 </div>
             </div>
         <% } %>

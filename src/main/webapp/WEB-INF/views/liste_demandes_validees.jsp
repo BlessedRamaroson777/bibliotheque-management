@@ -89,7 +89,6 @@
             <th>Livre</th>
             <th>Date Demande</th>
             <th>Date prévue</th>
-            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -101,14 +100,6 @@
             <td><%= d.getLivre().getTitre() %></td>
             <td><%= d.getDateDemande() %></td>
             <td><%= d.getDatePrevu() %></td>
-            <td>
-                <form action="${pageContext.request.contextPath}/emprunter" method="post">
-                    <input type="hidden" name="idDemande" value="<%= d.getId() %>" />
-                    <input type="hidden" name="idAdherent" value="<%= idAdherent %>" />
-                    <input type="submit" value="Emprunter" />
-                </form>
-            </td>
-        </tr>
         <%
             }
         %>

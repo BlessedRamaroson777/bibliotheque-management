@@ -19,6 +19,7 @@ public class DemandeEmpruntService {
     @Autowired private LivreRepository livreRepository;
     @Autowired private ExemplaireRepository exemplaireRepository;
     @Autowired private PenaliteRepository penaliteRepository;
+    @Autowired private PretService pretService;
     @Autowired private StatutMembreRepository statutMembreRepository;
     @Autowired private EmpruntRepository empruntRepository;
     
@@ -177,6 +178,33 @@ public class DemandeEmpruntService {
     public List<DemandeEmprunt> findDemandesValideesParAdherent(Long idAdherent) {
         return demandeEmpruntRepository.findByStatutAndMembreId("validee", idAdherent);
     }
+
+    public String creerEmpruntDepuisDemande(Long idDemande) {
+        Optional<DemandeEmprunt> opt = demandeEmpruntRepository.findById(idDemande);
+        if (!opt.isPresent()) return "Demande introuvable.";
+
+        DemandeEmprunt demande = opt.get();
+
+        if (!"validee".equalsIgnoreCase(demande.getStatut()))
+            return "La demande n'est pas validee.";
+
+        if (demande.getExemplaire() == null)
+            return "Exemplaire manquant dans la demande.";
+        LocalDateTime dateEcheance = pretService.calculerDateEcheanceSansJoursFeries(demande.getDatePrevu());
+        Emprunt emprunt = new Emprunt();
+        emprunt.setMembre(demande.getMembre());
+        emprunt.setExemplaire(demande.getExemplaire());
+        emprunt.setBiblioEmprunt(demande.getBibliothecaire());
+        emprunt.setDateEmprunt(demande.getDateTraitement());
+        emprunt.setDateDebut(demande.getDatePrevu());
+        emprunt.setDateEcheance(dateEcheance);
+        emprunt.setSurPlace(false); // selon ton besoin
+
+        empruntRepository.save(emprunt);
+
+        return "Emprunt cree avec succes.";
+    }
+
 
 
 

@@ -23,8 +23,8 @@
         }
 
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            color: #1a252f;
+            border-bottom: 2px solid #1a252f;
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
@@ -42,7 +42,7 @@
         }
 
         th {
-            background-color: #3498db;
+            background-color: #1a252f;
             color: white;
         }
 
@@ -50,14 +50,15 @@
             background-color: #f9f9f9;
         }
     </style>
+
 </head>
 <body>
     <div class="container">
-        <h2>Livres a rendre dans 2 jours (tous adherents)</h2>
+        <h2>Livres a rendre (tous adherents)</h2>
         <table>
             <tr>
                 <th>Id exemplaire</th>
-                <th>Date rendu</th>
+                <th>Date de retour</th>
                 <th>Duree restante (jours)</th>
                 <th>Date pret</th>
                 <th>Id adherent</th>

@@ -29,7 +29,7 @@
         }
         
         h2 {
-            color: #3498db;
+            color: #1a252f;
             margin-bottom: 1rem;
             font-weight: 600;
         }
@@ -43,7 +43,7 @@
         .home-link {
             display: inline-block;
             padding: 0.8rem 1.5rem;
-            background-color: #3498db;
+            background-color: #1a252f;
             color: white;
             text-decoration: none;
             border-radius: 4px;
@@ -54,8 +54,8 @@
         
         .home-link:hover {
             background-color: white;
-            color: #3498db;
-            border-color: #3498db;
+            color: #1a252f;
+            border-color: #1a252f;
             transform: translateY(-2px);
             box-shadow: 0 2px 8px rgba(52, 152, 219, 0.2);
         }

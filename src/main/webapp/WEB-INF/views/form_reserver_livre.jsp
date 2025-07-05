@@ -4,27 +4,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Reserver un livre</title>
+    <title>Réserver un livre</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            margin: 2rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 2rem;
             color: #333;
         }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
         h2, h3 {
-            color: #2a5d9f;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
         }
         form {
-            background-color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            box-shadow: 0 0 6px rgba(0,0,0,0.1);
             margin-bottom: 2rem;
         }
         select, input[type="datetime-local"], input[type="submit"] {
             margin: 0.5rem 0 1rem 0;
-            padding: 0.4rem 0.6rem;
+            padding: 0.6rem 1rem;
             font-size: 1rem;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -32,46 +40,51 @@
             max-width: 300px;
         }
         input[type="submit"] {
-            background-color: #2a5d9f;
+            background-color: #3498db;
             color: white;
             border: none;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         input[type="submit"]:hover {
-            background-color: #1f4474;
+            background-color: #217dbb;
         }
         table {
-            border-collapse: collapse;
             width: 100%;
-            background-color: white;
-            box-shadow: 0 0 5px rgba(0,0,0,0.1);
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: white;
         }
         th, td {
-            border: 1px solid #ccc;
-            padding: 0.6rem 1rem;
+            border: 1px solid #ddd;
+            padding: 0.8rem;
             text-align: left;
         }
         th {
-            background-color: #2a5d9f;
+            background-color: #3498db;
             color: white;
         }
-        div.message {
-            color: blue;
-            margin-bottom: 1rem;
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .message {
+            color: #0077cc;
             font-weight: bold;
+            margin-bottom: 1rem;
         }
     </style>
 </head>
 <body>
-    <% 
+<div class="container">
+    <%
         String resultat = (String) request.getAttribute("resultat");
         Long idAdherent = (Long) session.getAttribute("idMembre");
         if (resultat != null && !resultat.isEmpty()) {
     %>
         <div class="message"><%= resultat %></div>
     <% } %>
-    <h2>Reserver un livre</h2>
+
+    <h2>Réserver un livre</h2>
     <form action="reserver-livre" method="post">
         <input type="hidden" name="idAdherent" value="<%= idAdherent %>"/>
         Livre :
@@ -87,21 +100,22 @@
             %>
         </select>
         <br/>
-        Date reservation :
+        Date de réservation :
         <input type="datetime-local" name="dateReservation" value="<%= java.time.LocalDateTime.now().toString().substring(0,16) %>"/>
         <br/>
-        Date debut (retrait prevu) :
+        Date de début (Retrait prévu) :
         <input type="datetime-local" name="dateDebut" required/>
         <br/>
-        <input type="submit" value="Reserver"/>
+        <input type="submit" value="Réserver"/>
     </form>
-    <h3>Mes reservations</h3>
+
+    <h3>Mes réservations</h3>
     <table>
         <tr>
             <th>Livre</th>
-            <th>Date reservation</th>
-            <th>Date debut</th>
-            <th>Etat</th>
+            <th>Date réservation</th>
+            <th>Date début</th>
+            <th>État</th>
         </tr>
         <%
             List<com.bibliotheque.model.Reservation> reservations = (List<com.bibliotheque.model.Reservation>) request.getAttribute("reservations");
@@ -121,5 +135,6 @@
             }
         %>
     </table>
+</div>
 </body>
 </html>

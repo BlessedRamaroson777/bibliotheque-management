@@ -4,9 +4,11 @@ import com.bibliotheque.model.*;
 import com.bibliotheque.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import com.bibliotheque.repository.JourFerieRepository;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -19,6 +21,7 @@ public class PretService {
     @Autowired private PenaliteRepository penaliteRepository;
     @Autowired private AutorisationRepository autorisationRepository;
     @Autowired private EmpruntRepository empruntRepository;
+    @Autowired private DureeEmpruntRepository dureeEmpruntRepository;
     @Autowired private BibliothecaireRepository bibliothecaireRepository;
     @Autowired private JourFerieRepository jourFerieRepository;
 
@@ -76,7 +79,7 @@ public class PretService {
         emprunt.setDateEmprunt(LocalDateTime.now());
         emprunt.setDateDebut(LocalDateTime.now());
         // Calcul de la date d'echeance (exemple : +15 jours ouvrés hors jours fériés)
-        emprunt.setDateEcheance(calculerDateEcheanceSansJoursFeries(LocalDateTime.now(), 15));
+        emprunt.setDateEcheance(calculerDateEcheanceSansJoursFeries(LocalDateTime.now()));
         emprunt.setSurPlace(false);
         emprunt.setBiblioEmprunt(biblio);
         empruntRepository.save(emprunt);
@@ -84,21 +87,32 @@ public class PretService {
         return "Exemplaire n " + exemplaire.getNumeroExemplaire() + " prete. Date de rendu prevue : " + emprunt.getDateEcheance();
     }
 
-    // Ajoute cette méthode utilitaire
-    private LocalDateTime calculerDateEcheanceSansJoursFeries(LocalDateTime dateDebut, int nbJours) {
-        Set<java.time.LocalDate> joursFeries = jourFerieRepository.findAll().stream()
+    LocalDateTime calculerDateEcheanceSansJoursFeries(LocalDateTime dateDebut) {
+        Integer nbJours = dureeEmpruntRepository.findAll().stream()
+            .map(d -> d.getDuree()) // getDuree() doit retourner un int ou Integer
+            .findFirst()
+            .orElse(15); // Valeur par défaut si vide
+        Set<LocalDate> joursFeries = jourFerieRepository.findAll().stream()
             .map(jf -> jf.getDateJour().toLocalDate())
             .collect(Collectors.toSet());
+
         LocalDateTime date = dateDebut;
         int joursAjoutes = 0;
+
         while (joursAjoutes < nbJours) {
             date = date.plusDays(1);
-            if (!joursFeries.contains(date.toLocalDate())) {
+            DayOfWeek jour = date.getDayOfWeek();
+            boolean estWeekend = (jour == DayOfWeek.SATURDAY || jour == DayOfWeek.SUNDAY);
+            boolean estFerie = joursFeries.contains(date.toLocalDate());
+
+            if (!estWeekend && !estFerie) {
                 joursAjoutes++;
             }
         }
+
         return date;
     }
+
 
     public List<Emprunt> getPretsEnCours() {
         // Prêts classiques (pas sur place) et non rendus

@@ -39,6 +39,6 @@
 <body>
     <h2>Resultat</h2>
     <p>${resultat}</p>
-    <a href="form-prolonger-livre">Nouvelle demande</a>
+    <a href="${pageContext.request.contextPath}/">Accueil</a>
 </body>
 </html>

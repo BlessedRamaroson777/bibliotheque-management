@@ -33,6 +33,7 @@ com\bibliotheque\model\DemandeEmprunt.class
 com\bibliotheque\repository\JourFerieRepository.class
 com\bibliotheque\controller\LivreController.class
 com\bibliotheque\service\PretService.class
+com\bibliotheque\model\DureeEmprunt.class
 com\bibliotheque\model\DureePenalite.class
 com\bibliotheque\repository\ProlongationRepository.class
 com\bibliotheque\model\Reservation.class
@@ -56,6 +57,7 @@ com\bibliotheque\model\JourFerie.class
 com\bibliotheque\repository\PenaliteRepository.class
 com\bibliotheque\service\ReservationService.class
 com\bibliotheque\service\DisponibiliteResult.class
+com\bibliotheque\repository\DureeEmpruntRepository.class
 com\bibliotheque\repository\BibliothecaireRepository.class
 com\bibliotheque\controller\NotificationController.class
 com\bibliotheque\controller\DisponibiliteController.class

@@ -8,30 +8,40 @@
     <title>Liste des demandes admin</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
     <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1a252f;
+            color: #7ec8e3;
+            margin: 0; padding: 2rem;
+        }
+        h2 {
+            color: #7ec8e3;
+            border-bottom: 2px solid #7ec8e3;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
         table {
             border-collapse: collapse;
             width: 100%;
             margin-bottom: 30px;
         }
         th, td {
-            border: 1px solid #ccc;
+            border: 1px solid #3b4a5a;
             padding: 10px;
             text-align: left;
         }
         th {
-            background-color: #3498db;
-            color: white;
+            background-color: #7ec8e3;
+            color: #1a252f;
         }
         tr:nth-child(even) {
-            background-color: #f9f9f9;
+            background-color: #22303f;
+        }
+        tr:nth-child(odd) {
+            background-color: #1a252f;
         }
         form {
             display: inline;
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 5px;
         }
         .btn-valider {
             background-color: #2ecc71;
@@ -51,6 +61,13 @@
         }
         .btn-valider:hover, .btn-refuser:hover {
             opacity: 0.9;
+        }
+        a {
+            color: #7ec8e3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -146,7 +163,7 @@
         </tbody>
     </table>
 
-    <a href="<%= request.getContextPath() %>/" style="text-decoration: none; color: #3498db;">&larr; Retour à l'accueil</a>
+    <a href="<%= request.getContextPath() %>/" style="text-decoration: none;">&larr; Retour à l'accueil</a>
 </div>
 </body>
 </html>
