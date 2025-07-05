@@ -59,22 +59,25 @@
     </form>
     <table border="1">
         <tr>
+            <th>Livre</th>
             <th>Id exemplaire</th>
             <th>Date rendu avant</th>
-            <th>Date rendu apres</th>
-            <th>Accordee</th>
+            <th>Date rendu après</th>
+            <th>Prolongation</th>
         </tr>
         <%
-            java.util.List<com.bibliotheque.model.Prolongation> prolongations = (java.util.List<com.bibliotheque.model.Prolongation>) request.getAttribute("prolongations");
+            java.util.List<com.bibliotheque.model.Prolongation> prolongations =
+                (java.util.List<com.bibliotheque.model.Prolongation>) request.getAttribute("prolongations");
             if (prolongations != null) {
                 for (com.bibliotheque.model.Prolongation p : prolongations) {
                     if (p.getEmprunt().getMembre().getId().equals(idAdherent)) {
         %>
         <tr>
+            <td><%= p.getEmprunt().getExemplaire().getLivre().getTitre() %></td>
             <td><%= p.getEmprunt().getExemplaire().getId() %></td>
             <td><%= p.getAncienneEcheance() %></td>
             <td><%= p.getNouvelleEcheance() %></td>
-            <td><%= p.getAccordee() != null && p.getAccordee() ? "true" : "false" %></td>
+            <td><%= (p.getAccordee() != null && p.getAccordee()) ? "accordee" : "non accordee" %></td>
         </tr>
         <%
                     }
@@ -82,5 +85,6 @@
             }
         %>
     </table>
+
 </body>
 </html>

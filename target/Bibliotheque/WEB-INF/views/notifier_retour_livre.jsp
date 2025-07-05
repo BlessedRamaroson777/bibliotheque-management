@@ -55,7 +55,7 @@
 </head>
 <body>
 
-    <h2>Livres a rendre dans tel jours</h2>
+    <h2>Livres a rendre</h2>
     <%
         Long idAdherent = (Long) session.getAttribute("idMembre");
     %>
@@ -65,15 +65,11 @@
         <input type="number" name="jour" id="jour" value="2" min="1"/>
         <input type="submit" value="Voir emprunts pour ce nombre de jours"/>
     </form> --%>
-    <form method="get" action="notifier-retour-livre">
-        <input type="hidden" name="idAdherent" value="<%= idAdherent %>"/>
-        <input type="submit" value="Voir mes livres a rendre"/>
-    </form>
     <br/>
     <table border="1">
         <tr>
             <th>Id exemplaire</th>
-            <th>Date rendu</th>
+            <th>Date de retour</th>
             <th>Duree restante (jours)</th>
         </tr>
         <%

@@ -123,7 +123,7 @@
                     <a href="notifier-examination-prolongement-biblio">Examiner prolongement</a>
                     <a href="notifier-examination-reservation-biblio">Examiner reservation</a>
                     <a href="cotisations">Historique des cotisations</a>
-                    <a href="demandes/en-attente">Voir la liste des demandes en attente (admin)</a>
+                    <a href="demandes/en-attente">Liste demandes d'emprunt en attente</a>
                 </div>
             </div>
         <% } %>
@@ -136,7 +136,7 @@
                 <div class="menu-links">
                     <a href="form-prolonger-livre">Prolonger un livre</a>
                     <a href="form-reserver-livre">Reserver un livre</a>
-                    <a href="notifier-retour-livre">Notifier retour livre</a>
+                    <a href="notifier-retour-livre?idAdherent=<%= idAdherent %>">Notifier retour livre</a>
                     <a href="notifier-examination-prolongement?idAdherent=<%= idAdherent %>">Notification examen prolongement</a>
                     <a href="notifier-examination-reservation?idAdherent=<%= idAdherent %>">Notification examen reservation</a>
                     <a href="cotiser">Cotiser</a>

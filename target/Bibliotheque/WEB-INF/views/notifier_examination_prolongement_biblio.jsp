@@ -100,7 +100,7 @@
                             <button type="submit" name="accorder" value="false">Refuser</button>
                         </form>
                     <% } else { %>
-                        <%= p.getAccordee() ? "true" : "false" %>
+                        <%= p.getAccordee() ? "Accordee" : "Non accordee" %>
                     <% } %>
                 </td>
             </tr>

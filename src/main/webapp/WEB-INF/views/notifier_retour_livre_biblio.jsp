@@ -53,11 +53,11 @@
 </head>
 <body>
     <div class="container">
-        <h2>Livres a rendre dans 2 jours (tous adherents)</h2>
+        <h2>Livres a rendre (tous adherents)</h2>
         <table>
             <tr>
                 <th>Id exemplaire</th>
-                <th>Date rendu</th>
+                <th>Date de retour</th>
                 <th>Duree restante (jours)</th>
                 <th>Date pret</th>
                 <th>Id adherent</th>

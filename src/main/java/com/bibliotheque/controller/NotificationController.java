@@ -16,14 +16,14 @@ public class NotificationController {
     public String notifierRetourLivre(@RequestParam(required = false) Long idAdherent, Model model) {
         model.addAttribute("adherents", membreRepository.findAll());
         if (idAdherent != null) {
-            model.addAttribute("emprunts", notificationService.getEmpruntsARendreDans2Jours(idAdherent));
+            model.addAttribute("emprunts", notificationService.getEmpruntsARendre(idAdherent));
         }
         return "notifier_retour_livre";
     }
 
     @GetMapping("/notifier-retour-livre-biblio")
     public String notifierRetourLivreBiblio(Model model) {
-        model.addAttribute("emprunts", notificationService.getEmpruntsTousAdherentsARendreDans2Jours());
+        model.addAttribute("emprunts", notificationService.getEmpruntsTousAdherents());
         return "notifier_retour_livre_biblio";
     }
 

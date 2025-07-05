@@ -167,7 +167,7 @@
                 </div>
                 <div class="form-group">
                     <label for="dateNaissance">Date de naissance:</label>
-                    <input type="datetime-local" name="dateNaissance" id="dateNaissance" required/>
+                    <input type="date" name="dateNaissance" id="dateNaissance" required/>
                 </div>
             </div>
             
