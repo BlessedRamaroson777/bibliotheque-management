@@ -118,10 +118,10 @@
                     <a href="lectures-sur-place">Lectures sur place en cours</a>
                     <a href="form-preter-livre">Preter un livre</a>
                     <a href="form-historique-pret">Voir l'historique des prets</a>
-                    <a href="notifier-retour-livre-biblio">Notification retour livre</a>
+                    <a href="notifier-retour-livre-biblio">Livre a rendre</a>
                     <a href="form-rendre-livre">Rendre un livre</a>
-                    <a href="notifier-examination-prolongement-biblio">Examiner prolongement</a>
-                    <a href="notifier-examination-reservation-biblio">Examiner reservation</a>
+                    <a href="notifier-examination-prolongement-biblio">Traitement prolongement</a>
+                    <a href="notifier-examination-reservation-biblio">Traitement reservation</a>
                     <a href="cotisations">Historique des cotisations</a>
                     <a href="demandes/en-attente">Liste demandes d'emprunt en attente</a>
                 </div>
@@ -136,14 +136,14 @@
                 <div class="menu-links">
                     <a href="form-prolonger-livre">Prolonger un livre</a>
                     <a href="form-reserver-livre">Reserver un livre</a>
-                    <a href="notifier-retour-livre?idAdherent=<%= idAdherent %>">Notifier retour livre</a>
-                    <a href="notifier-examination-prolongement?idAdherent=<%= idAdherent %>">Notification examen prolongement</a>
-                    <a href="notifier-examination-reservation?idAdherent=<%= idAdherent %>">Notification examen reservation</a>
+                    <a href="notifier-retour-livre?idAdherent=<%= idAdherent %>">Livre a rendre</a>
+                    <a href="notifier-examination-prolongement?idAdherent=<%= idAdherent %>">Prolongements traitees</a>
+                    <a href="notifier-examination-reservation?idAdherent=<%= idAdherent %>">Reservations traitees</a>
                     <a href="cotiser">Cotiser</a>
                     <a href="cotisations">Mes cotisations</a>
-                    <a href="demandes/nouvelle">Faire une nouvelle demande d'emprunt</a>
-                    <a href="demandes/validees?idAdherent=<%= idAdherent %>">Demande d'emprunt validees</a>
-                    
+                    <a href="demandes/nouvelle">Demander un emprunt</a>
+                    <a href="demandes/validees?idAdherent=<%= idAdherent %>">Demandes d'emprunt validees</a>
+
                 </div>
             </div>
         <% } %>

@@ -4,71 +4,44 @@
 <head>
     <title>Notification examen prolongement</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+    
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
+            background: #f5f5f5;
             margin: 0;
             padding: 2rem;
             color: #333;
         }
-
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            background-color: white;
+            background: white;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
-
         h2 {
             color: #2c3e50;
             border-bottom: 2px solid #3498db;
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 2rem;
         }
-
         th, td {
             border: 1px solid #ddd;
             padding: 0.8rem;
             text-align: left;
         }
-
         th {
             background-color: #3498db;
             color: white;
         }
-
         tr:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        button {
-            padding: 0.4rem 0.8rem;
-            margin-right: 0.5rem;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            color: white;
-        }
-
-        button[name="accorder"][value="true"] {
-            background-color: #2ecc71;
-        }
-
-        button[name="accorder"][value="false"] {
-            background-color: #e74c3c;
-        }
-
-        button:hover {
-            opacity: 0.9;
+            background: #f9f9f9;
         }
     </style>
 </head>

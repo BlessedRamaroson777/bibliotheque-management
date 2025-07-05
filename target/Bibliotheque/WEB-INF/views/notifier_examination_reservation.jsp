@@ -5,47 +5,41 @@
     <title>Notification examen reservation</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 2rem;
-            background-color: #f4f6f8;
-            color: #222;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            margin: 0;
+            padding: 2rem;
+            color: #333;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
         h2 {
-            color: #1a4d8f;
-            border-bottom: 2px solid #1a4d8f;
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
         table {
-            border-collapse: collapse;
             width: 100%;
-            background-color: #fff;
-            box-shadow: 0 0 6px rgba(0,0,0,0.1);
+            border-collapse: collapse;
         }
         th, td {
-            border: 1px solid #ccc;
-            padding: 0.5rem 1rem;
+            border: 1px solid #ddd;
+            padding: 0.8rem;
             text-align: left;
         }
         th {
-            background-color: #1a4d8f;
+            background-color: #3498db;
             color: white;
         }
-        form button {
-            background-color: #1a4d8f;
-            color: white;
-            border: none;
-            padding: 0.3rem 0.6rem;
-            margin-right: 0.3rem;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        form button:hover {
-            background-color: #163c6e;
-        }
-        form {
-            margin: 0;
+        tr:nth-child(even) {
+            background: #f9f9f9;
         }
     </style>
 </head>
