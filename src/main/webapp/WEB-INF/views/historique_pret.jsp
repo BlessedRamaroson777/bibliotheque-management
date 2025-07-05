@@ -23,8 +23,8 @@
         }
 
         h2, h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            color: #1a252f;
+            border-bottom: 2px solid #1a252f;
             padding-bottom: 0.5rem;
             margin-bottom: 1rem;
         }
@@ -42,7 +42,7 @@
         }
 
         th {
-            background-color: #3498db;
+            background-color: #1a252f;
             color: white;
         }
 
@@ -50,6 +50,7 @@
             background-color: #f9f9f9;
         }
     </style>
+
 </head>
 <body>
     <div class="container">

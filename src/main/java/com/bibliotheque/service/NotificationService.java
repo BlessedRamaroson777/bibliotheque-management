@@ -32,12 +32,9 @@ public class NotificationService {
             .toList();
     }
     
-    public List<Emprunt> getEmpruntsARendreDansTelJours(Long idAdherent, int jours) {
-        LocalDateTime now = LocalDateTime.now().truncatedTo(ChronoUnit.DAYS);
-        LocalDateTime dansXJours = now.plusDays(jours);
+    public List<Emprunt> getEmpruntsARendre(Long idAdherent) {
         return empruntRepository.findByMembreId(idAdherent).stream()
             .filter(e -> e.getDateRetour() == null && e.getDateEcheance() != null)
-            .filter(e -> e.getDateEcheance().truncatedTo(ChronoUnit.DAYS).equals(dansXJours))
             .toList();
     }
 
@@ -48,6 +45,12 @@ public class NotificationService {
         return empruntRepository.findAll().stream()
             .filter(e -> e.getDateRetour() == null && e.getDateEcheance() != null)
             .filter(e -> e.getDateEcheance().truncatedTo(ChronoUnit.DAYS).equals(dans2Jours))
+            .toList();
+    }
+
+    public List<Emprunt> getEmpruntsTousAdherents() {
+        return empruntRepository.findAll().stream()
+            .filter(e -> e.getDateRetour() == null && e.getDateEcheance() != null)
             .toList();
     }
 

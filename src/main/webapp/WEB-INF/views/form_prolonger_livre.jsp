@@ -117,7 +117,7 @@
         <%
             }
         %>
-        <h3>Mes Prolongations</h3>
+        <h3>Mes Prolongations en cours de traitement</h3>
         <table>
             <tr>
                 <th>Adherent</th>
