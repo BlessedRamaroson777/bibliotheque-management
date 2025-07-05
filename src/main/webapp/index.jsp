@@ -1,10 +1,103 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8" />
     <title>Accueil - Bibliotheque</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
+
+    <% 
+       String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : ""; 
+    %>
+
     <style>
+    <% if ("bibliothecaire".equals(role)) { %>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5; /* même fond clair que les autres */
+            margin: 0;
+            padding: 2rem;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        h1 {
+            color: #1d3557; /* bleu marine */
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid #1d3557;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title {
+            color: #1d3557;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.3rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .menu-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        a {
+            display: block;
+            padding: 0.8rem 1rem;
+            background-color: #f8f9fa;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #1d3557;
+        }
+
+        a:hover {
+            background-color: #1d3557;
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .auth-links {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .auth-links a {
+            background-color: #2c3e50;
+            color: white;
+            border-left: 4px solid #1d3557;
+        }
+
+        .auth-links a:hover {
+            background-color: #1d3557;
+        }
+
+        @media (max-width: 768px) {
+            .menu-links {
+                grid-template-columns: 1fr;
+            }
+
+            .auth-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    <% } else { %>
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f5f5f5;
@@ -93,13 +186,14 @@
                 gap: 0.5rem;
             }
         }
+    <% } %>
     </style>
+
 </head>
 <body>
     <div class="container">
         <h1>Bibliotheque - Accueil</h1>
         
-        <% String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : ""; %>
         <div class="auth-links">
             <% if (!role.isEmpty()) { %>
                 <a href="logout">Deconnexion</a>

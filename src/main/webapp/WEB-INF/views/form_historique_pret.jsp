@@ -25,8 +25,8 @@
         }
 
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            color: #1a252f;
+            border-bottom: 2px solid #1a252f;
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
@@ -49,7 +49,7 @@
         }
 
         input[type="submit"] {
-            background-color: #3498db;
+            background-color: #1a252f;
             color: white;
             border: none;
             cursor: pointer;
@@ -57,9 +57,10 @@
         }
 
         input[type="submit"]:hover {
-            background-color: #2c3e50;
+            background-color: #121a22;
         }
     </style>
+
 </head>
 <body>
     <div class="container">

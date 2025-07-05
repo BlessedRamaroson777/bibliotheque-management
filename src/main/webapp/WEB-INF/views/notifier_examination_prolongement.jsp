@@ -45,6 +45,9 @@
     </style>
 </head>
 <body>
+    <%
+        Long idAdherent = (Long) session.getAttribute("idMembre");
+    %>
     <h2>Resultat examen prolongement</h2>
     <table border="1">
         <tr>

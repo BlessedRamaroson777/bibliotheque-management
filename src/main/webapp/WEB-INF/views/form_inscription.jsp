@@ -17,7 +17,7 @@
             min-height: 100vh;
             color: #333;
         }
-        
+
         .registration-container {
             background-color: white;
             padding: 2rem 3rem;
@@ -26,29 +26,30 @@
             width: 100%;
             max-width: 600px;
         }
-        
+
         h2 {
-            color: #3498db;
+            color: #1a252f;
             text-align: center;
             margin-bottom: 1.5rem;
             font-weight: 600;
         }
-        
+
         .form-group {
             margin-bottom: 1.2rem;
         }
-        
+
         label {
             display: block;
             font-weight: 500;
             margin-bottom: 0.5rem;
-            color: #2c3e50;
+            color: #1a252f;
         }
-        
+
         input[type="text"],
         input[type="email"],
         input[type="password"],
         input[type="datetime-local"],
+        input[type="date"],
         select {
             width: 100%;
             padding: 0.8rem;
@@ -57,7 +58,7 @@
             font-size: 1rem;
             box-sizing: border-box;
         }
-        
+
         select {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -65,16 +66,16 @@
             background-position: right 0.8rem center;
             background-size: 1rem;
         }
-        
+
         input:focus,
         select:focus {
             outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+            border-color: #1a252f;
+            box-shadow: 0 0 0 2px rgba(26, 37, 47, 0.2);
         }
-        
+
         .submit-btn {
-            background-color: #3498db;
+            background-color: #1a252f;
             color: white;
             padding: 0.8rem;
             border: none;
@@ -86,12 +87,12 @@
             margin-top: 1rem;
             font-weight: 500;
         }
-        
+
         .submit-btn:hover {
-            background-color: #2980b9;
+            background-color: #121a22;
             transform: translateY(-2px);
         }
-        
+
         .error-message {
             color: #e74c3c;
             padding: 0.8rem;
@@ -100,7 +101,7 @@
             border-radius: 4px;
             text-align: center;
         }
-        
+
         .success-message {
             color: #27ae60;
             padding: 0.8rem;
@@ -109,23 +110,24 @@
             border-radius: 4px;
             text-align: center;
         }
-        
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
-        
+
         @media (max-width: 600px) {
             .form-row {
                 grid-template-columns: 1fr;
             }
-            
+
             .registration-container {
                 padding: 1.5rem;
             }
         }
     </style>
+
 </head>
 <body>
     <div class="registration-container">

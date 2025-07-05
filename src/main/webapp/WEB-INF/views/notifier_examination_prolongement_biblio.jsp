@@ -22,8 +22,8 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
         h2 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
+            color: #1a252f; /* bleu nuit */
+            border-bottom: 2px solid #7ec8e3; /* bleu ciel clair */
             padding-bottom: 0.5rem;
             margin-bottom: 1.5rem;
         }
@@ -37,11 +37,29 @@
             text-align: left;
         }
         th {
-            background-color: #3498db;
-            color: white;
+            background-color: #7ec8e3; /* bleu ciel clair */
+            color: #1a252f; /* texte bleu nuit */
         }
         tr:nth-child(even) {
             background: #f9f9f9;
+        }
+
+        form {
+            display: flex;
+            gap: 0.5rem;
+        }
+        button {
+            background-color: #7ec8e3; /* bleu ciel */
+            color: #1a252f;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #5aa8c5; /* bleu ciel un peu plus foncé */
         }
     </style>
 </head>
@@ -67,7 +85,7 @@
                 <td><%= p.getNouvelleEcheance() %></td>
                 <td>
                     <% if (p.getAccordee() == null) { %>
-                        <form method="post" action="examiner-prolongation" style="display:flex; gap: 0.5rem;">
+                        <form method="post" action="examiner-prolongation">
                             <input type="hidden" name="idProlongation" value="<%= p.getId() %>" />
                             <button type="submit" name="accorder" value="true">Accepter</button>
                             <button type="submit" name="accorder" value="false">Refuser</button>
