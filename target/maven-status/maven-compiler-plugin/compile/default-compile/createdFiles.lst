@@ -1,4 +1,3 @@
-com\bibliotheque\config\RoleInterceptor.class
 com\bibliotheque\model\Autorisation.class
 com\bibliotheque\model\QuotaMembre.class
 com\bibliotheque\model\Emprunt.class
@@ -12,7 +11,6 @@ com\bibliotheque\controller\EmpruntController.class
 com\bibliotheque\repository\CotisationRepository.class
 com\bibliotheque\controller\PretController.class
 com\bibliotheque\service\CotisationService.class
-com\bibliotheque\config\WebConfig.class
 com\bibliotheque\service\DemandeEmpruntService.class
 com\bibliotheque\repository\DemandeEmpruntRepository.class
 com\bibliotheque\repository\QuotaEmpruntMembreRepository.class
@@ -50,6 +48,7 @@ com\bibliotheque\controller\HomeController.class
 com\bibliotheque\service\HistoriquePretService.class
 com\bibliotheque\repository\ReservationAnnuleeRepository.class
 com\bibliotheque\repository\AuteurRepository.class
+com\bibliotheque\security\AuthJspFilter.class
 com\bibliotheque\model\Exemplaire.class
 com\bibliotheque\service\EmpruntService.class
 com\bibliotheque\model\Penalite.class

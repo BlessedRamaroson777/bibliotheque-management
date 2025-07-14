@@ -242,14 +242,16 @@
             </div>
         <% } %>
 
-        <div class="menu-section">
-            <h3 class="section-title">Services communs</h3>
-            <div class="menu-links">
-                <a href="rechercher-livres">Liste des livres</a>
-                <a href="form-recherche-livre">Recherche avancee</a>
-                <a href="form-disponibilite">Verifier disponibilite d'un exemplaire</a>
+        <% if (!role.isEmpty()) { %>
+            <div class="menu-section">
+                <h3 class="section-title">Services communs</h3>
+                <div class="menu-links">
+                    <a href="rechercher-livres">Liste des livres</a>
+                    <a href="form-recherche-livre">Recherche avancee</a>
+                    <a href="form-disponibilite">Verifier disponibilite d'un exemplaire</a>
+                </div>
             </div>
-        </div>
+        <% } %>
     </div>
 </body>
 </html>
