@@ -7,6 +7,11 @@
     <meta charset="UTF-8">
     <title>Verifier disponibilite d'un livre</title>
     <link rel="stylesheet" href="css/style.css"/>
+    
+    <% 
+       String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : ""; 
+    %>
+    
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -30,7 +35,6 @@
         }
         
         h2 {
-            color: #3498db;
             text-align: center;
             margin-bottom: 1.5rem;
             font-weight: 600;
@@ -64,14 +68,7 @@
             background-size: 1rem;
         }
         
-        select:focus, input[type="datetime-local"]:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-        
         .submit-btn {
-            background-color: #3498db;
             color: white;
             padding: 0.8rem;
             border: none;
@@ -84,10 +81,48 @@
             font-weight: 500;
         }
         
-        .submit-btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
+        /* Styles communs */
+        select:focus, input[type="datetime-local"]:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
+        
+        /* Styles conditionnels selon le rôle */
+        <% if ("bibliothecaire".equals(role)) { %>
+            h2 {
+                color: #1d3557; /* bleu marine */
+            }
+            
+            select:focus, input[type="datetime-local"]:focus {
+                border-color: #1d3557;
+            }
+            
+            .submit-btn {
+                background-color: #1d3557; /* bleu marine */
+            }
+            
+            .submit-btn:hover {
+                background-color: #14213d;
+                transform: translateY(-2px);
+            }
+        <% } else { %>
+            h2 {
+                color: #3498db; /* bleu clair */
+            }
+            
+            select:focus, input[type="datetime-local"]:focus {
+                border-color: #3498db;
+            }
+            
+            .submit-btn {
+                background-color: #3498db; /* bleu clair */
+            }
+            
+            .submit-btn:hover {
+                background-color: #2980b9;
+                transform: translateY(-2px);
+            }
+        <% } %>
     </style>
 </head>
 <body>

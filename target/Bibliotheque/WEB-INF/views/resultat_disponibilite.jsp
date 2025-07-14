@@ -4,6 +4,11 @@
 <head>
     <title>Disponibilite du livre</title>
     <link rel="stylesheet" href="css/style.css"/>
+    
+    <% 
+       String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : ""; 
+    %>
+    
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -28,20 +33,17 @@
         }
         
         h2 {
-            color: #3498db;
             margin-bottom: 1.5rem;
             font-weight: 600;
         }
         
         .available {
-            color: #27ae60;
             font-size: 1.2rem;
             font-weight: 500;
             margin-bottom: 1rem;
         }
         
         .unavailable {
-            color: #e74c3c;
             font-size: 1.2rem;
             font-weight: 500;
             margin-bottom: 1rem;
@@ -64,17 +66,49 @@
             display: inline-block;
             margin-top: 1.5rem;
             padding: 0.6rem 1.2rem;
-            background-color: #2c3e50;
             color: white;
             text-decoration: none;
             border-radius: 4px;
             transition: all 0.3s;
         }
         
-        .back-link:hover {
-            background-color: #3498db;
-            transform: translateY(-2px);
+        /* Styles communs */
+        .available {
+            color: #27ae60; /* vert pour disponible (commun) */
         }
+        
+        .unavailable {
+            color: #e74c3c; /* rouge pour indisponible (commun) */
+        }
+        
+        /* Styles conditionnels selon le rôle */
+        <% if ("bibliothecaire".equals(role)) { %>
+            h2 {
+                color: #1d3557; /* bleu marine */
+            }
+            
+            .back-link {
+                background-color: #1d3557; /* bleu marine */
+            }
+            
+            .back-link:hover {
+                background-color: #14213d;
+                transform: translateY(-2px);
+            }
+        <% } else { %>
+            h2 {
+                color: #3498db; /* bleu clair */
+            }
+            
+            .back-link {
+                background-color: #3498db; /* bleu clair */
+            }
+            
+            .back-link:hover {
+                background-color: #2980b9;
+                transform: translateY(-2px);
+            }
+        <% } %>
     </style>
 </head>
 <body>

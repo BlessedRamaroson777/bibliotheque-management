@@ -8,58 +8,80 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f5f5;
+            background-color: #f5f5f5;
             margin: 0;
             padding: 2rem;
             color: #333;
         }
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            background: white;
+            background-color: white;
             padding: 2rem;
             border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
         }
+
         h2 {
-            color: #1a252f; /* bleu nuit */
-            border-bottom: 2px solid #7ec8e3; /* bleu ciel clair */
+            color: #1a252f;
+            border-bottom: 2px solid #1a252f;
             padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 0.8rem;
-            text-align: left;
-        }
-        th {
-            background-color: #7ec8e3; /* bleu ciel clair */
-            color: #1a252f; /* texte bleu nuit */
-        }
-        tr:nth-child(even) {
-            background: #f9f9f9;
+            margin-bottom: 2rem;
         }
 
-        form {
-            display: flex;
-            gap: 0.5rem;
+        th, td {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            text-align: left;
         }
-        button {
-            background-color: #7ec8e3; /* bleu ciel */
-            color: #1a252f;
+
+        th {
+            background-color: #1a252f;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        input[type="submit"] {
+            background-color: #1a252f;
+            color: white;
             border: none;
             padding: 0.4rem 0.8rem;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #121a22;
+        }
+        button {
+            padding: 0.4rem 0.8rem;
+            margin-right: 0.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            color: white;
             font-weight: 600;
             transition: background-color 0.3s ease;
         }
+        button[name="accorder"][value="true"] {
+            background-color: #27ae60; /* vert agréable */
+        }
+        button[name="accorder"][value="false"] {
+            background-color: #c0392b; /* rouge foncé */
+        }
         button:hover {
-            background-color: #5aa8c5; /* bleu ciel un peu plus foncé */
+            opacity: 0.9;
         }
     </style>
 </head>

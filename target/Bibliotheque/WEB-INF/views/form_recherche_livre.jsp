@@ -8,6 +8,11 @@
     <meta charset="UTF-8">
     <title>Recherche de livres</title>
     <link rel="stylesheet" href="css/style.css"/>
+    
+    <% 
+       String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : ""; 
+    %>
+    
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -31,7 +36,6 @@
         }
         
         h2 {
-            color: #3498db;
             text-align: center;
             margin-bottom: 1.5rem;
             font-weight: 600;
@@ -59,14 +63,6 @@
             box-sizing: border-box;
         }
         
-        input[type="text"]:focus,
-        input[type="datetime-local"]:focus,
-        select:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
-        }
-        
         select {
             appearance: none;
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
@@ -76,7 +72,6 @@
         }
         
         .submit-btn {
-            background-color: #3498db;
             color: white;
             padding: 0.8rem 1.5rem;
             border: none;
@@ -89,15 +84,18 @@
             font-weight: 500;
         }
         
-        .submit-btn:hover {
-            background-color: #2980b9;
-            transform: translateY(-2px);
-        }
-        
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
+        }
+        
+        /* Styles communs */
+        input[type="text"]:focus,
+        input[type="datetime-local"]:focus,
+        select:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
         }
         
         @media (max-width: 600px) {
@@ -109,6 +107,47 @@
                 padding: 1.5rem;
             }
         }
+        
+        /* Styles conditionnels selon le rôle */
+        <% if ("bibliothecaire".equals(role)) { %>
+            h2 {
+                color: #1d3557; /* bleu marine */
+            }
+            
+            input[type="text"]:focus,
+            input[type="datetime-local"]:focus,
+            select:focus {
+                border-color: #1d3557;
+            }
+            
+            .submit-btn {
+                background-color: #1d3557; /* bleu marine */
+            }
+            
+            .submit-btn:hover {
+                background-color: #14213d;
+                transform: translateY(-2px);
+            }
+        <% } else { %>
+            h2 {
+                color: #3498db; /* bleu clair */
+            }
+            
+            input[type="text"]:focus,
+            input[type="datetime-local"]:focus,
+            select:focus {
+                border-color: #3498db;
+            }
+            
+            .submit-btn {
+                background-color: #3498db; /* bleu clair */
+            }
+            
+            .submit-btn:hover {
+                background-color: #2980b9;
+                transform: translateY(-2px);
+            }
+        <% } %>
     </style>
 </head>
 <body>

@@ -5,6 +5,11 @@
     <meta charset="UTF-8">
     <title>Resultats recherche livres</title>
     <link rel="stylesheet" href="css/style.css"/>
+    
+    <% 
+       String role = (session.getAttribute("role") != null) ? session.getAttribute("role").toString() : ""; 
+    %>
+    
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,7 +29,6 @@
         }
         
         h2 {
-            color: #3498db;
             text-align: center;
             margin-bottom: 20px;
         }
@@ -42,9 +46,8 @@
         }
         
         th {
-            background-color: #3498db;
-            color: white;
             font-weight: 500;
+            color: white;
         }
         
         tr:nth-child(even) {
@@ -66,16 +69,46 @@
             display: inline-block;
             margin-top: 20px;
             padding: 10px 15px;
-            background-color: #2c3e50;
             color: white;
             text-decoration: none;
             border-radius: 4px;
             transition: all 0.3s;
         }
         
-        .back-button:hover {
-            background-color: #3498db;
-        }
+        /* Styles conditionnels selon le rôle */
+        <% if ("bibliothecaire".equals(role)) { %>
+            h2 {
+                color: #1d3557; /* bleu marine */
+            }
+            
+            th {
+                background-color: #1d3557; /* bleu marine */
+            }
+            
+            .back-button {
+                background-color: #1d3557; /* bleu marine */
+            }
+            
+            .back-button:hover {
+                background-color: #14213d;
+            }
+        <% } else { %>
+            h2 {
+                color: #3498db; /* bleu clair */
+            }
+            
+            th {
+                background-color: #3498db; /* bleu clair */
+            }
+            
+            .back-button {
+                background-color: #3498db; /* bleu clair */
+            }
+            
+            .back-button:hover {
+                background-color: #2980b9;
+            }
+        <% } %>
     </style>
 </head>
 <body>

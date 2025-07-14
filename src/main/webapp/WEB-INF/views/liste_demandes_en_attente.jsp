@@ -10,64 +10,104 @@
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1a252f;
-            color: #7ec8e3;
-            margin: 0; padding: 2rem;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 2rem;
+            color: #333;
         }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        }
+
         h2 {
-            color: #7ec8e3;
-            border-bottom: 2px solid #7ec8e3;
+            color: #1a252f;
+            border-bottom: 2px solid #1a252f;
             padding-bottom: 0.5rem;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
         }
+
         table {
-            border-collapse: collapse;
             width: 100%;
-            margin-bottom: 30px;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
         }
+
         th, td {
-            border: 1px solid #3b4a5a;
-            padding: 10px;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
             text-align: left;
         }
+
         th {
-            background-color: #7ec8e3;
-            color: #1a252f;
-        }
-        tr:nth-child(even) {
-            background-color: #22303f;
-        }
-        tr:nth-child(odd) {
             background-color: #1a252f;
+            color: white;
         }
-        form {
-            display: inline;
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
         }
-        .btn-valider {
-            background-color: #2ecc71;
+
+        input[type="submit"] {
+            background-color: #1a252f;
             color: white;
             border: none;
-            padding: 6px 12px;
+            padding: 0.4rem 0.8rem;
             border-radius: 4px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
-        .btn-refuser {
-            background-color: #e74c3c;
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .btn-valider:hover, .btn-refuser:hover {
-            opacity: 0.9;
+
+        input[type="submit"]:hover {
+            background-color: #121a22;
         }
         a {
-            color: #7ec8e3;
+            color: #1a252f;
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
+        }
+        /* Ajoutez ces styles dans votre balise <style> */
+
+        .btn-valider {
+            background-color: #4CAF50 !important; /* Vert */
+            color: white !important;
+            border: none;
+            padding: 0.5rem 1rem !important;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-refuser {
+            background-color: #f44336 !important; /* Rouge */
+            color: white !important;
+            border: none;
+            padding: 0.5rem 1rem !important;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-valider:hover {
+            background-color: #45a049 !important; /* Vert plus foncé au survol */
+        }
+
+        .btn-refuser:hover {
+            background-color: #d32f2f !important; /* Rouge plus foncé au survol */
+        }
+
+        /* Pour aligner les formulaires côte à côte */
+        td form {
+            display: inline-block;
+            margin-right: 5px;
         }
     </style>
 </head>
