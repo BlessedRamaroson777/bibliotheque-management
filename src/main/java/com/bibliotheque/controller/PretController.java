@@ -4,7 +4,11 @@ import com.bibliotheque.service.PretService;
 import com.bibliotheque.repository.LivreRepository;
 import com.bibliotheque.repository.MembreRepository;
 import com.bibliotheque.repository.BibliothecaireRepository;
+
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -28,8 +32,14 @@ public class PretController {
     }
 
     @PostMapping("/preter-livre")
-    public String preterLivre(@RequestParam Long idAdherent, @RequestParam Long idLivre, @RequestParam Long idBibliothecaire, Model model) {
-        String resultat = pretService.preterLivre(idAdherent, idLivre, idBibliothecaire);
+    
+public String preterLivre(
+    @RequestParam Long idAdherent,
+    @RequestParam Long idLivre,
+    @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime dateEmprunt,
+    @RequestParam Long idBibliothecaire,
+    Model model) {
+        String resultat = pretService.preterLivre(idAdherent, idLivre, dateEmprunt, idBibliothecaire);
         model.addAttribute("resultat", resultat);
         return "resultat_preter_livre";
     }

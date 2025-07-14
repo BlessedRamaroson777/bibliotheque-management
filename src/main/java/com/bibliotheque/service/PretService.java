@@ -25,7 +25,7 @@ public class PretService {
     @Autowired private BibliothecaireRepository bibliothecaireRepository;
     @Autowired private JourFerieRepository jourFerieRepository;
 
-    public String preterLivre(Long idAdherent, Long idLivre, Long idBibliothecaire) {
+    public String preterLivre(Long idAdherent, Long idLivre, LocalDateTime dateEmprunt, Long idBibliothecaire) {
         // 1. Verifier que l'adherent existe
         Membre membre = membreRepository.findById(idAdherent).orElse(null);
         if (membre == null) return "Adherent inexistant.";
@@ -76,10 +76,10 @@ public class PretService {
         Emprunt emprunt = new Emprunt();
         emprunt.setMembre(membre);
         emprunt.setExemplaire(exemplaire);
-        emprunt.setDateEmprunt(LocalDateTime.now());
-        emprunt.setDateDebut(LocalDateTime.now());
+        emprunt.setDateEmprunt(dateEmprunt);
+        emprunt.setDateDebut(dateEmprunt);
         // Calcul de la date d'echeance (exemple : +15 jours ouvrés hors jours fériés)
-        emprunt.setDateEcheance(calculerDateEcheanceSansJoursFeries(LocalDateTime.now()));
+        emprunt.setDateEcheance(calculerDateEcheanceSansJoursFeries(dateEmprunt));
         emprunt.setSurPlace(false);
         emprunt.setBiblioEmprunt(biblio);
         empruntRepository.save(emprunt);

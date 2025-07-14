@@ -112,16 +112,26 @@
                 <% } %>
             </select>
 
-            <label for="idBibliothecaire">Bibliothécaire :</label>
-            <select name="idBibliothecaire" id="idBibliothecaire" required>
-                <option value="">-- Choisir --</option>
-                <%
-                    List<Bibliothecaire> biblios = (List<Bibliothecaire>) request.getAttribute("bibliothecaires");
-                    for (Bibliothecaire b : biblios) {
-                %>
-                <option value="<%= b.getId() %>"><%= b.getNomUtilisateur() %></option>
-                <% } %>
-            </select>
+            <label for="dateEmprunt">Date d'emprunt :</label>
+            <%
+                java.time.LocalDateTime now = java.time.LocalDateTime.now();
+                String formattedNow = now.toString().substring(0, 16); // yyyy-MM-ddTHH:mm
+            %>
+            <input type="datetime-local" name="dateEmprunt" id="dateEmprunt" required value="<%= formattedNow %>"/>
+
+            <%
+                com.bibliotheque.model.Bibliothecaire biblio = (com.bibliotheque.model.Bibliothecaire) session.getAttribute("bibliothecaire");
+                String nomBiblio = (biblio != null) ? biblio.getNomUtilisateur() : "";
+                Long idBiblio = (biblio != null) ? biblio.getId() : null;
+            %>
+
+            <label for="nomBibliothecaire">Bibliothécaire :</label>
+            <input type="text" id="nomBibliothecaire" value="<%= nomBiblio %>" readonly />
+
+            <!-- Champ caché pour envoyer l'ID dans le formulaire -->
+            <input type="hidden" name="idBibliothecaire" value="<%= idBiblio %>" />
+
+
 
             <input type="submit" value="Preter"/>
         </form>

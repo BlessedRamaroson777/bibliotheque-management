@@ -32,6 +32,8 @@ public class EmpruntService {
         emprunt.setDateRetour(dateRendu);
         empruntRepository.save(emprunt);
 
+        StringBuilder message = new StringBuilder("Livre rendu. Quota +1. Exemplaire disponible.");
+
         // ⚠ Gestion penalite si retard
         if (dateRendu.isAfter(emprunt.getDateEcheance())) {
             long joursRetard = ChronoUnit.DAYS.between(emprunt.getDateEcheance().toLocalDate(), dateRendu.toLocalDate());
@@ -50,6 +52,8 @@ public class EmpruntService {
             penalite.setDuree(dureePenalite);
 
             penaliteRepository.save(penalite);
+
+            message.append(" Penalite appliquee : ").append(dureePenalite).append(" jour(s).");
         }
 
         // ✅ Gestion quota
@@ -60,7 +64,7 @@ public class EmpruntService {
         quota.setEmprunt(emprunt);
         quotaEmpruntMembreRepository.save(quota);
 
-        return "Livre rendu. Quota +1. Exemplaire disponible." +
-               (dateRendu.isAfter(emprunt.getDateEcheance()) ? " Penalite appliquee." : "");
+        return message.toString();
     }
+
 }
