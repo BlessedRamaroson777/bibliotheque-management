@@ -35,6 +35,24 @@ public class ProlongationService {
 
         if (emprunt == null) return "Aucun emprunt en cours pour ce livre.";
 
+        // 3. Vérifier si l'adhérent est en période de pénalité à la date d'emprunt
+        LocalDateTime dateFinPenalite = null;
+
+        for (Penalite p : penaliteRepository.findAll()) {
+            if (p.getMembre().getId().equals(idAdherent)
+                && p.getDateRetour() != null
+                && p.getDuree() != null
+                && !dateProlongement.isBefore(p.getDateRetour())
+                && !dateProlongement.isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
+
+                dateFinPenalite = p.getDateRetour().plusDays(p.getDuree());
+                break;
+            }
+        }
+
+        if (dateFinPenalite != null) {
+            return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate() + ".";
+        }
         // Verifier le quota de prolongation
         TypeMembre typeMembre = membre.getTypeMembre(); // getTypeMembre() doit exister
         int quotaAutorise = typeMembre.getQuotaProlongation();

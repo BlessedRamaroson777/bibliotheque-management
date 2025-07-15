@@ -17,6 +17,7 @@ public class ReservationService {
     @Autowired private BibliothecaireRepository bibliothecaireRepository;
     @Autowired private EmpruntRepository empruntRepository;
     @Autowired private ExemplaireRepository exemplaireRepository;
+    @Autowired private PenaliteRepository penaliteRepository;
     @Autowired private ReservationAnnuleeRepository reservationAnnuleeRepository;
     public String reserverLivre(Long idAdherent, Long idLivre, LocalDateTime dateReservation, LocalDateTime dateDebut) {
         // Verification existence membre
@@ -27,11 +28,31 @@ public class ReservationService {
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Erreur : livre inexistant.";
 
-        // Verification de l'âge minimum requis
+        
+        // 3. Vérifier si l'adhérent est en période de pénalité à la date d'emprunt
+        LocalDateTime dateFinPenalite = null;
+
+        for (Penalite p : penaliteRepository.findAll()) {
+            if (p.getMembre().getId().equals(idAdherent)
+                && p.getDateRetour() != null
+                && p.getDuree() != null
+                && !dateReservation.isBefore(p.getDateRetour())
+                && !dateReservation.isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
+
+                dateFinPenalite = p.getDateRetour().plusDays(p.getDuree());
+                break;
+            }
+        }
+
+        if (dateFinPenalite != null) {
+            return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate() + ".";
+        }
+
+        // Verification de l'age minimum requis
         if (livre.getAgeMinimum() != null && membre.getNaissance() != null) {
             int age = java.time.Period.between(membre.getNaissance().toLocalDate(), java.time.LocalDate.now()).getYears();
             if (age < livre.getAgeMinimum()) {
-                return "Vous n'avez pas l'âge minimum requis (" + livre.getAgeMinimum() + " ans) pour reserver ce livre.";
+                return "Vous n'avez pas l'age minimum requis (" + livre.getAgeMinimum() + " ans) pour reserver ce livre.";
             }
         }
 

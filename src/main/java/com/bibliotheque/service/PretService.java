@@ -35,11 +35,25 @@ public class PretService {
             .anyMatch(s -> s.getMembre().getId().equals(idAdherent) && s.getStatut().getValeur().equalsIgnoreCase("actif"));
         if (!actif) return "Adherent inactif.";
 
-        // 3. Verifier que l'adherent n'est pas penalise
-        boolean penalise = penaliteRepository.findAll().stream()
-            .anyMatch(p -> p.getMembre().getId().equals(idAdherent) && p.getDateRetour() == null);
-        if (penalise) return "Adherent penalise.";
+        // 3. Vérifier si l'adhérent est en période de pénalité à la date d'emprunt
+        LocalDateTime dateFinPenalite = null;
 
+        for (Penalite p : penaliteRepository.findAll()) {
+            if (p.getMembre().getId().equals(idAdherent)
+                && p.getDateRetour() != null
+                && p.getDuree() != null
+                && !dateEmprunt.isBefore(p.getDateRetour())
+                && !dateEmprunt.isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
+
+                dateFinPenalite = p.getDateRetour().plusDays(p.getDuree());
+                break;
+            }
+        }
+
+        if (dateFinPenalite != null) {
+            return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate() + ".";
+        }
+        
         // 4. Verifier que l'adherent n'a pas atteint son quota d'emprunt
         int quota = membre.getTypeMembre().getQuota();
         long empruntsEnCours = empruntRepository.findByMembreId(idAdherent).stream()
@@ -51,7 +65,7 @@ public class PretService {
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Livre inexistant.";
 
-        // Vérifier l'âge minimum requis
+        // Verifier l'âge minimum requis
         if (livre.getAgeMinimum() != null && membre.getNaissance() != null) {
             int age = java.time.Period.between(membre.getNaissance().toLocalDate(), java.time.LocalDate.now()).getYears();
             if (age < livre.getAgeMinimum()) {
@@ -60,7 +74,7 @@ public class PretService {
         }
 
         // 6. Verifier qu'il y a un exemplaire disponible
-        List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, LocalDateTime.now());
+        List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, dateEmprunt);
         if (exemplaires.isEmpty()) return "Aucun exemplaire disponible pour ce livre.";
 
         // 7. Verifier que le livre est compatible avec l'adherent (autorisation)
@@ -78,7 +92,7 @@ public class PretService {
         emprunt.setExemplaire(exemplaire);
         emprunt.setDateEmprunt(dateEmprunt);
         emprunt.setDateDebut(dateEmprunt);
-        // Calcul de la date d'echeance (exemple : +15 jours ouvrés hors jours fériés)
+        // Calcul de la date d'echeance (exemple : +15 jours ouvres hors jours feries)
         emprunt.setDateEcheance(calculerDateEcheanceSansJoursFeries(dateEmprunt));
         emprunt.setSurPlace(false);
         emprunt.setBiblioEmprunt(biblio);
@@ -91,7 +105,7 @@ public class PretService {
         Integer nbJours = dureeEmpruntRepository.findAll().stream()
             .map(d -> d.getDuree()) // getDuree() doit retourner un int ou Integer
             .findFirst()
-            .orElse(15); // Valeur par défaut si vide
+            .orElse(15); // Valeur par defaut si vide
         Set<LocalDate> joursFeries = jourFerieRepository.findAll().stream()
             .map(jf -> jf.getDateJour().toLocalDate())
             .collect(Collectors.toSet());

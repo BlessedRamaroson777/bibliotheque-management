@@ -129,11 +129,6 @@ public class DemandeEmpruntService {
                         s.getStatut().getValeur().equalsIgnoreCase("actif"));
         if (!actif) return "Adherent inactif.";
 
-        // Verifier penalite
-        boolean penalise = penaliteRepository.findAll().stream()
-            .anyMatch(p -> p.getMembre().getId().equals(idAdherent) && p.getDateRetour() == null);
-        if (penalise) return "Adherent penalise.";
-
         // Verifier quota
         int quota = membre.getTypeMembre().getQuota();
         long empruntsEnCours = empruntRepository.findByMembreId(idAdherent).stream()
@@ -156,6 +151,25 @@ public class DemandeEmpruntService {
             datePrevu = LocalDateTime.parse(datePrevuStr);
         } catch (Exception e) {
             return "Erreur dans le format des dates. Utilisez le format 'yyyy-MM-ddTHH:mm'.";
+        }        
+
+        // Vérifier si l'adhérent est en période de pénalité à la date de demande
+        LocalDateTime dateFinPenalite = null;
+
+        for (Penalite p : penaliteRepository.findAll()) {
+            if (p.getMembre().getId().equals(idAdherent)
+                && p.getDateRetour() != null
+                && p.getDuree() != null
+                && !dateDemande.isBefore(p.getDateRetour())
+                && !dateDemande.isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
+
+                dateFinPenalite = p.getDateRetour().plusDays(p.getDuree());
+                break;
+            }
+        }
+
+        if (dateFinPenalite != null) {
+            return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate();
         }
 
         // Verifier disponibilite des exemplaires
@@ -188,6 +202,25 @@ public class DemandeEmpruntService {
         if (!"validee".equalsIgnoreCase(demande.getStatut()))
             return "La demande n'est pas validee.";
 
+        
+        // 3. Vérifier si l'adhérent est en période de pénalité à la date d'emprunt
+        LocalDateTime dateFinPenalite = null;
+
+        for (Penalite p : penaliteRepository.findAll()) {
+            if (p.getMembre().getId().equals(demande.getMembre().getId())
+                && p.getDateRetour() != null
+                && p.getDuree() != null
+                && !demande.getDatePrevu().isBefore(p.getDateRetour())
+                && !demande.getDatePrevu().isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
+
+                dateFinPenalite = p.getDateRetour().plusDays(p.getDuree());
+                break;
+            }
+        }
+
+        if (dateFinPenalite != null) {
+            return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate() + ".";
+        }    
         if (demande.getExemplaire() == null)
             return "Exemplaire manquant dans la demande.";
         LocalDateTime dateEcheance = pretService.calculerDateEcheanceSansJoursFeries(demande.getDatePrevu());

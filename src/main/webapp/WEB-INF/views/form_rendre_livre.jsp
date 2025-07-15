@@ -120,9 +120,13 @@
                 <td><%= e.getDateEcheance() %></td>
                 <td>
                     <form action="rendre-livre" method="post" style="display:inline;">
+                        <%
+                            java.time.LocalDateTime now = java.time.LocalDateTime.now();
+                            String formattedNow = now.toString().substring(0, 16); // yyyy-MM-ddTHH:mm
+                        %>
+                        <input type="datetime-local" name="dateRendu" id="dateRendu" required value="<%= formattedNow %>"/>
                         <input type="hidden" name="idAdherent" value="<%= e.getMembre().getId() %>"/>
                         <input type="hidden" name="idExemplaire" value="<%= e.getExemplaire().getId() %>"/>
-                        <input type="hidden" name="dateRendu" value="<%= java.time.LocalDateTime.now().toString().substring(0,16) %>"/>
                         <input type="submit" value="Rendre"/>
                     </form>
                 </td>
