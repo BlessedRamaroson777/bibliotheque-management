@@ -15,7 +15,9 @@ public class ProlongationService {
     @Autowired private StatutMembreRepository statutMembreRepository;
     @Autowired private PenaliteRepository penaliteRepository;
     @Autowired private AutorisationRepository autorisationRepository;
+    @Autowired private QuotasProlongationMembreRepository quotasProlongationMembreRepository;
     @Autowired private ExemplaireRepository exemplaireRepository;
+    
 
     public String demanderProlongation(Long idAdherent, Long idLivre, LocalDateTime dateProlongement) {
         // Verifier que l'adherent existe
@@ -26,25 +28,44 @@ public class ProlongationService {
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Livre inexistant.";
 
-        // Trouver l'emprunt en cours pour ce livre et cet adherent
+        // Verifier que l'adherent a un emprunt actif sur ce livre
         Emprunt emprunt = empruntRepository.findByMembreId(idAdherent).stream()
             .filter(e -> e.getExemplaire().getLivre().getId().equals(idLivre) && e.getDateRetour() == null && !Boolean.TRUE.equals(e.getSurPlace()))
             .findFirst().orElse(null);
 
         if (emprunt == null) return "Aucun emprunt en cours pour ce livre.";
 
-        // Creer la demande de prolongation (accordee à false ou null)
+        // Verifier le quota de prolongation
+        TypeMembre typeMembre = membre.getTypeMembre(); // getTypeMembre() doit exister
+        int quotaAutorise = typeMembre.getQuotaProlongation();
+
+        // Compter le nombre de prolongations dejà faites
+        long nbProlongations = quotasProlongationMembreRepository.countByIdMembre(idAdherent);
+
+        if (nbProlongations >= quotaAutorise) {
+            return "Quota de prolongation atteint pour cet adherent.";
+        }
+
+        // Creer la prolongation
         Prolongation prolongation = new Prolongation();
         prolongation.setEmprunt(emprunt);
         prolongation.setDateProlongation(LocalDateTime.now());
         prolongation.setAncienneEcheance(emprunt.getDateEcheance());
         prolongation.setNouvelleEcheance(dateProlongement);
-        prolongation.setAccordee(null); // En attente de validation
+        prolongation.setAccordee(null); // en attente
         prolongationRepository.save(prolongation);
 
-        // Ici, tu pourrais notifier le bibliothecaire (mail, notification, etc.)
+        // Enregistrer dans la table des quotas
+        QuotasProlongationMembre quota = new QuotasProlongationMembre();
+        quota.setIdMembre(idAdherent);
+        quota.setQuotaProlongation(1); // Une prolongation ajoutee
+        quota.setDateQuota(LocalDateTime.now());
+        quota.setProlongation(prolongation); // setProlongation() attendu
+        quotasProlongationMembreRepository.save(quota);
+
         return "Demande de prolongation envoyee au bibliothecaire.";
     }
+
 
     public java.util.List<Prolongation> getProlongationsEnCours() {
         // Accordee == null → en attente de validation
@@ -57,13 +78,13 @@ public class ProlongationService {
         Prolongation prolongation = prolongationRepository.findById(idProlongation).orElse(null);
         if (prolongation == null) return "Erreur : demande de prolongation inexistante.";
         Emprunt emprunt = prolongation.getEmprunt();
-        if (emprunt == null) return "Erreur : aucun emprunt lié à cette demande.";
+        if (emprunt == null) return "Erreur : aucun emprunt lie à cette demande.";
         Membre membre = emprunt.getMembre();
         if (membre == null) return "Erreur : adherent inexistant.";
         Livre livre = emprunt.getExemplaire().getLivre();
         if (livre == null) return "Erreur : livre inexistant.";
 
-        // Vérifier que l'adhérent est actif (avant et après)
+        // Verifier que l'adherent est actif (avant et après)
         boolean actif = statutMembreRepository.findAll().stream()
             .anyMatch(s -> s.getMembre().getId().equals(membre.getId()) && s.getStatut().getValeur().equalsIgnoreCase("actif"));
         if (!actif) {
@@ -72,7 +93,7 @@ public class ProlongationService {
             return "Erreur : adherent inactif. Prolongation refusee.";
         }
 
-        // Vérifier que l'adhérent n'est pas pénalisé
+        // Verifier que l'adherent n'est pas penalise
         boolean penalise = penaliteRepository.findAll().stream()
             .anyMatch(p -> p.getMembre().getId().equals(membre.getId()) && p.getDateRetour() == null);
         if (penalise) {
@@ -81,7 +102,7 @@ public class ProlongationService {
             return "Erreur : adherent penalise. Prolongation refusee.";
         }
 
-        // Vérifier le quota à la date de prolongement
+        // Verifier le quota à la date de prolongement
         int quota = membre.getTypeMembre().getQuota();
         long empruntsEnCours = empruntRepository.findByMembreId(membre.getId()).stream()
             .filter(e -> e.getDateRetour() == null && !Boolean.TRUE.equals(e.getSurPlace()))
@@ -92,7 +113,7 @@ public class ProlongationService {
             return "Erreur : quota depasse a la date de prolongement. Prolongation refusee.";
         }
 
-        // Vérifier qu'un exemplaire est disponible à la date de prolongement
+        // Verifier qu'un exemplaire est disponible à la date de prolongement
         java.util.List<Exemplaire> exemplairesDispo = exemplaireRepository.findDisponibles(livre.getId(), prolongation.getNouvelleEcheance());
         boolean exemplairePropre = false;
         // Si l'exemplaire de l'emprunt actuel est celui du membre et il n'est pas rendu, il est "disponible" pour lui-même
@@ -105,7 +126,7 @@ public class ProlongationService {
             return "Aucun exemplaire disponible a la date demandee. Prolongation refusee.";
         }
 
-        // Vérifier que le livre est compatible avec l'adhérent (autorisation)
+        // Verifier que le livre est compatible avec l'adherent (autorisation)
         boolean autorise = autorisationRepository.findAll().stream()
             .anyMatch(a -> a.getTypeMembre().getId().equals(membre.getTypeMembre().getId()) && a.getLivre().getId().equals(livre.getId()));
         if (!autorise) {

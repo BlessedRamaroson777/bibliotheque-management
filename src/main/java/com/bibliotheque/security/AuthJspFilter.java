@@ -19,50 +19,51 @@ public class AuthJspFilter implements Filter {
         HttpSession session = req.getSession(false);
         String role = (session != null) ? (String) session.getAttribute("role") : null;
 
+        // Debug : Affiche l'URI demandée (à désactiver en prod)
+        System.out.println("URI demandée : " + uri);
+
         // ✅ Page d'accueil : accessible à tous
         if (uri.endsWith("/index.jsp") || uri.equals(req.getContextPath() + "/")) {
             chain.doFilter(request, response);
             return;
         }
 
-        // Bloquer l'accès aux pages services communs si pas connecté
-        if ((uri.contains("rechercher-livres") ||
-            uri.contains("form-recherche-livre") ||
-            uri.contains("form-disponibilite"))
+        // Bloquer l'accès aux pages publiques si non connecté
+        if ((uri.endsWith("rechercher-livres") ||
+             uri.endsWith("form-recherche-livre") ||
+             uri.endsWith("form-disponibilite"))
             && role == null) {
-            res.sendRedirect(req.getContextPath() + "/acces-refuse"); // Ou page login générale
+            res.sendRedirect(req.getContextPath() + "/acces-refuse");
             return;
         }
 
-
-        // Autoriser les pages de login si non connecté
-        if (role == null && (uri.contains("login-adherent") || uri.contains("login-bibliothecaire"))) {
+        // Autoriser login si pas connecté
+        if (role == null && (uri.endsWith("login-adherent") || uri.endsWith("login-bibliothecaire"))) {
             chain.doFilter(request, response);
             return;
         }
 
-
-        // 🔒 Pages bibliothécaire uniquement
-        if (uri.contains("form-preter-livre") ||
-            uri.contains("preter-livre") ||
-            uri.contains("form-lecture-sur-place") ||
-            uri.contains("lire-sur-place") ||
-            uri.contains("lectures-sur-place") ||
-            uri.contains("finir-lecture-sur-place") ||
-            uri.contains("form-historique-pret") ||
-            uri.contains("historique-pret") ||
-            uri.contains("notifier-retour-livre-biblio") ||
-            uri.contains("form-rendre-livre") ||
-            uri.contains("rendre-livre") ||
-            uri.contains("examiner-prolongation") ||
-            uri.contains("examiner-reservation") ||
-            uri.contains("annuler-reservation-biblio") ||
-            uri.contains("assigner-bibliothecaire-reservation") ||
-            uri.contains("recuperer-reservation") ||
-            uri.contains("notifier-examination-prolongement-biblio") ||
-            uri.contains("notifier-examination-reservation-biblio") ||
-            uri.contains("demandes/en-attente") ||
-            uri.contains("cotisations") // attention ici, à restreindre si besoin
+        // 🔒 Pages réservées au bibliothécaire
+        if (uri.endsWith("form-preter-livre") ||
+            uri.endsWith("preter-livre") ||
+            uri.endsWith("form-lecture-sur-place") ||
+            uri.endsWith("lire-sur-place") ||
+            uri.endsWith("lectures-sur-place") ||
+            uri.endsWith("finir-lecture-sur-place") ||
+            uri.endsWith("form-historique-pret") ||
+            uri.endsWith("historique-pret") ||
+            uri.endsWith("notifier-retour-livre-biblio") ||
+            uri.endsWith("form-rendre-livre") ||
+            uri.endsWith("rendre-livre") ||
+            uri.endsWith("examiner-prolongation") ||
+            uri.endsWith("examiner-reservation") ||
+            uri.endsWith("annuler-reservation-biblio") ||
+            uri.endsWith("assigner-bibliothecaire-reservation") ||
+            uri.endsWith("recuperer-reservation") ||
+            uri.endsWith("notifier-examination-prolongement-biblio") ||
+            uri.endsWith("notifier-examination-reservation-biblio") ||  // <-- bien ici
+            uri.endsWith("demandes/en-attente") ||
+            uri.endsWith("cotisations") // à restreindre si besoin
         ) {
             if (!"bibliothecaire".equals(role)) {
                 res.sendRedirect(req.getContextPath() + "/acces-refuse");
@@ -70,18 +71,19 @@ public class AuthJspFilter implements Filter {
             }
         }
 
-        // 🔒 Pages adhérent uniquement
-        if (uri.contains("form-prolonger-livre") ||
-            uri.contains("prolonger-livre") ||
-            uri.contains("form-reserver-livre") ||
-            uri.contains("reserver-livre") ||
-            uri.contains("annuler-reservation-membre") ||
-            uri.contains("notifier-retour-livre") ||
-            uri.contains("notifier-examination-prolongement") ||
-            uri.contains("notifier-examination-reservation") ||
-            uri.contains("cotiser") ||
-            uri.contains("demandes/nouvelle") ||
-            uri.contains("demandes/validees")
+        // 🔒 Pages réservées à l’adhérent
+        if (uri.endsWith("form-prolonger-livre") ||
+            uri.endsWith("prolonger-livre") ||
+            uri.endsWith("form-reserver-livre") ||
+            uri.endsWith("reserver-livre") ||
+            uri.endsWith("annuler-reservation-membre") ||
+            uri.endsWith("notifier-retour-livre") ||
+            uri.endsWith("notifier-examination-prolongement") ||
+            uri.endsWith("notifier-examination-reservation") ||
+            uri.endsWith("cotiser") ||
+            uri.endsWith("cotisations") ||
+            uri.endsWith("demandes/nouvelle") ||
+            uri.endsWith("demandes/validees")
         ) {
             if (!"adherent".equals(role)) {
                 res.sendRedirect(req.getContextPath() + "/acces-refuse");
@@ -89,7 +91,7 @@ public class AuthJspFilter implements Filter {
             }
         }
 
-        // ✅ Le reste est accessible aux rôles valides
+        // ✅ Tout le reste est autorisé si connecté
         chain.doFilter(request, response);
     }
 

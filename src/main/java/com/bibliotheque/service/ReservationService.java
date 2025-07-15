@@ -4,6 +4,8 @@ import com.bibliotheque.model.*;
 import com.bibliotheque.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Service
@@ -11,32 +13,43 @@ public class ReservationService {
     @Autowired private MembreRepository membreRepository;
     @Autowired private LivreRepository livreRepository;
     @Autowired private ReservationRepository reservationRepository;
+    @Autowired private QuotaReservationMembreRepository quotaReservationMembreRepository;
     @Autowired private BibliothecaireRepository bibliothecaireRepository;
     @Autowired private EmpruntRepository empruntRepository;
     @Autowired private ExemplaireRepository exemplaireRepository;
     @Autowired private ReservationAnnuleeRepository reservationAnnuleeRepository;
     public String reserverLivre(Long idAdherent, Long idLivre, LocalDateTime dateReservation, LocalDateTime dateDebut) {
-        // Verification existence adherent
+        // Verification existence membre
         Membre membre = membreRepository.findById(idAdherent).orElse(null);
         if (membre == null) return "Erreur : adherent inexistant.";
+
         // Verification existence livre
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Erreur : livre inexistant.";
 
-        // Vérifier l'âge minimum requis
+        // Verification de l'âge minimum requis
         if (livre.getAgeMinimum() != null && membre.getNaissance() != null) {
             int age = java.time.Period.between(membre.getNaissance().toLocalDate(), java.time.LocalDate.now()).getYears();
             if (age < livre.getAgeMinimum()) {
-                return "Vous n'avez pas l'âge minimum requis (" + livre.getAgeMinimum() + " ans) pour réserver ce livre.";
+                return "Vous n'avez pas l'âge minimum requis (" + livre.getAgeMinimum() + " ans) pour reserver ce livre.";
             }
         }
 
-        // Verifier que dateDebut >= dateReservation
+        // Verification dateDebut >= dateReservation
         if (dateDebut.isBefore(dateReservation)) {
-            return "Erreur : la date de debut doit être posterieure ou egale à la date de reservation.";
+            return "Erreur : la date de debut doit etre posterieure ou egale à la date de reservation.";
         }
 
-        // Creation de la reservation
+        // 🔒 Verifier le quota de reservation du membre pour aujourd’hui
+        int quotaUtilise = quotaReservationMembreRepository.countByMembreAndDate(idAdherent, LocalDate.now());
+        int quotaMax = membre.getTypeMembre().getQuotaReservation();
+
+
+        if (quotaUtilise >= quotaMax) {
+            return "Quota de reservation atteint.";
+        }
+
+        // ✅ Creation de la reservation
         Reservation reservation = new Reservation();
         reservation.setMembre(membre);
         reservation.setLivre(livre);
@@ -44,8 +57,17 @@ public class ReservationService {
         reservation.setDateDebut(dateDebut);
         reservationRepository.save(reservation);
 
+        // 💾 Enregistrement dans le quota
+        QuotaReservationMembre quota = new QuotaReservationMembre();
+        quota.setMembre(membre);
+        quota.setReservation(reservation);
+        quota.setDateQuota(LocalDate.now());
+        quota.setQuotaReservation(quotaMax);
+        quotaReservationMembreRepository.save(quota);
+
         return "Demande de reservation envoyee au bibliothecaire.";
     }
+
 
     public String annulerReservation(Long idReservation) {
         Reservation reservation = reservationRepository.findById(idReservation).orElse(null);

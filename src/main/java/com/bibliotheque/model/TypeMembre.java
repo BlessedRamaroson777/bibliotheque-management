@@ -11,6 +11,8 @@ public class TypeMembre {
 
     private String nom;
     private Integer quota;
+    private Integer quota_reservation;
+    private Integer quota_prolongation;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
@@ -20,4 +22,10 @@ public class TypeMembre {
 
     public Integer getQuota() { return quota; }
     public void setQuota(Integer quota) { this.quota = quota; }
+    
+    public Integer getQuotaReservation() { return quota_reservation; }
+    public void setQuotaReservation(Integer quota_reservation) { this.quota_reservation = quota_reservation; }
+
+    public Integer getQuotaProlongation() { return quota_prolongation; }
+    public void setQuotaProlongation(Integer quota_prolongation) { this.quota_prolongation = quota_prolongation; }
 }

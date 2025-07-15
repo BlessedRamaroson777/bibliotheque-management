@@ -1,4 +1,4 @@
--- DROP DATABASE IF EXISTS "BibliothequeNaina";
+DROP DATABASE IF EXISTS "BibliothequeNaina";
 CREATE DATABASE "BibliothequeNaina";
 \c "BibliothequeNaina";
 
@@ -322,3 +322,5 @@ CREATE TABLE demande_emprunt (
     FOREIGN KEY (id_bibliothecaire) REFERENCES bibliothecaire(id),
     FOREIGN KEY (id_exemplaire) REFERENCES exemplaire(id)
 );
+ALTER TABLE type_membre ADD COLUMN quota_prolongation INTEGER DEFAULT 2;
+ALTER TABLE type_membre ADD COLUMN quota_reservation INTEGER DEFAULT 3;
