@@ -13,7 +13,7 @@ public class LectureSurPlaceService {
     @Autowired private MembreRepository membreRepository;
     @Autowired private LivreRepository livreRepository;
     @Autowired private ExemplaireRepository exemplaireRepository;
-    @Autowired private StatutMembreRepository statutMembreRepository;
+    @Autowired private AbonnementRepository abonnementRepository;
     @Autowired private PenaliteRepository penaliteRepository;
     @Autowired private AutorisationRepository autorisationRepository;
     @Autowired private EmpruntRepository empruntRepository;
@@ -24,10 +24,13 @@ public class LectureSurPlaceService {
         Membre membre = membreRepository.findById(idAdherent).orElse(null);
         if (membre == null) return "Adherent inexistant.";
 
-        // 2. Verifier que l'adherent est actif
-        boolean actif = statutMembreRepository.findAll().stream()
-            .anyMatch(s -> s.getMembre().getId().equals(idAdherent) && s.getStatut().getValeur().equalsIgnoreCase("actif"));
-        if (!actif) return "Adherent inactif.";
+        boolean abonnementValide = abonnementRepository.estAbonnementValide(
+            membre.getId(), dateLecture);
+
+        if (!abonnementValide) {
+            return "Adherent sans abonnement valide.";
+        }
+
 
         // 3. Verifier que l'adherent n'est pas penalise
         boolean penalise = penaliteRepository.findAll().stream()

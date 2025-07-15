@@ -17,7 +17,7 @@ public class PretService {
     @Autowired private MembreRepository membreRepository;
     @Autowired private LivreRepository livreRepository;
     @Autowired private ExemplaireRepository exemplaireRepository;
-    @Autowired private StatutMembreRepository statutMembreRepository;
+    @Autowired private AbonnementRepository abonnementRepository;
     @Autowired private PenaliteRepository penaliteRepository;
     @Autowired private AutorisationRepository autorisationRepository;
     @Autowired private EmpruntRepository empruntRepository;
@@ -29,11 +29,13 @@ public class PretService {
         // 1. Verifier que l'adherent existe
         Membre membre = membreRepository.findById(idAdherent).orElse(null);
         if (membre == null) return "Adherent inexistant.";
+        
+        boolean abonnementValide = abonnementRepository.estAbonnementValide(
+            membre.getId(), dateEmprunt);
 
-        // 2. Verifier que l'adherent est actif
-        boolean actif = statutMembreRepository.findAll().stream()
-            .anyMatch(s -> s.getMembre().getId().equals(idAdherent) && s.getStatut().getValeur().equalsIgnoreCase("actif"));
-        if (!actif) return "Adherent inactif.";
+        if (!abonnementValide) {
+            return "Adherent sans abonnement valide.";
+        }
 
         // 3. Vérifier si l'adhérent est en période de pénalité à la date d'emprunt
         LocalDateTime dateFinPenalite = null;
@@ -53,7 +55,7 @@ public class PretService {
         if (dateFinPenalite != null) {
             return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate() + ".";
         }
-        
+
         // 4. Verifier que l'adherent n'a pas atteint son quota d'emprunt
         int quota = membre.getTypeMembre().getQuota();
         long empruntsEnCours = empruntRepository.findByMembreId(idAdherent).stream()

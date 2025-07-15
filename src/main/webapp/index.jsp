@@ -208,6 +208,8 @@
                 <h3 class="section-title">Espace Bibliothecaire</h3>
                 <div class="menu-links">
                     <a href="membre/inscrire">Inscrire une personne</a>
+                    <a href="abonnements/form">Inserer abonnement</a>
+                    <a href="abonnements/liste">Liste abonnements</a>
                     <a href="form-lecture-sur-place">Lire un livre sur place</a>
                     <a href="lectures-sur-place">Lectures sur place en cours</a>
                     <a href="form-preter-livre">Preter un livre</a>

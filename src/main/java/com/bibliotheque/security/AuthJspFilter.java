@@ -46,6 +46,9 @@ public class AuthJspFilter implements Filter {
         // 🔒 Pages réservées au bibliothécaire
         if (uri.endsWith("form-preter-livre") ||
             uri.endsWith("preter-livre") ||
+            uri.endsWith("membre/inscrire") ||            
+            uri.endsWith("abonnements/form") ||
+            uri.endsWith("abonnements/liste") ||            
             uri.endsWith("form-lecture-sur-place") ||
             uri.endsWith("lire-sur-place") ||
             uri.endsWith("lectures-sur-place") ||

@@ -12,7 +12,7 @@ public class ProlongationService {
     @Autowired private LivreRepository livreRepository;
     @Autowired private EmpruntRepository empruntRepository;
     @Autowired private ProlongationRepository prolongationRepository;
-    @Autowired private StatutMembreRepository statutMembreRepository;
+    @Autowired private AbonnementRepository abonnementRepository;
     @Autowired private PenaliteRepository penaliteRepository;
     @Autowired private AutorisationRepository autorisationRepository;
     @Autowired private QuotasProlongationMembreRepository quotasProlongationMembreRepository;
@@ -73,14 +73,6 @@ public class ProlongationService {
         prolongation.setAccordee(null); // en attente
         prolongationRepository.save(prolongation);
 
-        // Enregistrer dans la table des quotas
-        QuotasProlongationMembre quota = new QuotasProlongationMembre();
-        quota.setIdMembre(idAdherent);
-        quota.setQuotaProlongation(1); // Une prolongation ajoutee
-        quota.setDateQuota(LocalDateTime.now());
-        quota.setProlongation(prolongation); // setProlongation() attendu
-        quotasProlongationMembreRepository.save(quota);
-
         return "Demande de prolongation envoyee au bibliothecaire.";
     }
 
@@ -101,14 +93,13 @@ public class ProlongationService {
         if (membre == null) return "Erreur : adherent inexistant.";
         Livre livre = emprunt.getExemplaire().getLivre();
         if (livre == null) return "Erreur : livre inexistant.";
+      
+        
+        boolean abonnementValide = abonnementRepository.estAbonnementValide(
+            membre.getId(), LocalDateTime.now());
 
-        // Verifier que l'adherent est actif (avant et après)
-        boolean actif = statutMembreRepository.findAll().stream()
-            .anyMatch(s -> s.getMembre().getId().equals(membre.getId()) && s.getStatut().getValeur().equalsIgnoreCase("actif"));
-        if (!actif) {
-            prolongation.setAccordee(false);
-            prolongationRepository.save(prolongation);
-            return "Erreur : adherent inactif. Prolongation refusee.";
+        if (!abonnementValide) {
+            return "Adherent sans abonnement valide actuellement.";
         }
 
         // Verifier que l'adherent n'est pas penalise

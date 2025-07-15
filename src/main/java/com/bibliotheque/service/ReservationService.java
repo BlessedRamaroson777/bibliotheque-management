@@ -78,13 +78,6 @@ public class ReservationService {
         reservation.setDateDebut(dateDebut);
         reservationRepository.save(reservation);
 
-        // 💾 Enregistrement dans le quota
-        QuotaReservationMembre quota = new QuotaReservationMembre();
-        quota.setMembre(membre);
-        quota.setReservation(reservation);
-        quota.setDateQuota(LocalDate.now());
-        quota.setQuotaReservation(quotaMax);
-        quotaReservationMembreRepository.save(quota);
 
         return "Demande de reservation envoyee au bibliothecaire.";
     }

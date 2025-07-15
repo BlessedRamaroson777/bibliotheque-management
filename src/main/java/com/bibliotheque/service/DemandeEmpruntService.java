@@ -22,6 +22,7 @@ public class DemandeEmpruntService {
     @Autowired private PretService pretService;
     @Autowired private StatutMembreRepository statutMembreRepository;
     @Autowired private EmpruntRepository empruntRepository;
+    @Autowired private AbonnementRepository abonnementRepository;
     
     // Lister demandes en attente
     public List<DemandeEmprunt> findDemandesEnAttente() {
@@ -123,11 +124,22 @@ public class DemandeEmpruntService {
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Erreur : livre inexistant.";
 
-        // Verifier que l’adherent est actif
-        boolean actif = statutMembreRepository.findAll().stream()
-            .anyMatch(s -> s.getMembre().getId().equals(membre.getId()) &&
-                        s.getStatut().getValeur().equalsIgnoreCase("actif"));
-        if (!actif) return "Adherent inactif.";
+        // Convertir les dates reçues (format HTML5 datetime-local : "yyyy-MM-dd'T'HH:mm")
+        LocalDateTime dateDemande;
+        LocalDateTime datePrevu;
+        try {
+            dateDemande = LocalDateTime.parse(dateDemandeStr);
+            datePrevu = LocalDateTime.parse(datePrevuStr);
+        } catch (Exception e) {
+            return "Erreur dans le format des dates. Utilisez le format 'yyyy-MM-ddTHH:mm'.";
+        }        
+
+        boolean abonnementValide = abonnementRepository.estAbonnementValide(
+            membre.getId(), dateDemande);
+
+        if (!abonnementValide) {
+            return "Adherent sans abonnement valide.";
+        }
 
         // Verifier quota
         int quota = membre.getTypeMembre().getQuota();
@@ -143,16 +155,6 @@ public class DemandeEmpruntService {
                 return "Vous n'avez pas l'age minimum requis (" + livre.getAgeMinimum() + " ans) pour ce livre.";
             }
         }
-        // Convertir les dates reçues (format HTML5 datetime-local : "yyyy-MM-dd'T'HH:mm")
-        LocalDateTime dateDemande;
-        LocalDateTime datePrevu;
-        try {
-            dateDemande = LocalDateTime.parse(dateDemandeStr);
-            datePrevu = LocalDateTime.parse(datePrevuStr);
-        } catch (Exception e) {
-            return "Erreur dans le format des dates. Utilisez le format 'yyyy-MM-ddTHH:mm'.";
-        }        
-
         // Vérifier si l'adhérent est en période de pénalité à la date de demande
         LocalDateTime dateFinPenalite = null;
 

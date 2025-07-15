@@ -1,7 +1,9 @@
 com\bibliotheque\model\Autorisation.class
 com\bibliotheque\model\QuotaMembre.class
+com\bibliotheque\model\Abonnement.class
 com\bibliotheque\model\Emprunt.class
 com\bibliotheque\model\StatutMembre.class
+com\bibliotheque\repository\TypeAbonnementRepository.class
 com\bibliotheque\service\LectureSurPlaceService.class
 com\bibliotheque\repository\DureePenaliteRepository.class
 com\bibliotheque\model\GenreLivre.class
@@ -16,6 +18,7 @@ com\bibliotheque\repository\DemandeEmpruntRepository.class
 com\bibliotheque\repository\QuotaEmpruntMembreRepository.class
 com\bibliotheque\repository\AutorisationRepository.class
 com\bibliotheque\controller\LectureSurPlaceController.class
+com\bibliotheque\repository\AbonnementRepository.class
 com\bibliotheque\service\ProlongationService.class
 com\bibliotheque\controller\HistoriquePretController.class
 com\bibliotheque\repository\StatutMembreRepository.class
@@ -45,6 +48,7 @@ com\bibliotheque\repository\EmpruntRepository.class
 com\bibliotheque\repository\TypeMembreRepository.class
 com\bibliotheque\controller\ReservationController.class
 com\bibliotheque\controller\DemandeEmpruntController.class
+com\bibliotheque\controller\AbonnementController.class
 com\bibliotheque\model\TypeMembre.class
 com\bibliotheque\controller\CotisationController.class
 com\bibliotheque\model\Prolongation.class
@@ -53,6 +57,7 @@ com\bibliotheque\service\HistoriquePretService.class
 com\bibliotheque\repository\ReservationAnnuleeRepository.class
 com\bibliotheque\repository\AuteurRepository.class
 com\bibliotheque\security\AuthJspFilter.class
+com\bibliotheque\controller\AdherentRestController.class
 com\bibliotheque\model\Exemplaire.class
 com\bibliotheque\service\EmpruntService.class
 com\bibliotheque\model\QuotaReservationMembre.class
@@ -65,6 +70,7 @@ com\bibliotheque\repository\DureeEmpruntRepository.class
 com\bibliotheque\repository\BibliothecaireRepository.class
 com\bibliotheque\controller\NotificationController.class
 com\bibliotheque\controller\DisponibiliteController.class
+com\bibliotheque\model\TypeAbonnement.class
 com\bibliotheque\repository\GenreLivreRepository.class
 com\bibliotheque\service\NotificationService.class
 com\bibliotheque\repository\MembreRepository.class
