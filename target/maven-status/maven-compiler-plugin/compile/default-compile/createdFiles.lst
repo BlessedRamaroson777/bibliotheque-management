@@ -32,6 +32,7 @@ com\bibliotheque\repository\QuotasProlongationMembreRepository.class
 com\bibliotheque\repository\JourFerieRepository.class
 com\bibliotheque\controller\LivreController.class
 com\bibliotheque\repository\QuotaReservationMembreRepository.class
+com\bibliotheque\controller\LivreRestController.class
 com\bibliotheque\service\PretService.class
 com\bibliotheque\model\QuotasProlongationMembre.class
 com\bibliotheque\model\DureeEmprunt.class

@@ -16,4 +16,7 @@ public interface ExemplaireRepository extends JpaRepository<Exemplaire, Long> {
 
     @Query("SELECT MIN(em.dateEcheance) FROM Emprunt em WHERE em.exemplaire.livre.id = :livreId AND (em.dateRetour IS NULL OR em.dateRetour > :dateDispo)")
     LocalDateTime findProchaineDateDisponible(@Param("livreId") Long livreId, @Param("dateDispo") LocalDateTime dateDispo);
+
+    // Ajouter cette méthode si tu veux récupérer tous les exemplaires liés à un livre (peu importe la dispo)
+    List<Exemplaire> findByLivreId(Long livreId);
 }
