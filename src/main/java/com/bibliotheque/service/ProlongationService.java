@@ -73,6 +73,15 @@ public class ProlongationService {
         prolongation.setAccordee(null); // en attente
         prolongationRepository.save(prolongation);
 
+        
+        // Enregistrer dans la table des quotas
+        QuotasProlongationMembre quota = new QuotasProlongationMembre();
+        quota.setIdMembre(idAdherent);
+        quota.setQuotaProlongation(1); // Une prolongation ajoutee
+        quota.setDateQuota(LocalDateTime.now());
+        quota.setProlongation(prolongation); // setProlongation() attendu
+        quotasProlongationMembreRepository.save(quota);
+
         return "Demande de prolongation envoyee au bibliothecaire.";
     }
 

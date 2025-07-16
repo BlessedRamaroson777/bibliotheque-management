@@ -30,7 +30,7 @@ public class ReservationService {
 
         
         
-        // Verifier si l'adherent est en periode de penalite à la date de demande
+        // Verifier si l'adherent est en periode de penalite a la date de demande
         long totalPenalite = 0;
 
         for (Penalite p : penaliteRepository.findAll()) {
@@ -58,10 +58,10 @@ public class ReservationService {
 
         // Verification dateDebut >= dateReservation
         if (dateDebut.isBefore(dateReservation)) {
-            return "Erreur : la date de debut doit etre posterieure ou egale à la date de reservation.";
+            return "Erreur : la date de debut doit etre posterieure ou egale a la date de reservation.";
         }
 
-        // 🔒 Verifier le quota de reservation du membre pour aujourd’hui
+        // // 🔒 Verifier le quota de reservation du membre pour aujourd’hui
         int quotaUtilise = quotaReservationMembreRepository.countByMembreAndDate(idAdherent, LocalDate.now());
         int quotaMax = membre.getTypeMembre().getQuotaReservation();
 
@@ -78,6 +78,13 @@ public class ReservationService {
         reservation.setDateDebut(dateDebut);
         reservationRepository.save(reservation);
 
+        // 💾 Enregistrement dans le quota
+        QuotaReservationMembre quota = new QuotaReservationMembre();
+        quota.setMembre(membre);
+        quota.setReservation(reservation);
+        quota.setDateQuota(LocalDate.now());
+        quota.setQuotaReservation(quotaMax);
+        quotaReservationMembreRepository.save(quota);
 
         return "Demande de reservation envoyee au bibliothecaire.";
     }
@@ -110,14 +117,14 @@ public class ReservationService {
             return "Impossible de recuperer la reservation avant la date de debut prevue (" + reservation.getDateDebut() + ").";
         }
 
-        // Chercher un exemplaire disponible à la date de recuperation
+        // Chercher un exemplaire disponible a la date de recuperation
         Livre livre = livreRepository.findByIdWithExemplaires(reservation.getLivre().getId());
         Membre membre = reservation.getMembre();
         java.util.List<Exemplaire> exemplairesDispo = exemplaireRepository.findDisponibles(livre.getId(), now);
         Exemplaire exemplaire = exemplairesDispo.stream()
             .filter(e -> e.getEmprunts().stream().noneMatch(em -> em.getDateRetour() == null))
             .findFirst().orElse(null);
-        if (exemplaire == null) return "Aucun exemplaire disponible pour ce livre à la date de recuperation.";
+        if (exemplaire == null) return "Aucun exemplaire disponible pour ce livre a la date de recuperation.";
 
         // Creer l'emprunt
         Emprunt emprunt = new Emprunt();
@@ -142,13 +149,13 @@ public class ReservationService {
     public String assignerBibliothecaire(Long idReservation, Long idBibliothecaire) {
         Reservation reservation = reservationRepository.findById(idReservation).orElse(null);
         if (reservation == null) return "Reservation inexistante.";
-        if (reservation.getBibliothecaire() != null) return "Dejà assignee à un bibliothecaire.";
+        if (reservation.getBibliothecaire() != null) return "Deja assignee a un bibliothecaire.";
         Bibliothecaire biblio = bibliothecaireRepository.findById(idBibliothecaire).orElse(null);
         if (biblio == null) return "Bibliothecaire inexistant.";
         reservation.setBibliothecaire(biblio);
         reservation.setDateTraitement(java.time.LocalDateTime.now());
         reservationRepository.save(reservation);
-        return "Bibliothecaire assigne à la reservation.";
+        return "Bibliothecaire assigne a la reservation.";
     }
 
     public String annulerReservationParBibliothecaire(Long idReservation, Long idBibliothecaire) {
@@ -156,7 +163,7 @@ public class ReservationService {
         if (reservation == null) return "reservation inexistante";
         Bibliothecaire biblio = bibliothecaireRepository.findById(idBibliothecaire).orElse(null);
         if (biblio == null) return "bibliothecaire inexistant";
-        // Verifier si dejà annulee
+        // Verifier si deja annulee
         boolean dejaAnnulee = reservationAnnuleeRepository.findByReservationId(idReservation).size() > 0;
         if (dejaAnnulee) return "reservation deja annulee";
         ReservationAnnulee annulee = new ReservationAnnulee();

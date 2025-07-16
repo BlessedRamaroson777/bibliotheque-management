@@ -335,4 +335,3 @@ ADD CONSTRAINT fk_duree_emprunt_type_membre
 FOREIGN KEY (id_type_membre)
 REFERENCES type_membre(id)
 ON DELETE CASCADE;
-
