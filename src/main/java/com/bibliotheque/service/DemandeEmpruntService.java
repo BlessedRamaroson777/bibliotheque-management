@@ -155,8 +155,8 @@ public class DemandeEmpruntService {
                 return "Vous n'avez pas l'age minimum requis (" + livre.getAgeMinimum() + " ans) pour ce livre.";
             }
         }
-        // Vérifier si l'adhérent est en période de pénalité à la date de demande
-        LocalDateTime dateFinPenalite = null;
+        // Verifier si l'adherent est en periode de penalite à la date de demande
+        long totalPenalite = 0;
 
         for (Penalite p : penaliteRepository.findAll()) {
             if (p.getMembre().getId().equals(idAdherent)
@@ -165,14 +165,13 @@ public class DemandeEmpruntService {
                 && !dateDemande.isBefore(p.getDateRetour())
                 && !dateDemande.isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
 
-                dateFinPenalite = p.getDateRetour().plusDays(p.getDuree());
-                break;
+                totalPenalite += p.getDuree();
             }
         }
 
-        if (dateFinPenalite != null) {
-            return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate();
-        }
+        if (totalPenalite > 0) {
+            return "Adherent penalise. Total des jours de penalite en cours : " + totalPenalite + " jour(s)";
+        } 
 
         // Verifier disponibilite des exemplaires
         List<Exemplaire> exemplaires = exemplaireRepository.findDisponibles(idLivre, datePrevu);
@@ -205,7 +204,7 @@ public class DemandeEmpruntService {
             return "La demande n'est pas validee.";
 
         
-        // 3. Vérifier si l'adhérent est en période de pénalité à la date d'emprunt
+        // 3. Verifier si l'adherent est en periode de penalite à la date d'emprunt
         LocalDateTime dateFinPenalite = null;
 
         for (Penalite p : penaliteRepository.findAll()) {
@@ -225,7 +224,7 @@ public class DemandeEmpruntService {
         }    
         if (demande.getExemplaire() == null)
             return "Exemplaire manquant dans la demande.";
-        LocalDateTime dateEcheance = pretService.calculerDateEcheanceSansJoursFeries(demande.getDatePrevu());
+        LocalDateTime dateEcheance = pretService.calculerDateEcheanceSansJoursFeries(demande.getDatePrevu(), demande.getMembre().getTypeMembre().getId());
         Emprunt emprunt = new Emprunt();
         emprunt.setMembre(demande.getMembre());
         emprunt.setExemplaire(demande.getExemplaire());
@@ -239,8 +238,5 @@ public class DemandeEmpruntService {
 
         return "Emprunt cree avec succes.";
     }
-
-
-
 
 }

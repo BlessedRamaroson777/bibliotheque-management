@@ -37,8 +37,9 @@ public class PretService {
             return "Adherent sans abonnement valide.";
         }
 
-        // 3. Vérifier si l'adhérent est en période de pénalité à la date d'emprunt
-        LocalDateTime dateFinPenalite = null;
+        
+        // Verifier si l'adherent est en periode de penalite à la date de demande
+        long totalPenalite = 0;
 
         for (Penalite p : penaliteRepository.findAll()) {
             if (p.getMembre().getId().equals(idAdherent)
@@ -47,14 +48,13 @@ public class PretService {
                 && !dateEmprunt.isBefore(p.getDateRetour())
                 && !dateEmprunt.isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
 
-                dateFinPenalite = p.getDateRetour().plusDays(p.getDuree());
-                break;
+                totalPenalite += p.getDuree();
             }
         }
 
-        if (dateFinPenalite != null) {
-            return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate() + ".";
-        }
+        if (totalPenalite > 0) {
+            return "Adherent penalise. Total des jours de penalite en cours : " + totalPenalite + " jour(s)";
+        } 
 
         // 4. Verifier que l'adherent n'a pas atteint son quota d'emprunt
         int quota = membre.getTypeMembre().getQuota();
@@ -95,7 +95,7 @@ public class PretService {
         emprunt.setDateEmprunt(dateEmprunt);
         emprunt.setDateDebut(dateEmprunt);
         // Calcul de la date d'echeance (exemple : +15 jours ouvres hors jours feries)
-        emprunt.setDateEcheance(calculerDateEcheanceSansJoursFeries(dateEmprunt));
+        emprunt.setDateEcheance(calculerDateEcheanceSansJoursFeries(dateEmprunt, membre.getTypeMembre().getId()));
         emprunt.setSurPlace(false);
         emprunt.setBiblioEmprunt(biblio);
         empruntRepository.save(emprunt);
@@ -103,11 +103,11 @@ public class PretService {
         return "Exemplaire n " + exemplaire.getNumeroExemplaire() + " prete. Date de rendu prevue : " + emprunt.getDateEcheance();
     }
 
-    LocalDateTime calculerDateEcheanceSansJoursFeries(LocalDateTime dateDebut) {
-        Integer nbJours = dureeEmpruntRepository.findAll().stream()
-            .map(d -> d.getDuree()) // getDuree() doit retourner un int ou Integer
-            .findFirst()
-            .orElse(15); // Valeur par defaut si vide
+    LocalDateTime calculerDateEcheanceSansJoursFeries(LocalDateTime dateDebut, Long idTypeMembre) {
+        Integer nbJours = dureeEmpruntRepository.findByTypeMembreId(idTypeMembre)
+            .map(DureeEmprunt::getDuree)
+            .orElse(15); // Valeur par défaut si pas de durée définie
+
         Set<LocalDate> joursFeries = jourFerieRepository.findAll().stream()
             .map(jf -> jf.getDateJour().toLocalDate())
             .collect(Collectors.toSet());
@@ -128,6 +128,7 @@ public class PretService {
 
         return date;
     }
+
 
 
     public List<Emprunt> getPretsEnCours() {

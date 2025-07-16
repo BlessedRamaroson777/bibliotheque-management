@@ -29,8 +29,9 @@ public class ReservationService {
         if (livre == null) return "Erreur : livre inexistant.";
 
         
-        // 3. Vérifier si l'adhérent est en période de pénalité à la date d'emprunt
-        LocalDateTime dateFinPenalite = null;
+        
+        // Verifier si l'adherent est en periode de penalite à la date de demande
+        long totalPenalite = 0;
 
         for (Penalite p : penaliteRepository.findAll()) {
             if (p.getMembre().getId().equals(idAdherent)
@@ -39,14 +40,13 @@ public class ReservationService {
                 && !dateReservation.isBefore(p.getDateRetour())
                 && !dateReservation.isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
 
-                dateFinPenalite = p.getDateRetour().plusDays(p.getDuree());
-                break;
+                totalPenalite += p.getDuree();
             }
         }
 
-        if (dateFinPenalite != null) {
-            return "Adherent penalise jusqu a la date " + dateFinPenalite.toLocalDate() + ".";
-        }
+        if (totalPenalite > 0) {
+            return "Adherent penalise. Total des jours de penalite en cours : " + totalPenalite + " jour(s)";
+        } 
 
         // Verification de l'age minimum requis
         if (livre.getAgeMinimum() != null && membre.getNaissance() != null) {

@@ -32,10 +32,24 @@ public class LectureSurPlaceService {
         }
 
 
-        // 3. Verifier que l'adherent n'est pas penalise
-        boolean penalise = penaliteRepository.findAll().stream()
-            .anyMatch(p -> p.getMembre().getId().equals(idAdherent) && p.getDateRetour() == null);
-        if (penalise) return "Adherent penalise.";
+        
+        // Verifier si l'adherent est en periode de penalite à la date de demande
+        long totalPenalite = 0;
+
+        for (Penalite p : penaliteRepository.findAll()) {
+            if (p.getMembre().getId().equals(idAdherent)
+                && p.getDateRetour() != null
+                && p.getDuree() != null
+                && !dateLecture.isBefore(p.getDateRetour())
+                && !dateLecture.isAfter(p.getDateRetour().plusDays(p.getDuree()))) {
+
+                totalPenalite += p.getDuree();
+            }
+        }
+
+        if (totalPenalite > 0) {
+            return "Adherent penalise. Total des jours de penalite en cours : " + totalPenalite + " jour(s)";
+        } 
 
         // 4. Verifier que le livre existe
         Livre livre = livreRepository.findById(idLivre).orElse(null);

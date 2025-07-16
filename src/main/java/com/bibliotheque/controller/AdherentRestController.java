@@ -1,6 +1,7 @@
 package com.bibliotheque.controller;
 
 import com.bibliotheque.model.Abonnement;
+import com.bibliotheque.model.Penalite;
 import com.bibliotheque.repository.AbonnementRepository;
 import com.bibliotheque.repository.EmpruntRepository;
 import com.bibliotheque.repository.PenaliteRepository;
@@ -48,18 +49,20 @@ public class AdherentRestController {
             .count();
         result.put("quota emprunts", nbEmpruntsEnCours);
 
-        // 3. Periode de penalite
+        // 3. Somme des jours de pénalité en cours
         LocalDateTime maintenant = LocalDateTime.now();
-        LocalDateTime penaliseJusquau = penaliteRepository.findAll().stream()
+
+        long totalPenalite = penaliteRepository.findAll().stream()
             .filter(p -> p.getMembre().getId().equals(idAdherent)
                     && p.getDateRetour() != null
                     && p.getDuree() != null
                     && !maintenant.isBefore(p.getDateRetour())
                     && !maintenant.isAfter(p.getDateRetour().plusDays(p.getDuree())))
-            .map(p -> p.getDateRetour().plusDays(p.getDuree()))
-            .findFirst()
-            .orElse(null);
-        result.put("penalise jusqu au", penaliseJusquau != null ? penaliseJusquau.format(formatter) : "Non penalise");
+            .mapToLong(Penalite::getDuree)
+            .sum();
+
+        result.put("Somme penalite en cours", totalPenalite > 0 ? totalPenalite + " jour(s)" : "Non penalise");
+
 
         return result;
     }

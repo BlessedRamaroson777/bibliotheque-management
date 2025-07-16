@@ -324,3 +324,4 @@ CREATE TABLE demande_emprunt (
 );
 ALTER TABLE type_membre ADD COLUMN quota_prolongation INTEGER DEFAULT 2;
 ALTER TABLE type_membre ADD COLUMN quota_reservation INTEGER DEFAULT 3;
+
