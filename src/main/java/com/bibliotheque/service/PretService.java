@@ -118,7 +118,7 @@ public class PretService {
         while (joursAjoutes < nbJours) {
             date = date.plusDays(1);
             DayOfWeek jour = date.getDayOfWeek();
-            boolean estWeekend = (jour == DayOfWeek.SATURDAY || jour == DayOfWeek.SUNDAY);
+            boolean estWeekend = (jour == DayOfWeek.SUNDAY);
             boolean estFerie = joursFeries.contains(date.toLocalDate());
 
             if (!estWeekend && !estFerie) {

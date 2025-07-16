@@ -325,3 +325,14 @@ CREATE TABLE demande_emprunt (
 ALTER TABLE type_membre ADD COLUMN quota_prolongation INTEGER DEFAULT 2;
 ALTER TABLE type_membre ADD COLUMN quota_reservation INTEGER DEFAULT 3;
 
+-- Étape 1 : Ajouter la colonne id_type_membre
+ALTER TABLE duree_emprunt
+ADD COLUMN id_type_membre BIGINT;
+
+-- Étape 2 : Ajouter la contrainte de clé étrangère
+ALTER TABLE duree_emprunt
+ADD CONSTRAINT fk_duree_emprunt_type_membre
+FOREIGN KEY (id_type_membre)
+REFERENCES type_membre(id)
+ON DELETE CASCADE;
+

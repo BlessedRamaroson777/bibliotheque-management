@@ -90,10 +90,10 @@
         <h2>Connexion Adhérent</h2>
         <form action="login-adherent" method="post">
             <label for="email">Email :</label>
-            <input type="email" name="email" id="email" value="alice@mail.com" required />
+            <input type="email" name="email" id="email" value="amine.bensaid@example.com" required />
             
             <label for="motDePasse">Mot de passe :</label>
-            <input type="password" name="motDePasse" id="motDePasse" value="passalice" required />
+            <input type="password" name="motDePasse" id="motDePasse" value="123" required />
             
             <input type="submit" value="Se connecter"/>
         </form>
