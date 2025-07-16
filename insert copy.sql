@@ -176,6 +176,10 @@ VALUES
   ((SELECT id FROM type_membre WHERE nom = 'Enseignant'), 9),
   ((SELECT id FROM type_membre WHERE nom = 'Professionnel'), 8);
 
+INSERT INTO autorisation (id_type_membre, id_livre)
+SELECT tm.id, l.id
+FROM type_membre tm
+CROSS JOIN livre l;
 
 
 
