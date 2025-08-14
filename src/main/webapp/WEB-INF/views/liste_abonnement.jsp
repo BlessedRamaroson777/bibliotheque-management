@@ -72,9 +72,10 @@
             java.util.Collections.sort(abonnements, new java.util.Comparator<com.bibliotheque.model.Abonnement>() {
                 @Override
                 public int compare(com.bibliotheque.model.Abonnement a1, com.bibliotheque.model.Abonnement a2) {
-                    return a1.getMembre().getNomUtilisateur().compareToIgnoreCase(a2.getMembre().getNomUtilisateur());
+                    return Long.compare(a1.getMembre().getId(), a2.getMembre().getId());
                 }
             });
+
 
             String currentMembre = null;
             boolean firstMembre = true;
@@ -107,12 +108,14 @@
                         <tbody>
     <%
                 }
-                // Ici on compare LocalDate (pas LocalDateTime) avec now
+                java.time.LocalDate debutDate = abonnement.getDebutAbonnement().toLocalDate();
                 java.time.LocalDate finDate = abonnement.getFinAbonnement().toLocalDate();
-                String color = finDate.isBefore(now) ? "red" : "black";
-                String debutStr = abonnement.getDebutAbonnement().toLocalDate().toString();
+                boolean estValide = (now.isEqual(debutDate) || now.isAfter(debutDate)) && (now.isBefore(finDate) || now.isEqual(finDate));
+                String color = estValide ? "green" : "red";
+                String debutStr = debutDate.toString();
                 String finStr = finDate.toString();
-                String etat = finDate.isBefore(now) ? "Non valide" : "Valide";
+                String etat = estValide ? "Valide" : "Non valide";
+
     %>
                 <tr style="color: <%= color %>;">
                     <td><%= abonnement.getId() %></td>

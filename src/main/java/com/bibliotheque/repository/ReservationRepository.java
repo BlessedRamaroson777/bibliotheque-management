@@ -18,7 +18,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<Reservation> findReclamees();
 
     
-    @Query("SELECT COUNT(r) FROM Reservation r WHERE r.idMembre = :idMembre AND r.etat = 'en_cours' AND r.dateDebut <= CURRENT_DATE")
-    int countReservationsEnCoursParMembre(@Param("idMembre") Integer idMembre);
+    // @Query("SELECT COUNT(r) FROM Reservation r WHERE r.idMembre = :idMembre AND r.etat = 'en_cours' AND r.dateDebut <= CURRENT_DATE")
+    // int countReservationsEnCoursParMembre(@Param("idMembre") Integer idMembre);
     
 }

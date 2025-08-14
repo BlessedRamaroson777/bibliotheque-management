@@ -113,7 +113,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Resultats de la recherche</h2>
+        <h2>Liste</h2>
         
         <% java.util.List<com.bibliotheque.model.Livre> Livres = (java.util.List<com.bibliotheque.model.Livre>) request.getAttribute("livres");
         if (Livres == null || Livres.isEmpty()) { %>

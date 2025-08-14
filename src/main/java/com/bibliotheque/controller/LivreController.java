@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import com.bibliotheque.repository.AuteurRepository;
@@ -28,10 +29,11 @@ public class LivreController {
                                    @RequestParam(required = false) String typeAuteur,
                                    @RequestParam(required = false) String typeLivre,
                                    Model model) {
-        LocalDateTime date = null;
+        LocalDate date = null;
         if (dateEdition != null && !dateEdition.isEmpty()) {
-            date = LocalDateTime.parse(dateEdition);
+            date = LocalDate.parse(dateEdition); // format yyyy-MM-dd attendu
         }
+
 
         titre = (titre != null && !titre.trim().isEmpty()) ? titre : null;
         nomAuteur = (nomAuteur != null && !nomAuteur.trim().isEmpty()) ? nomAuteur : null;

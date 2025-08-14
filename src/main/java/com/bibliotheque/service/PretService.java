@@ -106,30 +106,23 @@ public class PretService {
     LocalDateTime calculerDateEcheanceSansJoursFeries(LocalDateTime dateDebut, Long idTypeMembre) {
         Integer nbJours = dureeEmpruntRepository.findByTypeMembreId(idTypeMembre)
             .map(DureeEmprunt::getDuree)
-            .orElse(15); // Valeur par défaut si pas de durée définie
+            .orElse(15); // valeur par défaut
 
         Set<LocalDate> joursFeries = jourFerieRepository.findAll().stream()
             .map(jf -> jf.getDateJour().toLocalDate())
             .collect(Collectors.toSet());
 
-        LocalDateTime date = dateDebut;
-        int joursAjoutes = 0;
+        // 1. On ajoute les jours normalement (on ne saute rien)
+        LocalDateTime date = dateDebut.plusDays(nbJours);
 
-        while (joursAjoutes < nbJours) {
+        // 2. Si la date tombe un jour férié ou dimanche, on recule d'un jour
+        while (joursFeries.contains(date.toLocalDate()) || date.getDayOfWeek() == DayOfWeek.SUNDAY) {
             date = date.plusDays(1);
-            DayOfWeek jour = date.getDayOfWeek();
-            boolean estWeekend = (jour == DayOfWeek.SUNDAY);
-            boolean estFerie = joursFeries.contains(date.toLocalDate());
-
-            if (!estWeekend && !estFerie) {
-                joursAjoutes++;
-            }
+            // On s’arrête quand ce n’est plus ni férié ni dimanche
         }
 
         return date;
     }
-
-
 
     public List<Emprunt> getPretsEnCours() {
         // Prêts classiques (pas sur place) et non rendus

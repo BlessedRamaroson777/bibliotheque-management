@@ -53,7 +53,7 @@
         }
         
         input[type="text"],
-        input[type="datetime-local"],
+        input[type="date"],
         select {
             width: 100%;
             padding: 0.8rem;
@@ -92,7 +92,7 @@
         
         /* Styles communs */
         input[type="text"]:focus,
-        input[type="datetime-local"]:focus,
+        input[type="date"]:focus,
         select:focus {
             outline: none;
             box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
@@ -115,7 +115,7 @@
             }
             
             input[type="text"]:focus,
-            input[type="datetime-local"]:focus,
+            input[type="date"]:focus,
             select:focus {
                 border-color: #1d3557;
             }
@@ -134,7 +134,7 @@
             }
             
             input[type="text"]:focus,
-            input[type="datetime-local"]:focus,
+            input[type="date"]:focus,
             select:focus {
                 border-color: #3498db;
             }
@@ -160,10 +160,10 @@
             </div>
             
             <div class="form-row">
-                <div class="form-group">
+                <%-- <div class="form-group">
                     <label for="dateEdition">Date édition:</label>
-                    <input type="datetime-local" name="dateEdition" id="dateEdition"/>
-                </div>
+                    <input type="date" name="dateEdition" id="dateEdition"/>
+                </div> --%>
                 
                 <div class="form-group">
                     <label for="typeLivre">Genre:</label>
@@ -202,7 +202,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="typeAuteur">Type auteur:</label>
+                    <label for="typeAuteur">Nom d'artiste:</label>
                     <select name="typeAuteur" id="typeAuteur">
                         <option value="">-- Tous --</option>
                         <%

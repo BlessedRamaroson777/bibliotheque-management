@@ -38,7 +38,7 @@ public class AuthJspFilter implements Filter {
         }
 
         // Autoriser login si pas connecté
-        if (role == null && (uri.endsWith("login-adherent") || uri.endsWith("login-bibliothecaire"))) {
+        if (role == null && (uri.endsWith("cotisations") || uri.endsWith("login-adherent") || uri.endsWith("login-bibliothecaire"))) {
             chain.doFilter(request, response);
             return;
         }
@@ -65,8 +65,7 @@ public class AuthJspFilter implements Filter {
             uri.endsWith("recuperer-reservation") ||
             uri.endsWith("notifier-examination-prolongement-biblio") ||
             uri.endsWith("notifier-examination-reservation-biblio") ||  // <-- bien ici
-            uri.endsWith("demandes/en-attente") ||
-            uri.endsWith("cotisations") // à restreindre si besoin
+            uri.endsWith("demandes/en-attente") 
         ) {
             if (!"bibliothecaire".equals(role)) {
                 res.sendRedirect(req.getContextPath() + "/acces-refuse");
@@ -84,7 +83,6 @@ public class AuthJspFilter implements Filter {
             uri.endsWith("notifier-examination-prolongement") ||
             uri.endsWith("notifier-examination-reservation") ||
             uri.endsWith("cotiser") ||
-            uri.endsWith("cotisations") ||
             uri.endsWith("demandes/nouvelle") ||
             uri.endsWith("demandes/validees")
         ) {

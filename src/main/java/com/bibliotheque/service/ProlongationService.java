@@ -23,7 +23,7 @@ public class ProlongationService {
         // Verifier que l'adherent existe
         Membre membre = membreRepository.findById(idAdherent).orElse(null);
         if (membre == null) return "Adherent inexistant.";
-
+        
         // Verifier que le livre existe
         Livre livre = livreRepository.findById(idLivre).orElse(null);
         if (livre == null) return "Livre inexistant.";
